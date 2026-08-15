@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Mritunjay - Timeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@600;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#b08d5b",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "text-secondary": "#4B5563",
+                        "primary-container": "#1a2b4b",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "surface-container-highest": "#e1e3e4",
+                        "inverse-primary": "#b6c6ef",
+                        "primary-fixed": "#d8e2ff",
+                        "on-background": "#191c1d",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#00174c",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-tint": "#4e5e81",
+                        "surface-warm": "#FAF9F6",
+                        "surface-container-high": "#e7e8e9",
+                        "caution-amber": "#F59E0B",
+                        "background": "#f8f9fa",
+                        "urgent-red": "#D12727",
+                        "on-surface-variant": "#44474e",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "secondary-fixed": "#dbe1ff",
+                        "tertiary-container": "#3e2700",
+                        "recovery-green": "#198754",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "secondary": "#004ccd",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "secondary-container": "#0f62fe",
+                        "text-primary": "#111827",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#8293b8",
+                        "surface-container-low": "#f3f4f5",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#003da9",
+                        "on-secondary-container": "#f3f3ff",
+                        "on-primary-fixed": "#081b3a",
+                        "tertiary-fixed": "#ffddb1",
+                        "surface-dim": "#d9dadb",
+                        "outline": "#75777f",
+                        "tertiary": "#231400",
+                        "clinical-blue": "#0F62FE",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c5c6cf",
+                        "primary": "#031635",
+                        "on-primary-fixed-variant": "#364768"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "clinical-data": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "clinical-data": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e1e3e4;
+            z-index: 0;
+        }
+        .active-dot {
+            position: relative;
+            z-index: 10;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-surface font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="full-width sticky top-0 z-40 bg-surface-bright dark:bg-inverse-surface border-b border-surface-variant">
+<div class="flex justify-between items-center px-margin-mobile py-unit w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<img alt="Mritunjay Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZw9lIPKaZl22EWU4RFgLUEwPxqfLfqtmttNARTilyU5M9PANrnKStjnCFMSltqQkDNoXQNrcfasut-ruB1NWBKtIhz6_XkThziLyVdWSvhiVtNcJaaoKHExufyADBUbKKAsO-_-Q6xjycRj8vqTUq1NwcuPt18iPkvMhLEnd4aYsQXvLUM0qLw2U1fb30SVfTxBCjDRUrx5ml6PPLaZVxcg4unS0CUdB9CDHept6NlbjCh0zq78XxDtB95ADAKws9GYQ"/>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Timeline</h1>
+</div>
+<div class="flex items-center">
+<span class="font-label-caps text-label-caps text-clinical-blue uppercase tracking-wider">Clinical Status: Active</span>
+</div>
+</div>
+</header>
+<!-- Search Section - Pinned -->
+<div class="sticky top-[57px] z-30 bg-surface-bright/95 backdrop-blur-md px-margin-mobile py-stack-md">
+<div class="relative flex items-center w-full bg-surface-container rounded-xl px-stack-md py-3 focus-within:ring-2 focus-within:ring-clinical-blue transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 w-full text-body-md placeholder:text-text-secondary" placeholder="Search medical history..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant ml-2">filter_list</span>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="px-margin-mobile pb-32 pt-stack-md max-w-container-max mx-auto">
+<!-- Timeline Section: Today -->
+<section class="mb-stack-lg">
+<h2 class="font-label-caps text-label-caps text-text-secondary mb-stack-md px-2">Today</h2>
+<div class="relative timeline-line">
+<!-- Timeline Card 1 -->
+<div class="relative pl-8 mb-stack-md last:mb-0">
+<div class="active-dot absolute left-0 top-6 w-[24px] h-[24px] flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-clinical-blue ring-4 ring-clinical-blue/20"></div>
+</div>
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer shadow-sm border-l-2 border-l-clinical-blue" onclick="this.classList.toggle('ring-2'); this.classList.toggle('ring-clinical-blue')">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-clinical-blue uppercase tracking-widest mb-1">Prescription</span>
+<h3 class="font-clinical-data text-clinical-data text-on-surface">Medication Started: Lisinopril</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-clinical-blue text-[18px] mt-0.5">neurology</span>
+<div class="flex-1">
+<p class="text-[13px] leading-snug text-on-surface-variant italic">Hypertension management protocol.</p>
+<span class="block mt-1 text-[11px] font-label-caps text-on-surface-variant/70">AI SUMMARY</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section: Last 30 Days -->
+<section class="mb-stack-lg">
+<h2 class="font-label-caps text-label-caps text-text-secondary mb-stack-md px-2">Last 30 Days</h2>
+<div class="relative timeline-line">
+<!-- Timeline Card 2 -->
+<div class="relative pl-8 mb-stack-md">
+<div class="active-dot absolute left-0 top-6 w-[24px] h-[24px] flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-on-surface-variant/40"></div>
+</div>
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-text-secondary uppercase tracking-widest mb-1">Consultation • 12 Oct</span>
+<h3 class="font-clinical-data text-clinical-data text-on-surface">Consultation with Dr. Aris</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-clinical-blue text-[18px] mt-0.5">auto_awesome</span>
+<div class="flex-1">
+<p class="text-[13px] leading-snug text-on-surface-variant italic">Recovery is on track.</p>
+<span class="block mt-1 text-[11px] font-label-caps text-on-surface-variant/70">AI SUMMARY</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Card 3 -->
+<div class="relative pl-8 mb-stack-md">
+<div class="active-dot absolute left-0 top-6 w-[24px] h-[24px] flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-on-surface-variant/40"></div>
+</div>
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-recovery-green uppercase tracking-widest mb-1">Diagnostic • 05 Oct</span>
+<h3 class="font-clinical-data text-clinical-data text-on-surface">Lab Result: Lipid Panel</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-clinical-blue text-[18px] mt-0.5">check_circle</span>
+<div class="flex-1">
+<p class="text-[13px] leading-snug text-on-surface-variant italic">Cholesterol levels within target.</p>
+<span class="block mt-1 text-[11px] font-label-caps text-on-surface-variant/70">AI SUMMARY</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section: This Year -->
+<section class="mb-stack-lg">
+<h2 class="font-label-caps text-label-caps text-text-secondary mb-stack-md px-2">This Year</h2>
+<div class="relative timeline-line">
+<!-- Timeline Card 4 -->
+<div class="relative pl-8 mb-stack-md">
+<div class="active-dot absolute left-0 top-6 w-[24px] h-[24px] flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-on-surface-variant/40"></div>
+</div>
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-text-secondary uppercase tracking-widest mb-1">In-Patient • June</span>
+<h3 class="font-clinical-data text-clinical-data text-on-surface">Hospital Visit: City Health</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+<div class="mt-3 flex gap-2">
+<span class="inline-flex items-center px-2 py-1 bg-surface-container rounded-md text-[11px] font-medium text-on-surface-variant">4 Reports</span>
+<span class="inline-flex items-center px-2 py-1 bg-surface-container rounded-md text-[11px] font-medium text-on-surface-variant">Discharge Summary</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-unit pb-safe bg-surface-container-lowest dark:bg-inverse-surface border-t border-surface-variant shadow-sm rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-clinical-blue font-bold active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-caps text-label-caps mt-1">Timeline</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-caps text-label-caps mt-1">Consult</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-caps text-label-caps mt-1">Recovery</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for clinical precision
+        document.querySelectorAll('.active\\:scale-\\[0\\.98\\]').forEach(card => {
+            card.addEventListener('click', function() {
+                const icon = this.querySelector('.material-symbols-outlined:last-child');
+                if (icon && icon.innerText === 'expand_more') {
+                    icon.style.transform = icon.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+                    icon.style.transition = 'transform 0.3s ease';
+                }
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input');
+        const searchIcon = document.querySelector('.material-symbols-outlined:first-child');
+        
+        searchInput.addEventListener('focus', () => {
+            searchIcon.classList.add('text-clinical-blue');
+        });
+        
+        searchInput.addEventListener('blur', () => {
+            searchIcon.classList.remove('text-clinical-blue');
+        });
+    </script>
+</body></html>

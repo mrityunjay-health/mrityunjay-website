@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --background: #f9f9f9;
+  --foreground: #1a1c1c;
+  --primary: #001736;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #d6e3ff;
+  color: #001b3d;
+}
+
+/* Background pattern overlay */
+.bg-clinical-overlay {
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCK4B0RZ27r959XxMI05hUc4omQfF3ajZvS-nKC5jSRjoGkkcnAJTHNc3MZ3yu2ZRiI1kT-mwMChCCAqfML9BW0y-n862B4ly-ANG0PtGISLHskmhvvKiaEjKG3l_HEkQVPLfUScTVmDaQnF8Oh_V8HPJcRiaO79Mqu6BNvuTiFCOklyrqFkPPhrsFrvcKYrRi3omoVtLlM7_X4S6TNOEUsIL1opOGgp-sipEC0KbyovFz1fZBdCnIJw");
+  background-attachment: fixed;
+  background-size: cover;
+  background-blend-mode: overlay;
+}
+
+/* Layer bridge gradient */
+.layer-bridge {
+  background: linear-gradient(to bottom, transparent, rgba(0, 23, 54, 0.02) 50%, transparent);
+}
+
+/* Artifact shadow */
+.artifact-shadow {
+  box-shadow: 0 4px 24px -12px rgba(0, 23, 54, 0.12);
+}
+
+/* Scroll-reveal animation - applied via data-reveal="in" attribute set by Reveal */
+@keyframes revealIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+[data-reveal="in"] {
+  animation: revealIn 1.2s cubic-bezier(0.2, 1, 0.3, 1) both;
+}
+
+/* Process line dash */
+.process-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3s linear forwards;
+}
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Type blink cursor */
+.typing-cursor {
+  animation: blink 1s step-end infinite;
+  display: inline-block;
+  width: 0.125rem;
+  height: 1.25rem;
+  background: #001736;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,559 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en" data-lt-installed="true" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Mritunjay | 2026 Healthcare Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;family=Hanken+Grotesk:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c4c6d0",
+                        "secondary-container": "#d9e1e3",
+                        "data-node": "#D1D5DB",
+                        "inverse-primary": "#a9c7ff",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-surface-variant": "#43474f",
+                        "surface-variant": "#e2e2e2",
+                        "surface-tint": "#405f91",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#c0c8ca",
+                        "on-tertiary-fixed-variant": "#00497a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#264778",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-fixed": "#001d35",
+                        "ink-black": "#1A1A1A",
+                        "outline": "#747780",
+                        "secondary-fixed": "#dce4e6",
+                        "on-surface": "#1a1c1c",
+                        "primary-fixed-dim": "#a9c7ff",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary-container": "#7594ca",
+                        "memory-glow": "#A5D8FF",
+                        "primary": "#001736",
+                        "on-tertiary-container": "#5898d6",
+                        "on-secondary-fixed-variant": "#40484a",
+                        "tertiary-fixed-dim": "#9ccaff",
+                        "secondary": "#586062",
+                        "tertiary-fixed": "#d0e4ff",
+                        "background": "#f9f9f9",
+                        "surface-container-low": "#f3f3f3",
+                        "primary-fixed": "#d6e3ff",
+                        "surface": "#f9f9f9",
+                        "surface-container": "#eeeeee",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#002b5b",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e8e8e8",
+                        "surface-container-highest": "#e2e2e2",
+                        "tertiary-container": "#002e4f",
+                        "on-secondary-fixed": "#151d1f",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#00192e",
+                        "on-primary-fixed": "#001b3d",
+                        "on-secondary-container": "#5c6466",
+                        "inverse-surface": "#2f3131",
+                        "on-error": "#ffffff",
+                        "clinical-white": "#FFFFFF",
+                        "surface-dim": "#dadada"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "section-gap-md": "80px",
+                        "gutter": "32px",
+                        "container-max": "1280px",
+                        "section-gap-lg": "160px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Newsreader"],
+                        "body-lg": ["Manrope"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Newsreader"],
+                        "display-hero": ["Newsreader"],
+                        "body-md": ["Manrope"],
+                        "quote": ["Newsreader"],
+                        "headline-md": ["Newsreader"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["36px", {"lineHeight": "44px", "fontWeight": "400"}],
+                        "display-hero": ["84px", {"lineHeight": "92px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "quote": ["28px", {"lineHeight": "42px", "fontWeight": "300"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .fade-in-up { animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+        .artifact-shadow { box-shadow: 0 4px 24px -12px rgba(0, 23, 54, 0.12); }
+        .process-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 3s linear forwards; }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+    </style>
+</head>
+<body class="bg-clinical-white text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed antialiased" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCCK4B0RZ27r959XxMI05hUc4omQfF3ajZvS-nKC5jSRjoGkkcnAJTHNc3MZ3yu2ZRiI1kT-mwMChCCAqfML9BW0y-n862B4ly-ANG0PtGISLHskmhvvKiaEjKG3l_HEkQVPLfUScTVmDaQnF8Oh_V8HPJcRiaO79Mqu6BNvuTiFCOklyrqFkPPhrsFrvcKYrRi3omoVtLlM7_X4S6TNOEUsIL1opOGgp-sipEC0KbyovFz1fZBdCnIJw&quot;); background-attachment: fixed; background-size: cover; background-blend-mode: overlay;">
+<!-- Navigation -->
+<header class="fixed top-0 w-full bg-clinical-white/80 backdrop-blur-md z-50 border-b border-data-node/10">
+<div class="max-w-container-max mx-auto px-gutter flex justify-between items-center h-20">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter">Mritunjay</div>
+<nav class="hidden md:flex gap-10 items-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#product">The Product</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#science">Clinical Science</a>
+<button class="bg-primary text-clinical-white px-7 py-3.5 font-label-caps text-label-caps tracking-widest hover:bg-opacity-90 transition-all">2026 FLAGSHIP ACCESS</button>
+</nav>
+<button class="md:hidden text-primary"><span class="material-symbols-outlined">menu</span></button>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero: The Greeting -->
+<section class="relative min-h-screen flex flex-col items-center pt-32 pb-20 px-gutter overflow-hidden">
+<!-- Hero Content -->
+<div class="max-w-4xl mx-auto text-center z-10 mb-16">
+<h1 class="font-display-hero text-display-hero text-primary tracking-tighter mb-6 fade-in-up">Healthcare That Never Starts Over.</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto mb-10 fade-in-up">One place to organize your medical history, understand your journey, and receive doctor-reviewed care.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 fade-in-up" style="animation-delay: 0.4s;">
+<button class="bg-primary text-clinical-white px-10 py-4 font-label-caps text-label-caps tracking-widest hover:bg-opacity-90 transition-all rounded-full">JOIN WAITING LIST</button>
+<button class="border border-primary text-primary px-10 py-4 font-label-caps text-label-caps tracking-widest hover:bg-primary hover:text-clinical-white transition-all rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">play_circle</span>
+                WATCH PRODUCT DEMO
+            </button>
+</div>
+<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-secondary font-label-caps text-[10px] tracking-widest opacity-60 fade-in-up" style="animation-delay: 0.6s;">
+<span class="">AI-ORGANIZED RECORDS</span>
+<span class="opacity-30">•</span>
+<span class="">LICENSED DOCTOR REVIEW</span>
+<span class="opacity-30">•</span>
+<span class="">SECURE BY DESIGN</span>
+</div>
+</div>
+<!-- The 'Living' Product Interface -->
+<div class="w-full max-w-5xl mx-auto relative fade-in-up" style="animation-delay: 0.8s;">
+<div class="bg-clinical-white/80 backdrop-blur-md border border-data-node/20 rounded-[2rem] shadow-2xl overflow-hidden aspect-[16/9] flex flex-col">
+<!-- App Header -->
+<div class="h-12 border-b border-data-node/10 flex items-center px-6 gap-2">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-data-node/30"></div>
+<div class="w-3 h-3 rounded-full bg-data-node/30"></div>
+<div class="w-3 h-3 rounded-full bg-data-node/30"></div>
+</div>
+<div class="mx-auto font-label-caps text-[10px] opacity-40 tracking-widest">MRITUNJAY OS // CLINICAL INTERFACE</div>
+</div>
+<!-- App Content (Storytelling Sequence) -->
+<div class="flex-1 p-10 relative font-body-md">
+<div class="space-y-6 max-w-2xl mx-auto" id="hero-story-container">
+<!-- Scene 1 & 2: Chat Interaction -->
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-clinical-white text-sm">smart_toy</span>
+</div>
+<div class="bg-surface-container p-4 rounded-2xl rounded-tl-none text-primary">
+<p class="font-headline-md text-[20px]" id="typing-text">Good morning. How can we help your health today<span class="blink inline-block w-0.5 h-5 bg-primary ml-1"></span></p>
+</div>
+</div>
+<div class="flex items-start gap-4 justify-end transition-opacity duration-1000 opacity-0" id="user-response">
+<div class="bg-primary text-clinical-white p-4 rounded-2xl rounded-tr-none">
+<p class="text-[18px]">I've had chest pain for two days.</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-clinical-white text-sm">person</span>
+</div>
+</div>
+</div>
+<!-- Scene 3: Processing -->
+<div class="pt-8 space-y-3 transition-opacity duration-1000 opacity-0" id="processing-indicators">
+<div class="flex items-center gap-3 text-secondary">
+<div class="w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+<span class="font-label-caps text-[11px]">ANALYZING 2024 LAB REPORTS...</span>
+</div>
+<div class="flex items-center gap-3 text-secondary opacity-60">
+<div class="w-4 h-4 border-2 border-primary/10 rounded-full"></div>
+<span class="font-label-caps text-[11px]">CONNECTING MEDICATION HISTORY...</span>
+</div>
+</div>
+<!-- Scene 4: Synthesis Card -->
+<div class="absolute inset-x-10 bottom-10 transition-all duration-1000 ease-out translate-y-0 translate-y-full opacity-0" id="synthesis-card">
+<div class="bg-primary text-clinical-white p-8 rounded-2xl shadow-2xl border border-clinical-white/10">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-headline-md text-[22px]">Synthesized Brief</h3>
+<span class="font-label-caps text-[10px] px-3 py-1 bg-clinical-white/10 rounded-full">URGENT</span>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="border-l border-clinical-white/20 pl-4">
+<p class="font-label-caps text-[10px] opacity-50">HEART RATE</p>
+<p class="text-xl">88 BPM</p>
+</div>
+<div class="border-l border-clinical-white/20 pl-4">
+<p class="font-label-caps text-[10px] opacity-50">PREVIOUS BP</p>
+<p class="text-xl">145/95</p>
+</div>
+<div class="border-l border-clinical-white/20 pl-4">
+<p class="font-label-caps text-[10px] opacity-50">ALLERGIES</p>
+<p class="text-xl">None</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Scene 5: Human Bond Overlay -->
+<div class="absolute inset-0 flex items-center justify-center bg-clinical-white/40 backdrop-blur-sm pointer-events-none transition-opacity duration-1000 opacity-0" id="doctor-overlay">
+<div class="bg-clinical-white p-8 rounded-3xl shadow-2xl border border-data-node/20 text-center transition-transform duration-1000 scale-100" id="doctor-card">
+<div class="w-20 h-20 rounded-full bg-primary-fixed mx-auto mb-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl">medical_services</span>
+</div>
+<h4 class="font-headline-md text-2xl text-primary mb-1">Dr. Elena Vance</h4>
+<p class="font-label-caps text-[11px] text-secondary mb-6">REVIEWING YOUR SUMMARY</p>
+<div class="flex items-center justify-center gap-3 text-green-600 font-label-caps tracking-widest transition-opacity duration-500 opacity-0" id="approval-badge">
+<span class="material-symbols-outlined">check_circle</span>
+                                CARE PLAN APPROVED
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Animation Script -->
+<script>
+        (function() {
+            const steps = [
+                () => { document.getElementById('user-response').classList.remove('opacity-0'); },
+                () => { document.getElementById('processing-indicators').classList.remove('opacity-0'); },
+                () => { 
+                    document.getElementById('synthesis-card').classList.remove('translate-y-full', 'opacity-0');
+                    document.getElementById('synthesis-card').classList.add('translate-y-0');
+                },
+                () => { 
+                    document.getElementById('doctor-overlay').classList.remove('opacity-0');
+                    document.getElementById('doctor-card').classList.remove('scale-90');
+                    document.getElementById('doctor-card').classList.add('scale-100');
+                },
+                () => { document.getElementById('approval-badge').classList.remove('opacity-0'); }
+            ];
+
+            let currentStep = 0;
+            function runSequence() {
+                if (currentStep < steps.length) {
+                    steps[currentStep]();
+                    currentStep++;
+                    setTimeout(runSequence, 2000);
+                } else {
+                    setTimeout(() => {
+                        // Reset for loop
+                        document.getElementById('user-response').classList.add('opacity-0');
+                        document.getElementById('processing-indicators').classList.add('opacity-0');
+                        document.getElementById('synthesis-card').classList.add('translate-y-full', 'opacity-0');
+                        document.getElementById('doctor-overlay').classList.add('opacity-0');
+                        document.getElementById('approval-badge').classList.add('opacity-0');
+                        currentStep = 0;
+                        setTimeout(runSequence, 2000);
+                    }, 5000);
+                }
+            }
+
+            setTimeout(runSequence, 3000);
+        })();
+    </script>
+</section>
+<!-- Product Moment 1: Live Synthesis Demonstration -->
+<section class="py-section-gap-lg px-gutter bg-surface-container-low" id="product">
+<div class="max-w-container-max mx-auto">
+<div class="mb-20 text-center">
+<span class="font-label-caps text-label-caps text-primary tracking-[0.3em] block mb-4">LIVE SYNTHESIS</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">From raw data to clinical insight.</h2>
+</div>
+<!-- The Interaction Sandbox -->
+<div class="grid lg:grid-cols-12 gap-12 items-stretch">
+<!-- Left: Input/Artifacts -->
+<div class="lg:col-span-5 space-y-6">
+<div class="bg-clinical-white p-8 border border-data-node/20 rounded-xl artifact-shadow scroll-reveal visible">
+<div class="flex items-center gap-4 mb-6 text-primary">
+<span class="material-symbols-outlined">upload_file</span>
+<span class="font-label-caps text-label-caps">INGESTING: LAB_REPORT_AUG24.PDF</span>
+</div>
+<div class="space-y-4 opacity-60">
+<div class="h-4 bg-surface-container rounded w-3/4"></div>
+<div class="h-4 bg-surface-container rounded w-full"></div>
+<div class="h-4 bg-surface-container rounded w-1/2"></div>
+<div class="border-t border-data-node/10 pt-4 mt-6">
+<div class="flex justify-between font-label-caps text-[10px]">
+<span class="">HGB: 14.2 g/dL</span>
+<span class="text-error">BP: 145/95 ↑</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-clinical-white p-8 border border-data-node/20 rounded-xl artifact-shadow scroll-reveal visible" style="transition-delay: 0.3s;">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary">history</span>
+<span class="font-label-caps text-label-caps">PATIENT HISTORY MATCHED</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic leading-relaxed">
+                            "Connecting new BP data point with August medication titration of Lisinopril..."
+                        </p>
+</div>
+</div>
+<!-- Middle: The Connection Point (Visual Line) -->
+<div class="hidden lg:flex lg:col-span-1 justify-center items-center">
+<svg class="w-full h-24" preserveAspectRatio="none" viewBox="0 0 100 100">
+<line class="process-line" stroke="#001736" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="100" y1="50" y2="50"></line>
+</svg>
+</div>
+<!-- Right: Structured Result -->
+<div class="lg:col-span-6">
+<div class="bg-primary p-10 rounded-xl shadow-2xl text-clinical-white h-full scroll-reveal visible" style="transition-delay: 0.6s;">
+<div class="flex justify-between items-start mb-12">
+<div>
+<p class="font-label-caps text-label-caps opacity-60 mb-2">INTELLIGENCE LAYER</p>
+<h3 class="font-headline-md text-headline-md">Synthesized Brief</h3>
+</div>
+<div class="px-4 py-1.5 bg-clinical-white/10 border border-clinical-white/20 rounded-full text-[10px] font-label-caps">2026 ENGINE V4.2</div>
+</div>
+<div class="space-y-8">
+<div class="flex gap-6">
+<div class="w-10 h-10 rounded-full bg-clinical-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-memory-glow">insights</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-memory-glow">PRIMARY OBSERVATION</p>
+<p class="font-body-md text-body-md mt-1">Correlation detected: Recent headaches align with 15% systolic spike following Aug 24 titration.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-10 h-10 rounded-full bg-clinical-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">clinical_notes</span>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-memory-glow">PROPOSED ACTION</p>
+<p class="font-body-md text-body-md mt-1">Metabolic panel refresh and potential dosage recalibration.</p>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-clinical-white/10 flex items-center justify-between">
+<span class="font-label-caps text-[11px] opacity-40">AWAITING CLINICAL REVIEW</span>
+<div class="flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-memory-glow animate-pulse"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-memory-glow animate-pulse" style="animation-delay: 0.2s"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-memory-glow animate-pulse" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Moment 2: Trust Architecture (The Doctor Review) -->
+<section class="py-section-gap-lg px-gutter bg-clinical-white overflow-hidden">
+<div class="max-w-container-max mx-auto grid lg:grid-cols-2 gap-24 items-center">
+<div class="scroll-reveal visible">
+<span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-6">TRUST ARCHITECTURE</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-8 leading-tight">Human oversight is our default.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">Mritunjay does not practice medicine; it empowers practitioners. Our interface ensures that every automated insight is validated, edited, and approved by a licensed physician before it ever reaches a care plan.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4 text-primary font-label-caps text-label-caps">
+<span class="material-symbols-outlined">verified</span>
+<span class="">Zero-Black-Box Policy</span>
+</div>
+<div class="flex items-center gap-4 text-primary font-label-caps text-label-caps">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="">Full Physician Edit Control</span>
+</div>
+</div>
+</div>
+<!-- Doctor Review Interface -->
+<div class="relative scroll-reveal visible" style="transition-delay: 0.4s;">
+<div class="absolute -inset-4 bg-surface-container-low rounded-[2rem] -z-10 blur-2xl opacity-50"></div>
+<div class="bg-clinical-white border border-data-node/30 rounded-2xl artifact-shadow overflow-hidden">
+<div class="bg-surface-container p-6 flex justify-between items-center border-b border-data-node/20">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-error/40"></div>
+<span class="font-label-caps text-[10px] tracking-widest">URGENT REVIEW REQUIRED</span>
+</div>
+<span class="font-label-caps text-[10px] opacity-50">ID: MJ-2026-081</span>
+</div>
+<div class="p-10 space-y-10">
+<div class="flex items-center gap-6 pb-8 border-b border-data-node/10">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[24px] text-primary">Dr.&nbsp;<span><em>Vipul Khandelwal</em></span></h4>
+<p class="font-label-caps text-label-caps text-secondary">BOARD CERTIFIED INTERNAL MEDICINE</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-lg border border-primary/5">
+<p class="font-label-caps text-[11px] text-primary mb-4">CLINICAL DETERMINATION</p>
+<p class="font-quote text-[22px] leading-relaxed italic text-primary">
+                                "Synthesized report confirmed. The correlation between the medication shift and the hypertension spike is statistically significant. Proceeding with metabolic panel."
+                            </p>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-primary text-clinical-white py-5 font-label-caps text-label-caps tracking-widest hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                                APPROVE CARE PLAN
+                            </button>
+<button class="px-8 py-5 border border-data-node text-secondary hover:bg-surface-container transition-all flex items-center justify-center">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Real Artifacts (Timeline) -->
+<section class="py-section-gap-lg px-gutter bg-surface-bright" id="science">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-xl scroll-reveal visible">
+<span class="font-label-caps text-label-caps text-secondary tracking-widest block mb-4">THE LIVING MEMORY</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">A continuous medical narrative.</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-2 scroll-reveal visible" style="transition-delay: 0.2s;">We map every lab result, physician note, and biometric reading into a unified, actionable timeline.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Artifact 1: Lab Result -->
+<div class="bg-clinical-white p-8 border border-data-node/20 rounded-xl artifact-shadow scroll-reveal visible">
+<span class="font-label-caps text-[10px] text-secondary mb-4 block">LAB_RESULT // JAN 2024</span>
+<h5 class="font-headline-md text-[20px] mb-6">Metabolic Baseline</h5>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-data-node/10 pb-2">
+<span class="font-body-md text-[14px]">Glucose</span>
+<span class="font-label-caps text-[14px]">92 MG/DL</span>
+</div>
+<div class="flex justify-between items-end border-b border-data-node/10 pb-2">
+<span class="font-body-md text-[14px]">Creatinine</span>
+<span class="font-label-caps text-[14px]">0.9 MG/DL</span>
+</div>
+<div class="flex justify-between items-end border-b border-data-node/10 pb-2">
+<span class="font-body-md text-[14px]">Calcium</span>
+<span class="font-label-caps text-[14px]">9.4 MG/DL</span>
+</div>
+</div>
+</div>
+<!-- Artifact 2: Rx Summary -->
+<div class="bg-clinical-white p-8 border border-data-node/20 rounded-xl artifact-shadow scroll-reveal visible" style="transition-delay: 0.2s;">
+<span class="font-label-caps text-[10px] text-secondary mb-4 block">PRESCRIPTION // AUG 2024</span>
+<h5 class="font-headline-md text-[20px] mb-6">Lisinopril Titration</h5>
+<div class="bg-primary/5 p-4 rounded mb-6">
+<p class="font-body-md text-[14px] text-primary">Adjustment: +5mg daily increase following sustained systolic readings &gt;135.</p>
+</div>
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-caps text-[11px]">VERIFIED BY DR. VANCE</span>
+</div>
+</div>
+<!-- Artifact 3: Real-time Update -->
+<div class="bg-primary p-8 rounded-xl artifact-shadow scroll-reveal visible" style="transition-delay: 0.4s;">
+<span class="font-label-caps text-[10px] text-clinical-white/50 mb-4 block">ACTIVE INTELLIGENCE // TODAY</span>
+<h5 class="font-headline-md text-[20px] text-clinical-white mb-6">Symptom Mapping</h5>
+<div class="relative pl-6 border-l border-memory-glow/30 space-y-6">
+<div class="relative">
+<div class="absolute -left-[27px] top-1 w-2 h-2 rounded-full bg-memory-glow"></div>
+<p class="font-body-md text-[14px] text-clinical-white/90">Recurring cephalalgia reported (Severity 4/10).</p>
+</div>
+<div class="relative opacity-60">
+<div class="absolute -left-[27px] top-1 w-2 h-2 rounded-full bg-memory-glow/50"></div>
+<p class="font-body-md text-[14px] text-clinical-white/90">Cross-referencing Aug titration values...</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Transformative Vision -->
+<section class="py-section-gap-lg px-gutter relative bg-clinical-white">
+<div class="max-w-container-max mx-auto flex flex-col lg:flex-row items-center gap-20">
+<div class="w-full lg:w-1/2 aspect-[4/5] relative overflow-hidden rounded-2xl scroll-reveal visible">
+<img alt="Physician in consultation" class="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3Tdvb_ulIuf4HVg1hp-aM8fDOhFEExMIyke5SyLY0F5KeXyTjZK34O_k6MVRgJ0aEAkkBUxXLA2r3oZZgZRg7Rx1e--d7Ps6XD4qH6jmTbyVKC0BN0UpMsBfizZlF9lYjQvvMeAfvgomj6UH4bJvAJymudobZZeLeCCmF1G0Oy4urjkQp9Y6BzleAIZ7aSyduuIf-ItDkycqU6pP7_FJr9fddS4rWNzLzBD-BgUQbLi9vzAgME_pdfw">
+<div class="absolute inset-0 bg-primary/5"></div>
+</div>
+<div class="w-full lg:w-1/2 space-y-12 scroll-reveal visible" style="transition-delay: 0.3s;">
+<h2 class="font-headline-lg text-headline-lg text-primary leading-[1.1]">Confidence over excitement.</h2>
+<div class="space-y-10">
+<div class="border-t border-data-node/20 pt-10">
+<h4 class="font-headline-md text-[26px] text-primary mb-4">Sovereign Health Memory</h4>
+<p class="font-body-md text-body-lg text-on-surface-variant leading-relaxed">Your data remains yours. Mritunjay creates a portable, encrypted clinical record that follows you, not the provider. Access is granted only through explicit biometric consent.</p>
+</div>
+<div class="border-t border-data-node/20 pt-10">
+<h4 class="font-headline-md text-[26px] text-primary mb-4">The Human Interface</h4>
+<p class="font-body-md text-body-lg text-on-surface-variant leading-relaxed">We believe the best technology is invisible. Our platform organizes the clerical chaos of healthcare so that the human bond between doctor and patient can finally return to the center.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2026 Waiting List -->
+<section class="py-section-gap-lg bg-primary text-clinical-white px-gutter text-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-5 pointer-events-none">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0,50 Q25,30 50,50 T100,50" fill="none" stroke="white" stroke-width="0.1"></path>
+<path d="M0,60 Q25,40 50,60 T100,60" fill="none" stroke="white" stroke-width="0.1"></path>
+</svg>
+</div>
+<div class="max-w-3xl mx-auto space-y-10 relative z-10 scroll-reveal visible">
+<span class="font-label-caps text-label-caps text-memory-glow tracking-[0.4em]">STRICTLY LIMITED RELEASE // EST. 2026</span>
+<h2 class="font-headline-lg text-headline-lg">Join the Healthcare Vanguard.</h2>
+<p class="font-body-lg text-body-lg opacity-70">We are currently onboarding initial clinical partners for the 2026 flagship launch. Secure your position on the global priority list.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+<input class="bg-clinical-white/10 border border-clinical-white/20 text-clinical-white font-body-md text-body-md px-8 py-5 w-full sm:w-96 focus:ring-1 focus:ring-memory-glow outline-none transition-all" placeholder="Enter clinical email" type="email">
+<button class="bg-clinical-white text-primary px-12 py-5 font-label-caps text-label-caps tracking-widest hover:bg-surface-bright hover:scale-[1.02] transition-all w-full sm:w-auto">JOIN LIST</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-surface-container-low py-20 border-t border-data-node/20">
+<div class="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row justify-between items-center">
+<div class="font-headline-md text-headline-md text-primary mb-8 md:mb-0">Mritunjay</div>
+<div class="flex gap-12 mb-8 md:mb-0">
+<a class="font-label-caps text-[11px] text-on-surface-variant hover:text-primary transition-all" href="#">CLINICAL METHODOLOGY</a>
+<a class="font-label-caps text-[11px] text-on-surface-variant hover:text-primary transition-all" href="#">DATA SOVEREIGNTY</a>
+<a class="font-label-caps text-[11px] text-on-surface-variant hover:text-primary transition-all" href="#">2026 ROADMAP</a>
+</div>
+<div class="font-label-caps text-[10px] text-secondary text-center md:text-right">
+            © 2024 MRITUNJAY. ADVANCED HEALTHCARE INTELLIGENCE. ALL RIGHTS RESERVED.
+        </div>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+
+
+</body></html>

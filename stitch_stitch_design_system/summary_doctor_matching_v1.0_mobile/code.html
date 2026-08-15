@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-surface": "#191c1d",
+                  "surface": "#f8f9fa",
+                  "surface-variant": "#e1e3e4",
+                  "on-secondary-container": "#f3f3ff",
+                  "on-tertiary-fixed": "#291800",
+                  "error-container": "#ffdad6",
+                  "outline-variant": "#c5c6cf",
+                  "primary-fixed-dim": "#b6c6ef",
+                  "text-primary": "#111827",
+                  "secondary-fixed-dim": "#b4c5ff",
+                  "surface-container-low": "#f3f4f5",
+                  "on-error-container": "#93000a",
+                  "on-primary-container": "#8293b8",
+                  "on-primary-fixed-variant": "#364768",
+                  "error": "#ba1a1a",
+                  "urgent-red": "#D12727",
+                  "on-secondary": "#ffffff",
+                  "surface-container-high": "#e7e8e9",
+                  "tertiary-fixed": "#ffddb1",
+                  "on-tertiary-container": "#b08d5b",
+                  "caution-amber": "#F59E0B",
+                  "surface-bright": "#f8f9fa",
+                  "secondary-fixed": "#dbe1ff",
+                  "outline": "#75777f",
+                  "on-background": "#191c1d",
+                  "surface-container-highest": "#e1e3e4",
+                  "inverse-on-surface": "#f0f1f2",
+                  "background": "#f8f9fa",
+                  "primary-fixed": "#d8e2ff",
+                  "tertiary": "#231400",
+                  "recovery-green": "#198754",
+                  "on-primary-fixed": "#081b3a",
+                  "surface-container": "#edeeef",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary-fixed": "#00174c",
+                  "surface-tint": "#4e5e81",
+                  "text-secondary": "#4B5563",
+                  "tertiary-container": "#3e2700",
+                  "secondary-container": "#0f62fe",
+                  "surface-warm": "#FAF9F6",
+                  "on-secondary-fixed-variant": "#003da9",
+                  "surface-dim": "#d9dadb",
+                  "on-tertiary-fixed-variant": "#5d4217",
+                  "secondary": "#004ccd",
+                  "primary": "#031635",
+                  "clinical-blue": "#0F62FE",
+                  "inverse-surface": "#2e3132",
+                  "inverse-primary": "#b6c6ef",
+                  "primary-container": "#1a2b4b",
+                  "on-surface-variant": "#44474e",
+                  "on-primary": "#ffffff",
+                  "tertiary-fixed-dim": "#e8c08a",
+                  "on-error": "#ffffff",
+                  "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "stack-md": "16px",
+                  "margin-desktop": "40px",
+                  "container-max": "1280px",
+                  "gutter": "24px",
+                  "unit": "8px",
+                  "stack-lg": "32px",
+                  "margin-mobile": "16px",
+                  "stack-sm": "8px"
+          },
+          "fontFamily": {
+                  "display-lg": ["Manrope"],
+                  "headline-md": ["Manrope"],
+                  "body-md": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "label-caps": ["JetBrains Mono"],
+                  "headline-lg-mobile": ["Manrope"],
+                  "headline-lg": ["Manrope"],
+                  "clinical-data": ["Inter"]
+          },
+          "fontSize": {
+                  "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                  "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "clinical-data": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #f8f9fa;
+      color: #191c1d;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .severity-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(to right, #198754 0%, #F59E0B 50%, #D12727 100%);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e1e3e4;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden pb-24">
+<!-- Mobile Top Bar -->
+<header class="sticky top-0 z-50 bg-surface-bright dark:bg-surface-dim px-margin-mobile h-16 flex items-center justify-between border-b border-outline-variant">
+<div class="flex items-center gap-3">
+<img alt="Heart-infinity brand logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0o9cqwoq_hSTchxN_r89mTzSICEVBfK3DsI11A97i-0IW2Km821Su_qxk03KoAUb7fTkrsKB5bDvF226LLRZCUIDfre6fJodEYHH5BOSY-Y-v6xASNsuiJ2SHalbJt5Hgn4DplUf5xrwGsPT_zjT-guDyuRyatzPn59uMKW3S76yxKGtCI2Up-MHn_Oa2PBpUu04Q0HBNn8vzkeZ2eXLAcLCcJuWvGLb8Sjh7o0dctrdvd0Ku8CM6eBqErT5mpYVB5TM"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">Mritunjay</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">timer</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">ACTIVE</span>
+</div>
+</header>
+<main class="max-w-md mx-auto px-margin-mobile pt-stack-lg flex flex-col gap-stack-lg">
+<!-- Title Section -->
+<section>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Review your summary</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Confirm the clinical details extracted from our conversation.</p>
+</section>
+<!-- Clinical Bento Card Container -->
+<div class="flex flex-col gap-gutter">
+<!-- Primary Complaint -->
+<article class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer shadow-sm border-l-2 border-l-clinical-blue relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-clinical-blue opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<header class="flex items-center justify-between mb-stack-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Primary Complaint</span>
+<span class="material-symbols-outlined text-clinical-blue text-sm">edit</span>
+</header>
+<p class="font-body-lg text-body-lg text-primary font-medium">Persistent lower back pain localized in the lumbar region.</p>
+</article>
+<!-- Duration & Severity -->
+<div class="grid grid-cols-2 gap-stack-md">
+<article class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2 block">Duration</span>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-[32px] text-primary">4</span>
+<span class="font-body-md text-on-surface-variant">Days</span>
+</div>
+</article>
+<article class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2 block">Severity</span>
+<div class="flex items-center justify-between mb-2">
+<span class="font-clinical-data text-primary">7/10</span>
+<span class="font-label-caps text-[10px] text-urgent-red font-bold">MODERATE HIGH</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full relative">
+<div class="absolute left-0 top-0 h-full bg-urgent-red rounded-full" style="width: 70%"></div>
+</div>
+</article>
+</div>
+<!-- Relevant History -->
+<article class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer shadow-sm">
+<header class="flex items-center gap-2 mb-stack-sm">
+<span class="material-symbols-outlined text-caution-amber text-[20px]">history</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Relevant History</span>
+</header>
+<p class="font-body-md text-primary">Previous lumbar strain documented in 2022. Patient reports recurring discomfort during seasonal transitions.</p>
+</article>
+<!-- Current Medicines -->
+<article class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 active:scale-[0.98] transition-transform duration-150 cursor-pointer shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-stack-sm block">Current Medicines</span>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full font-clinical-data text-xs">
+            Ibuprofen
+          </span>
+<span class="inline-flex items-center px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full font-clinical-data text-xs">
+            Multi-vitamin
+          </span>
+</div>
+</article>
+<!-- Allergies -->
+<article class="bg-error-container rounded-xl border border-transparent p-stack-md flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-urgent-red" data-weight="fill">warning</span>
+<div>
+<span class="font-label-caps text-label-caps text-on-error-container uppercase">Allergies</span>
+<p class="font-clinical-data text-on-error-container">Penicillin</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-error-container opacity-40">close</span>
+</article>
+</div>
+<!-- AI Visualization Placeholder -->
+<div class="w-full aspect-[16/6] bg-surface-container rounded-xl overflow-hidden relative border border-outline-variant">
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest bg-surface-bright/80 px-2 py-1 rounded">Analyzing Neural Patterns...</span>
+</div>
+</div>
+</main>
+<!-- Sticky Footer Action -->
+<footer class="fixed bottom-[64px] left-0 right-0 p-margin-mobile bg-gradient-to-t from-surface via-surface/90 to-transparent">
+<button class="w-full bg-clinical-blue text-white h-14 rounded-xl font-headline-md flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all">
+      Confirm &amp; Find Specialist
+      <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest dark:bg-on-surface flex justify-around items-center px-4 py-2 shadow-[0_-4px_12px_0_rgba(0,0,0,0.04)] md:hidden"><button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150"><span class="material-symbols-outlined">home</span><span class="font-label-caps text-label-caps mt-1">Home</span></button><button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150"><span class="material-symbols-outlined">history</span><span class="font-label-caps text-label-caps mt-1">Timeline</span></button><button class="flex flex-col items-center justify-center text-clinical-blue font-bold active:scale-95 transition-transform duration-150"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span><span class="font-label-caps text-label-caps mt-1">Consult</span></button><button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150"><span class="material-symbols-outlined">health_and_safety</span><span class="font-label-caps text-label-caps mt-1">Recovery</span></button><button class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 active:scale-95 transition-transform duration-150"><span class="material-symbols-outlined">person</span><span class="font-label-caps text-label-caps mt-1">Profile</span></button></nav>
+<script>
+    // Minimal interaction logic
+    document.querySelectorAll('article').forEach(card => {
+      card.addEventListener('touchstart', () => {
+        card.classList.add('scale-[0.98]');
+      });
+      card.addEventListener('touchend', () => {
+        card.classList.remove('scale-[0.98]');
+      });
+    });
+
+    // Handle scroll shadow for top bar
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 10) {
+        header.classList.add('shadow-sm');
+      } else {
+        header.classList.remove('shadow-sm');
+      }
+    });
+  </script>
+</body></html>

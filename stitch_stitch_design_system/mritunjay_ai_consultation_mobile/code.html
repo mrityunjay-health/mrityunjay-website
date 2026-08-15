@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mritunjay - Active Consultation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#191c1d",
+                        "surface": "#f8f9fa",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary-container": "#f3f3ff",
+                        "on-tertiary-fixed": "#291800",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c5c6cf",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "text-primary": "#111827",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "surface-container-low": "#f3f4f5",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#8293b8",
+                        "on-primary-fixed-variant": "#364768",
+                        "error": "#ba1a1a",
+                        "urgent-red": "#D12727",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary-fixed": "#ffddb1",
+                        "on-tertiary-container": "#b08d5b",
+                        "caution-amber": "#F59E0B",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed": "#dbe1ff",
+                        "outline": "#75777f",
+                        "on-background": "#191c1d",
+                        "surface-container-highest": "#e1e3e4",
+                        "inverse-on-surface": "#f0f1f2",
+                        "background": "#f8f9fa",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary": "#231400",
+                        "recovery-green": "#198754",
+                        "on-primary-fixed": "#081b3a",
+                        "surface-container": "#edeeef",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#00174c",
+                        "surface-tint": "#4e5e81",
+                        "text-secondary": "#4B5563",
+                        "tertiary-container": "#3e2700",
+                        "secondary-container": "#0f62fe",
+                        "surface-warm": "#FAF9F6",
+                        "on-secondary-fixed-variant": "#003da9",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "secondary": "#004ccd",
+                        "primary": "#031635",
+                        "clinical-blue": "#0F62FE",
+                        "inverse-surface": "#2e3132",
+                        "inverse-primary": "#b6c6ef",
+                        "primary-container": "#1a2b4b",
+                        "on-surface-variant": "#44474e",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "16px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "clinical-data": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "clinical-data": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .message-bubble-ai {
+            background-color: #ffffff;
+            border: 1px solid #e1e3e4;
+            border-bottom-left-radius: 2px;
+        }
+        .message-bubble-user {
+            background-color: #031635;
+            color: #ffffff;
+            border-bottom-right-radius: 2px;
+        }
+        .insight-panel-gradient {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f3f3ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full h-16 flex justify-between items-center px-margin-mobile bg-surface-bright border-b border-outline-variant z-50">
+<div class="flex items-center gap-3">
+<img alt="Mritunjay Brand Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHWx6SS55Vbfz2e4tbgksRIDWlenRVmIFcx0Aw4O4NwFjnBH3Mi9yE-chGUabAqBRpBB7sye52rQ6Q397QXd7fsjOPpGRgI0_WhW6Vf4RBIKkAQZxygZs8BNs571cBra3Cspi_6Tf225-rA42bdIgALAjfnrQC-XU74zyJXLRYbr1NbxJm77ARncI2-HiBDNh1-bpoltF4fck8MFmWTzXUMOyPU1yghr8yQQB2wMjCn4PgZtSSnaxT8U08uETdxvvZmzmhQq1jDDjb"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">Mritunjay</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">timer</span>
+<span class="font-label-caps text-label-caps text-clinical-blue font-bold">ACTIVE</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 mt-16 mb-44 px-margin-mobile overflow-y-auto">
+<!-- Collapsible Extracted Insights Panel -->
+<section class="my-stack-md">
+<details class="group" open="">
+<summary class="flex items-center justify-between p-4 rounded-xl insight-panel-gradient border border-outline-variant cursor-pointer list-none">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-clinical-blue" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant font-bold">EXTRACTED INSIGHTS</span>
+</div>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-outline">expand_more</span>
+</summary>
+<div class="p-4 bg-white border-x border-b border-outline-variant rounded-b-xl -mt-2 pt-6">
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-caution-amber text-sm">emergency_home</span>
+<div>
+<p class="font-clinical-data text-clinical-data text-on-surface">Reported: Dull chest pressure</p>
+<p class="font-body-md text-xs text-on-surface-variant">Potential Cardiovascular Focus</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-clinical-blue text-sm">history</span>
+<div>
+<p class="font-clinical-data text-clinical-data text-on-surface">Timeline: Last 3 hours</p>
+<p class="font-body-md text-xs text-on-surface-variant">Acute presentation noted</p>
+</div>
+</div>
+</div>
+</div>
+</details>
+</section>
+<!-- Scrolling Conversation View -->
+<div class="flex flex-col gap-stack-md py-4">
+<!-- AI Message -->
+<div class="flex flex-col items-start max-w-[85%]">
+<div class="message-bubble-ai p-4 rounded-2xl shadow-sm">
+<p class="font-body-md text-body-md text-on-surface">I understand. Could you tell me more about the discomfort? Is it a sharp pain or more of a dull pressure? Also, are you experiencing any difficulty breathing or a cough?</p>
+</div>
+<span class="mt-2 ml-1 font-label-caps text-[10px] text-outline">10:42 AM • Health OS AI</span>
+</div>
+<!-- Patient Message -->
+<div class="flex flex-col items-end max-w-[85%] self-end">
+<div class="message-bubble-user p-4 rounded-2xl shadow-sm">
+<p class="font-body-md text-body-md">It feels like a dull pressure, like someone is leaning on my chest. I have a slight cough too, but it feels dry.</p>
+</div>
+<span class="mt-2 mr-1 font-label-caps text-[10px] text-outline">10:43 AM • You</span>
+</div>
+<!-- Status Indicator -->
+<div class="mt-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-clinical-blue animate-pulse"></span>
+<p class="font-label-caps text-label-caps text-clinical-blue font-bold">ANALYZING SYMPTOMS...</p>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">68% Complete</p>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-clinical-blue h-full w-[68%] transition-all duration-1000 ease-in-out"></div>
+</div>
+<p class="mt-3 font-body-md text-xs text-on-surface-variant italic">Cross-referencing with your history and current clinical guidelines.</p>
+</div>
+</div>
+</main>
+<!-- Footer Input Area -->
+<footer class="fixed bottom-16 left-0 w-full bg-surface-container-lowest p-margin-mobile border-t border-outline-variant z-40">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container border-none rounded-full px-6 py-4 font-body-md text-body-md focus:ring-2 focus:ring-clinical-blue placeholder:text-on-surface-variant" placeholder="Describe how you feel..." type="text"/>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-clinical-blue/10 text-clinical-blue">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+<button class="w-full bg-clinical-blue text-on-secondary py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-clinical-blue/20 active:scale-[0.98] transition-transform">
+<span class="font-headline-md text-sm font-bold tracking-wide">Confirm &amp; Find Doctor</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</footer>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full h-16 bg-surface-container-lowest flex justify-around items-center px-4 z-50 shadow-[0_-4px_12px_0_rgba(0,0,0,0.04)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-caps text-[10px] mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-clinical-blue font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+<span class="font-label-caps text-[10px] mt-1">Consult</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-caps text-[10px] mt-1">Reports</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-[10px] mt-1">Timeline</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-[10px] mt-1">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for the progress bar
+        window.addEventListener('DOMContentLoaded', () => {
+            const bar = document.querySelector('.bg-clinical-blue.h-full');
+            setTimeout(() => {
+                bar.style.width = '82%';
+                document.querySelector('.text-on-surface-variant.font-label-caps').textContent = '82% Complete';
+            }, 3000);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,87 @@
+import type { Metadata } from "next";
+import type { ReactElement } from "react";
+import { Nav } from "@/components/nav";
+import { WaitlistForm } from "@/components/waitlist-form";
+import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  title: "2026 Flagship Access | Mritunjay Healthcare Intelligence",
+  description:
+    "Join the priority waiting list for Mritunjay's 2026 Flagship Launch. Secure your health narrative across providers with continuous medical memory.",
+};
+
+function TrustBadge({
+  icon,
+  title,
+  description,
+}: {
+  readonly icon: string;
+  readonly title: string;
+  readonly description: string;
+}): ReactElement {
+  return (
+    <div className="bg-clinical-white border border-data-node/40 p-5 sm:p-6 rounded text-left space-y-2">
+      <div className="text-primary font-mono text-[10px] sm:text-xs font-semibold tracking-widest uppercase flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-primary" aria-hidden="true" />
+        {icon}
+      </div>
+      <h3 className="font-headline-md text-base sm:text-lg text-primary">{title}</h3>
+      <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+export default function WaitlistPage(): ReactElement {
+  return (
+    <>
+      <Nav />
+      <main className="pt-24 sm:pt-28 pb-16 sm:pb-24 lg:pb-section-gap-lg bg-clinical-overlay min-h-screen">
+        <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter text-center space-y-8 sm:space-y-12">
+          {/* Header Section */}
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
+            <span className="font-label-caps text-[10px] sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.4em] block uppercase">
+              STRICTLY LIMITED RELEASE // EST. 2026
+            </span>
+            <h1 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg text-primary">
+              Secure Your History.
+            </h1>
+            <p className="font-body-lg text-base sm:text-body-lg text-on-surface-variant">
+              We are currently onboarding initial clinical partners, specialists, and patients for the
+              2026 flagship launch. Ensure your healthcare narrative starts with understanding.
+            </p>
+          </div>
+
+          {/* Main Form Component */}
+          <WaitlistForm />
+
+          {/* Clinical Trust & Compliance Highlights */}
+          <div className="max-w-4xl mx-auto pt-8 sm:pt-12">
+            <span className="font-label-caps text-[10px] sm:text-xs text-on-surface-variant tracking-widest uppercase block mb-4 sm:mb-6">
+              CLINICAL INTEGRITY & PRIVACY ASSURANCES
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+              <TrustBadge
+                icon="HIPAA // BAA"
+                title="Strict Compliance"
+                description="Built on zero-trust enterprise infrastructure with end-to-end encryption for all health records."
+              />
+              <TrustBadge
+                icon="DATA SOVEREIGNTY"
+                title="Patient Ownership"
+                description="Your medical narrative belongs entirely to you. Export or revoke provider access anytime."
+              />
+              <TrustBadge
+                icon="CLINICAL SYNTHESIS"
+                title="Physician Centrality"
+                description="Designed alongside cardiac & internal specialists to augment consultation clarity."
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}

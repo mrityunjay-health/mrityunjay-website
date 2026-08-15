@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Mritunjay Healthcare OS</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#004ccd",
+                        "tertiary": "#231400",
+                        "caution-amber": "#F59E0B",
+                        "on-surface-variant": "#44474e",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "tertiary-container": "#3e2700",
+                        "surface-dim": "#d9dadb",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-surface": "#191c1d",
+                        "primary-container": "#1a2b4b",
+                        "primary-fixed": "#d8e2ff",
+                        "surface": "#f8f9fa",
+                        "inverse-surface": "#2e3132",
+                        "recovery-green": "#198754",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "outline-variant": "#c5c6cf",
+                        "background": "#f8f9fa",
+                        "on-secondary-fixed": "#00174c",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffddb1",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "text-secondary": "#4B5563",
+                        "clinical-blue": "#0F62FE",
+                        "on-primary-fixed": "#081b3a",
+                        "inverse-primary": "#b6c6ef",
+                        "on-tertiary-fixed": "#291800",
+                        "on-secondary-fixed-variant": "#003da9",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-fixed-variant": "#364768",
+                        "on-background": "#191c1d",
+                        "urgent-red": "#D12727",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "on-tertiary-container": "#b08d5b",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-warm": "#FAF9F6",
+                        "surface-bright": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#4e5e81",
+                        "outline": "#75777f",
+                        "text-primary": "#111827",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container": "#edeeef",
+                        "primary": "#031635",
+                        "on-primary-container": "#8293b8",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary-container": "#f3f3ff",
+                        "secondary-container": "#0f62fe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "clinical-data": ["Inter"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "clinical-data": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blur-backdrop {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .clinical-shadow {
+            box-shadow: 0 4px 20px rgba(3, 22, 53, 0.04);
+        }
+        .fab-shadow {
+            box-shadow: 0 8px 24px rgba(15, 98, 254, 0.3);
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-clinical-blue selection:text-white">
+<!-- Top App Bar -->
+<header class="bg-surface-container-lowest sticky top-0 z-40 border-b border-outline-variant w-full h-16 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-3">
+<img alt="Mritunjay Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbF6wDR2Mry6YfKHFVwvDAthFoXyT8uvrOKzCUApccAucgx2pxJCMEvSGuWzPdQFgIXLTQMavaeNmUlxsx9tojYjtn6LUhR0G7iJkbemXouiE50eC-_d_WNS2sjoAItgWkj5LNjELEpiRNyIqoAyv6TVHcmFeLNa_3B2GXpfbxMNjDMaybb3bXMLUFEmvePmByoJfsZcxMBusSTLWok7qbLlre5A11pGFYIeq4an_39bBBc9eSdutD1fI10IX9kX2BzNl4janu1phe"/>
+<span class="font-display-lg text-xl font-bold text-primary">Mritunjay</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-surface-container-high overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJfTxseW4SOIZVMmR99Q2bPN6d2t3bnQh4Gg3mhPp5STs0HoieVXLOW018VUyGx_C4o5WFI1wGWocX2yOXH0bK4ypwBMjjhDB4lxutO7xHBp6bvxzQRG4-A8_keY8hhSK55UR0yqWYK3tM2oGnCPg4o64ufZeZXpCTKK9raHZlzXfP8UmxtpnfYtRP9CRK4lMc7SL7lQSqgbgKihAQD4QdE1xHTai1yQQFKrONMxCx4xEsT461hi0cu7g0Gig3WN4ZnzPT0cGnNDf6"/>
+</div>
+</div>
+</header>
+<!-- Main Scrolling Content -->
+<main class="w-full max-w-md mx-auto px-margin-mobile pt-stack-lg pb-32 flex flex-col gap-stack-lg">
+<!-- Greeting -->
+<section>
+<h1 class="font-headline-lg-mobile text-primary">Good Morning, Mr. Singh</h1>
+<p class="text-on-surface-variant font-body-md">Your recovery plan is on track.</p>
+</section>
+<!-- Hero Card: Status -->
+<section class="bg-primary text-white rounded-xl p-5 clinical-shadow flex justify-between items-center relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 bg-recovery-green rounded-full animate-pulse"></span>
+<span class="font-label-caps text-label-caps opacity-90 uppercase">Current Status</span>
+</div>
+<h2 class="text-3xl font-bold">Stable</h2>
+<p class="text-primary-fixed-dim text-sm mt-1">Recovery Day 3 of 7</p>
+</div>
+<div class="relative z-10 text-right">
+<div class="text-4xl font-bold">65%</div>
+<p class="text-[10px] uppercase tracking-widest opacity-70">Progress</p>
+</div>
+<!-- Decorative subtle wave pattern (using text as visual element) -->
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-white opacity-5 text-9xl">analytics</span>
+</section>
+<!-- Daily Routine: Actionable Checklist -->
+<section class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Daily Routine</h3>
+<span class="font-label-caps text-label-caps text-clinical-blue">2/5 DONE</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest border border-outline-variant p-4 rounded-lg opacity-60">
+<div class="w-6 h-6 rounded-md bg-recovery-green flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div>
+<p class="font-clinical-data text-on-surface line-through">Morning Vitals Logged</p>
+<p class="text-[12px] text-on-surface-variant">Completed at 08:00 AM</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest border border-outline-variant p-4 rounded-lg border-l-4 border-l-clinical-blue shadow-sm">
+<div class="w-6 h-6 rounded-md border-2 border-outline-variant flex items-center justify-center cursor-pointer active:bg-surface-container transition-colors"></div>
+<div class="flex-grow">
+<p class="font-clinical-data text-on-surface">Post-Breakfast Meds</p>
+<p class="text-[12px] text-on-surface-variant">Metformin 500mg • <span class="text-urgent-red font-semibold">Due Now</span></p>
+</div>
+<span class="material-symbols-outlined text-clinical-blue">medication</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest border border-outline-variant p-4 rounded-lg">
+<div class="w-6 h-6 rounded-md border-2 border-outline-variant flex items-center justify-center cursor-pointer"></div>
+<div class="flex-grow">
+<p class="font-clinical-data text-on-surface">Recovery Walk</p>
+<p class="text-[12px] text-on-surface-variant">15 mins duration • Scheduled for 10:30 AM</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">directions_walk</span>
+</div>
+</div>
+</section>
+<!-- Quick Access: Shortcuts Grid -->
+<section class="flex flex-col gap-stack-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Quick Access</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container-low rounded-xl border border-outline-variant active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary clinical-shadow">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase">Reports</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container-low rounded-xl border border-outline-variant active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary clinical-shadow">
+<span class="material-symbols-outlined">timeline</span>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase">Timeline</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container-low rounded-xl border border-outline-variant active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary clinical-shadow">
+<span class="material-symbols-outlined">medication_liquid</span>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase">Medicines</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container-low rounded-xl border border-outline-variant active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary clinical-shadow">
+<span class="material-symbols-outlined">auto_graph</span>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase">Recovery</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container-low rounded-xl border border-outline-variant active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary clinical-shadow">
+<span class="material-symbols-outlined">family_restroom</span>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase">Family</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-surface-container-low rounded-xl border border-outline-variant active:scale-95 transition-transform">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary clinical-shadow">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase">Profile</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Floating Action Button: Primary CTA -->
+<div class="fixed bottom-24 right-6 z-50">
+<button class="flex items-center gap-3 bg-clinical-blue text-white px-6 py-4 rounded-full fab-shadow active:scale-90 transition-transform font-clinical-data">
+<span class="material-symbols-outlined">video_call</span>
+<span>Start Consultation</span>
+</button>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center gap-1 w-1/5 py-2 text-clinical-blue" href="#">
+<span class="material-symbols-outlined fill-1" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 w-1/5 py-2 text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Timeline</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 w-1/5 py-2 text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">videocam</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Consult</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 w-1/5 py-2 text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Recovery</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 w-1/5 py-2 text-on-surface-variant opacity-70" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Profile</span>
+</a>
+</nav>
+<script>
+    // Subtle interaction simulation
+    document.querySelectorAll('.cursor-pointer').forEach(item => {
+        item.addEventListener('click', function() {
+            if (this.innerHTML === '') {
+                this.innerHTML = '<span class="material-symbols-outlined text-[16px] text-white">check</span>';
+                this.classList.add('bg-clinical-blue', 'border-clinical-blue');
+                this.parentElement.classList.add('opacity-60');
+            } else {
+                this.innerHTML = '';
+                this.classList.remove('bg-clinical-blue', 'border-clinical-blue');
+                this.parentElement.classList.remove('opacity-60');
+            }
+        });
+    });
+</script>
+</body></html>

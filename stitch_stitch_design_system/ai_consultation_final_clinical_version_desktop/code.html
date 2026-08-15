@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareGuide AI | Desktop Consultation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#f3f3ff",
+                    "on-surface-variant": "#44474e",
+                    "primary-container": "#1a2b4b",
+                    "text-secondary": "#4B5563",
+                    "on-tertiary-fixed-variant": "#5d4217",
+                    "on-secondary-fixed": "#00174c",
+                    "secondary-fixed": "#dbe1ff",
+                    "tertiary-container": "#3e2700",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#4e5e81",
+                    "surface-bright": "#f8f9fa",
+                    "tertiary-fixed": "#ffddb1",
+                    "primary": "#031635",
+                    "text-primary": "#111827",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b6c6ef",
+                    "on-primary-container": "#8293b8",
+                    "surface": "#f8f9fa",
+                    "inverse-primary": "#b6c6ef",
+                    "recovery-green": "#198754",
+                    "tertiary-fixed-dim": "#e8c08a",
+                    "secondary-container": "#0f62fe",
+                    "on-surface": "#191c1d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-warm": "#FAF9F6",
+                    "inverse-surface": "#2e3132",
+                    "surface-container": "#edeeef",
+                    "tertiary": "#231400",
+                    "on-primary-fixed": "#081b3a",
+                    "outline-variant": "#c5c6cf",
+                    "on-primary-fixed-variant": "#364768",
+                    "on-background": "#191c1d",
+                    "secondary": "#004ccd",
+                    "primary-fixed": "#d8e2ff",
+                    "on-error": "#ffffff",
+                    "urgent-red": "#D12727",
+                    "on-tertiary-container": "#b08d5b",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e1e3e4",
+                    "on-tertiary": "#ffffff",
+                    "clinical-blue": "#0F62FE",
+                    "on-secondary-fixed-variant": "#003da9",
+                    "caution-amber": "#F59E0B",
+                    "surface-container-low": "#f3f4f5",
+                    "background": "#f8f9fa",
+                    "surface-dim": "#d9dadb",
+                    "outline": "#75777f",
+                    "on-tertiary-fixed": "#291800",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-container-high": "#e7e8e9",
+                    "secondary-fixed-dim": "#b4c5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "clinical-data": ["Inter"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "clinical-data": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-clinical-blue/20 overflow-x-hidden">
+<!-- Atmospheric Background Layer -->
+<canvas id="bg-canvas"></canvas>
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary text-2xl">clinical_notes</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">CareGuide AI</span>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-low rounded-full border border-outline-variant">
+<div class="w-2 h-2 rounded-full bg-recovery-green animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Live Diagnostic Mode</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBENB2HKZCtq1c3-3qo1NDEwt4GA0_AHV-hZ_oQPJpfQ8U0gNy2jmsz63HoOX6TZo9BmKl0MVYjm9F874ncL-5GoFdLSUiwySCupoDkTrNjgo3hzekEGI2tgUJBgVzzfyA6vwYNB2-6aHVHaAiQI52v7urxrOiZRmDPby1SyOL5l60qQkk9mKd_I-_m4CkurjRj0ijSKOtW88_Q4-WkpE-IteHJd6vLR8XTfdirWxnxdFSj16NhVg3KecUaHTZ3DGuwNqwm_H_9K2_f"/>
+</div>
+</div>
+</header>
+<!-- Navigation Drawer -->
+<aside class="fixed left-0 top-0 h-full w-80 hidden md:flex flex-col bg-surface/90 backdrop-blur-sm border-r border-outline-variant z-40 pt-16">
+<div class="p-gutter flex flex-col gap-stack-md h-full overflow-y-auto custom-scrollbar">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-clinical-blue" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div>
+<h3 class="font-body-md text-body-md font-semibold text-primary">Mritunjay Singh</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Clinical Summary Active</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 px-4 py-3 text-clinical-blue border-l-2 border-clinical-blue font-semibold bg-clinical-blue/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-body-md">Symptom Checker</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-body-md">Medical Records</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-body-md">Treatment Plan</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">search_check</span>
+<span class="font-body-md">Find Doctor</span>
+</a>
+</nav>
+<div class="mt-auto pt-stack-lg">
+<div class="p-4 bg-primary-container/40 rounded-lg border border-primary/10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-clinical-blue text-sm">verified_user</span>
+<p class="font-label-caps text-[11px] text-primary font-bold tracking-widest uppercase">Data Integrity</p>
+</div>
+<p class="text-[11px] text-on-primary-fixed-variant leading-relaxed font-medium">
+                        Session encrypted via <span class="text-primary font-bold">AES-256</span>. 
+                        Compliant with <span class="text-primary font-bold">HIPAA</span> Security Rules.
+                    </p>
+</div>
+<div class="mt-4 flex justify-between items-center text-on-surface-variant/40">
+<span class="font-label-caps text-[10px]">VER. 1.0.2</span>
+<span class="font-label-caps text-[10px]">CORE-IDX-SECURED</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="md:pl-80 pt-16 min-h-screen flex">
+<!-- Left: Diagnostic Chat -->
+<section class="w-full md:w-[68%] flex flex-col h-[calc(100vh-64px)] relative">
+<!-- Chat Header -->
+<div class="px-gutter py-4 flex items-center justify-between bg-surface/50 backdrop-blur-md sticky top-0 z-10 border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-clinical-blue">forum</span>
+<h2 class="font-headline-md text-headline-md text-primary">Diagnostic Session</h2>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-lowest rounded-lg border border-outline-variant font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container transition-colors">
+                        SAVE DRAFT
+                    </button>
+<button class="px-4 py-2 bg-surface-container-lowest rounded-lg border border-outline-variant font-label-caps text-label-caps text-urgent-red hover:bg-error-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">cancel</span> ABORT
+                    </button>
+</div>
+</div>
+<!-- Scrollable Chat Area -->
+<div class="flex-1 overflow-y-auto px-gutter py-stack-lg flex flex-col custom-scrollbar gap-10">
+<!-- System Greeting -->
+<div class="flex gap-4 max-w-2xl fade-in">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="p-5 bg-primary text-white rounded-2xl rounded-tl-none shadow-sm leading-relaxed font-body-md">
+                            Hello Mritunjay, I'm your AI Clinical Assistant. I've reviewed your last visit summary. Please describe your symptoms today in detail, or upload any recent lab reports for analysis.
+                        </div>
+<span class="text-[10px] text-on-surface-variant font-label-caps ml-1">AI ASSISTANT • 09:12 AM</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-2xl self-end flex-row-reverse fade-in">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<div class="flex flex-col gap-2 items-end">
+<div class="p-5 bg-white border border-outline-variant text-on-surface rounded-2xl rounded-tr-none shadow-sm font-body-md">
+                            I've been feeling a sharp, localized pain in my chest area for the last hour. It feels like a tight pressure that won't go away. I'm also feeling slightly dizzy.
+                        </div>
+<span class="text-[10px] text-on-surface-variant font-label-caps mr-1">MRITUNJAY • 09:14 AM</span>
+</div>
+</div>
+<!-- Emergency State -->
+<div class="flex gap-4 max-w-3xl fade-in">
+<div class="w-10 h-10 rounded-lg bg-urgent-red flex items-center justify-center shrink-0 shadow-lg shadow-urgent-red/20">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<div class="flex-1">
+<div class="p-8 bg-error-container/50 border border-urgent-red/30 rounded-2xl shadow-xl backdrop-blur-sm border-l-8 border-l-urgent-red">
+<h4 class="font-headline-md text-headline-md text-urgent-red mb-3">Immediate Action Required</h4>
+<p class="font-body-md text-on-surface mb-8 leading-relaxed">
+                                Your reported symptoms (<strong>Chest Pain + Dizziness</strong>) are high-risk indicators of a potential cardiac event. 
+                            </p>
+<div class="flex flex-col gap-4">
+<button class="w-full py-5 bg-urgent-red text-white rounded-xl font-headline-md text-headline-md hover:bg-error transition-all active:scale-[0.98] shadow-lg shadow-urgent-red/30 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-3xl">call</span> CALL EMERGENCY (911)
+                                </button>
+<button class="w-full py-3 bg-white/50 border border-urgent-red/20 text-on-surface-variant rounded-lg font-body-md font-semibold hover:bg-white/80 transition-all text-sm">
+                                    I am already at a hospital / under medical care
+                                </button>
+</div>
+</div>
+<div class="mt-4 p-4 bg-white/60 backdrop-blur-sm border border-outline-variant rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-caution-amber/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-caution-amber">location_on</span>
+</div>
+<div>
+<p class="font-label-caps text-[10px] text-on-surface-variant font-bold">NEAREST EMERGENCY FACILITY</p>
+<p class="font-body-md text-primary font-semibold">St. Jude Medical Center — 1.2 miles away</p>
+</div>
+<button class="ml-auto px-4 py-2 bg-clinical-blue/10 text-clinical-blue rounded-lg font-semibold hover:bg-clinical-blue/20 transition-colors">
+                                Get Directions
+                            </button>
+</div>
+</div>
+</div>
+<!-- Upload Area -->
+<div class="mt-8">
+<div class="border-2 border-dashed border-outline-variant bg-surface-container-lowest/50 backdrop-blur-sm rounded-2xl p-10 flex flex-col items-center gap-4 group hover:border-clinical-blue transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center group-hover:bg-clinical-blue/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-clinical-blue">upload_file</span>
+</div>
+<div class="text-center">
+<h4 class="font-headline-md text-headline-md text-primary">Upload Medical Reports</h4>
+<p class="font-body-md text-on-surface-variant mt-1">PDF, DICOM, or High-Res Photos. AI parses clinical data instantly.</p>
+</div>
+<button class="mt-2 px-8 py-3 bg-primary text-white rounded-lg font-label-caps text-label-caps hover:bg-primary-container transition-all shadow-md">
+                            SELECT FILES
+                        </button>
+</div>
+</div>
+</div>
+<!-- Message Input Area -->
+<div class="px-gutter py-6 bg-surface/80 backdrop-blur-lg border-t border-outline-variant">
+<div class="max-w-4xl mx-auto flex items-end gap-3">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<div class="flex-1 relative">
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-2xl py-4 pl-6 pr-24 focus:ring-2 focus:ring-clinical-blue focus:border-transparent resize-none font-body-md custom-scrollbar shadow-sm" placeholder="Describe symptoms or ask follow-up questions..." rows="1"></textarea>
+<div class="absolute right-2 bottom-2 flex gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-clinical-blue text-white hover:bg-secondary transition-all active:scale-90 shadow-md">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-center gap-6">
+<span class="flex items-center gap-1 font-label-caps text-[10px] text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined text-[14px]">bolt</span> AI ENHANCED
+                    </span>
+<span class="flex items-center gap-1 font-label-caps text-[10px] text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined text-[14px]">lock</span> END-TO-END ENCRYPTED
+                    </span>
+</div>
+</div>
+</section>
+<!-- Right: Clinical Summary/Timeline -->
+<section class="hidden md:flex md:w-[32%] flex-col h-[calc(100vh-64px)] bg-surface-container-low/40 backdrop-blur-sm border-l border-outline-variant overflow-y-auto custom-scrollbar">
+<div class="p-gutter flex flex-col gap-stack-lg">
+<!-- Live Summary Header -->
+<div>
+<h3 class="font-label-caps text-label-caps text-primary font-bold mb-4 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-clinical-blue animate-pulse"></span> LIVE CLINICAL SUMMARY
+                    </h3>
+<!-- Indicators Section -->
+<div class="bg-white/80 border border-outline-variant rounded-xl p-5 shadow-sm space-y-6">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-clinical-blue text-lg">analytics</span>
+<h4 class="font-body-md font-bold text-primary">Extracted Indicators</h4>
+</div>
+<div class="space-y-5">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-md text-on-surface font-medium">Chest Pressure</span>
+<span class="px-2 py-0.5 bg-urgent-red text-white rounded text-[9px] font-bold tracking-tighter">CRITICAL</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-urgent-red h-full w-[94%]"></div>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-md text-on-surface font-medium">Dizziness</span>
+<span class="px-2 py-0.5 bg-caution-amber text-white rounded text-[9px] font-bold tracking-tighter">MODERATE</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-caution-amber h-full w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/30">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-clinical-blue text-lg">vital_signs</span>
+<h4 class="font-body-md font-bold text-primary">Vital Signs (Last Recorded)</h4>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<p class="font-label-caps text-[9px] text-on-surface-variant mb-1">BLOOD PRESSURE</p>
+<p class="font-clinical-data text-clinical-blue text-lg">135/88 <span class="text-[10px] text-on-surface-variant">mmHg</span></p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<p class="font-label-caps text-[9px] text-on-surface-variant mb-1">HEART RATE</p>
+<p class="font-clinical-data text-clinical-blue text-lg">72 <span class="text-[10px] text-on-surface-variant">BPM</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Patient History Timeline -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant font-bold mb-4 px-1">CLINICAL TIMELINE</h3>
+<div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant">
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-clinical-blue border-2 border-white ring-4 ring-clinical-blue/10"></div>
+<div class="p-4 bg-white/80 border border-clinical-blue/20 rounded-xl shadow-sm">
+<span class="font-label-caps text-[10px] text-clinical-blue font-bold">TODAY, 09:14 AM</span>
+<h5 class="font-body-md font-semibold text-primary mt-1">Symptom Flare-up</h5>
+<p class="text-[13px] text-on-surface-variant mt-1 leading-relaxed">Sharp localized chest pain. Secondary dizziness. High acuity protocol triggered.</p>
+</div>
+</div>
+<div class="relative opacity-60 grayscale-[0.3]">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-outline-variant border-2 border-white"></div>
+<div class="p-4 bg-white/50 border border-outline-variant rounded-xl">
+<span class="font-label-caps text-[10px] text-on-surface-variant font-bold">MAR 12, 2024</span>
+<h5 class="font-body-md font-semibold text-primary mt-1">Annual Wellness Check</h5>
+<p class="text-[13px] text-on-surface-variant mt-1 leading-relaxed">BP 135/88. Elevated lipid panel noted.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-time Medication -->
+<div class="p-5 bg-primary-container rounded-2xl text-on-primary-container shadow-lg shadow-primary/10">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-clinical-blue">medication</span>
+<h4 class="font-label-caps text-label-caps font-bold">ACTIVE REGIMEN</h4>
+</div>
+<ul class="space-y-3">
+<li class="flex justify-between items-center text-[13px]">
+<span class="font-semibold">Lisinopril 10mg</span>
+<span class="px-2 py-0.5 bg-white/10 rounded text-[10px]">Daily</span>
+</li>
+<li class="flex justify-between items-center text-[13px]">
+<span class="font-semibold">Multivitamin</span>
+<span class="px-2 py-0.5 bg-white/10 rounded text-[10px]">Morning</span>
+</li>
+</ul>
+</div>
+<!-- Primary Action CTA -->
+<div class="mt-auto pt-6 border-t border-outline-variant/30 sticky bottom-0 bg-transparent py-4">
+<button class="w-full py-4 bg-clinical-blue text-white rounded-xl font-headline-md text-[18px] hover:bg-secondary transition-all active:scale-[0.98] shadow-lg shadow-clinical-blue/20 flex items-center justify-center gap-3">
+                        Confirm &amp; Notify Specialist <span class="material-symbols-outlined">send_and_archive</span>
+</button>
+<p class="text-[10px] text-on-surface-variant text-center mt-3 leading-relaxed font-medium">
+                        Securely transmitting clinical indicators to Dr. Elena Vance (Cardiology).
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- WebGL Background Script -->
+<script>
+        const canvas = document.getElementById('bg-canvas');
+        const gl = canvas.getContext('webgl');
+
+        if (gl) {
+            const vsSource = `
+                attribute vec2 a_position;
+                varying vec2 v_texCoord;
+                void main() {
+                    v_texCoord = a_position * 0.5 + 0.5;
+                    gl_Position = vec4(a_position, 0.0, 1.0);
+                }
+            `;
+
+            const fsSource = `
+                precision highp float;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+                varying vec2 v_texCoord;
+
+                vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+                float snoise(vec2 v){
+                  const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                  vec2 i  = floor(v + dot(v, C.yy) );
+                  vec2 x0 = v -   i + dot(i, C.xx);
+                  vec2 i1;
+                  i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+                  vec4 x12 = x0.xyxy + C.xxzz;
+                  x12.xy -= i1;
+                  i = mod(i, 289.0);
+                  vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 )) + i.x + vec3(0.0, i1.x, 1.0 ));
+                  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+                  m = m*m ; m = m*m ;
+                  vec3 x = 2.0 * fract(p * C.www) - 1.0;
+                  vec3 h = abs(x) - 0.5;
+                  vec3 ox = floor(x + 0.5);
+                  vec3 a0 = x - ox;
+                  m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+                  vec3 g;
+                  g.x  = a0.x  * x0.x  + h.x  * x0.y;
+                  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                  return 130.0 * dot(m, g);
+                }
+
+                void main() {
+                    vec2 uv = v_texCoord;
+                    float n1 = snoise(uv * 2.0 + u_time * 0.05);
+                    float n2 = snoise(uv * 4.0 - u_time * 0.07 + n1);
+                    vec3 color_bg = vec3(0.97, 0.98, 0.98);
+                    vec3 color_accent = vec3(0.10, 0.17, 0.29);
+                    float mask = smoothstep(0.4, 0.9, n2 * 0.5 + 0.5);
+                    vec3 final_color = mix(color_bg, color_accent, mask * 0.04);
+                    float pulse = sin(u_time * 0.5) * 0.5 + 0.5;
+                    final_color += color_accent * mask * 0.015 * pulse;
+                    gl_FragColor = vec4(final_color, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const program = gl.createProgram();
+            gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vsSource));
+            gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fsSource));
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, 'a_position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation = gl.getUniformLocation(program, 'u_time');
+            const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+
+            function render(time) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                gl.uniform1f(timeLocation, time * 0.001);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        }
+
+        // Adjust textarea height
+        const tx = document.getElementsByTagName("textarea");
+        for (let i = 0; i < tx.length; i++) {
+          tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
+          tx[i].addEventListener("input", function() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+          }, false);
+        }
+    </script>
+</body></html>

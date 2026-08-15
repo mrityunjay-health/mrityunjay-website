@@ -1,0 +1,492 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#44474e",
+                        "on-secondary-fixed-variant": "#003da9",
+                        "background": "#f8f9fa",
+                        "urgent-red": "#D12727",
+                        "secondary-container": "#0f62fe",
+                        "on-secondary-fixed": "#00174c",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#1a2b4b",
+                        "primary-fixed": "#d8e2ff",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-secondary-container": "#f3f3ff",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-fixed": "#291800",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed-dim": "#e8c08a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#3e2700",
+                        "on-primary-container": "#8293b8",
+                        "tertiary-fixed": "#ffddb1",
+                        "outline-variant": "#c5c6cf",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#364768",
+                        "surface-warm": "#FAF9F6",
+                        "tertiary": "#231400",
+                        "surface-tint": "#4e5e81",
+                        "recovery-green": "#198754",
+                        "surface-dim": "#d9dadb",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b6c6ef",
+                        "on-primary-fixed": "#081b3a",
+                        "caution-amber": "#F59E0B",
+                        "secondary": "#004ccd",
+                        "text-secondary": "#4B5563",
+                        "primary-fixed-dim": "#b6c6ef",
+                        "secondary-fixed": "#dbe1ff",
+                        "outline": "#75777f",
+                        "on-tertiary-container": "#b08d5b",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container": "#edeeef",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1d",
+                        "text-primary": "#111827",
+                        "primary": "#031635",
+                        "on-tertiary-fixed-variant": "#5d4217",
+                        "clinical-blue": "#0F62FE",
+                        "surface": "#f8f9fa",
+                        "surface-bright": "#f8f9fa",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "stack-sm": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "clinical-data": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "clinical-data": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    }catch(_e){}</script></head><body class="flex min-h-screen">
+
+<!-- Atmospheric Shader Background (Subtle) -->
+<div class="fixed inset-0 w-full h-full pointer-events-none z-0" style="display:block;">
+    <canvas id="shader-canvas-ANIMATION_10" style="display:block;width:100%;height:100%"></canvas>
+    <script>
+        (function() {
+            const canvas = document.getElementById('shader-canvas-ANIMATION_10');
+            function syncSize() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                if (canvas.width !== w || canvas.height !== h) {
+                    canvas.width  = w;
+                    canvas.height = h;
+                }
+            }
+            window.addEventListener('resize', syncSize);
+            syncSize();
+
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (!gl) return;
+            const vs = `attribute vec2 a_position;
+        varying vec2 v_texCoord;
+        void main() {
+            v_texCoord = a_position * 0.5 + 0.5;
+            gl_Position = vec4(a_position, 0.0, 1.0);
+        }`;
+            const fs = `precision highp float;
+        uniform float u_time;
+        uniform vec2 u_resolution;
+        varying vec2 v_texCoord;
+
+        vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+        float snoise(vec2 v){
+            const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                    -0.577350269189626, 0.024390243902439);
+            vec2 i  = floor(v + dot(v, C.yy) );
+            vec2 x0 = v -   i + dot(i, C.xx);
+            vec2 i1;
+            i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+            vec4 x12 = x0.xyxy + C.xxzz;
+            x12.xy -= i1;
+            i = mod(i, 289.0);
+            vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+            + i.x + vec3(0.0, i1.x, 1.0 ));
+            vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+                dot(x12.zw,x12.zw)), 0.0);
+            m = m*m ;
+            m = m*m ;
+            vec3 x = 2.0 * fract(p * C.www) - 1.0;
+            vec3 h = abs(x) - 0.5;
+            vec3 ox = floor(x + 0.5);
+            vec3 a0 = x - ox;
+            m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+            vec3 g;
+            g.x  = a0.x  * x0.x  + h.x  * x0.y;
+            g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+            return 130.0 * dot(m, g);
+        }
+
+        void main() {
+            vec2 uv = v_texCoord;
+            float n1 = snoise(uv * 2.0 + u_time * 0.1);
+            float n2 = snoise(uv * 4.0 - u_time * 0.15 + n1);
+            vec3 color_bg = vec3(0.97, 0.98, 0.98); 
+            vec3 color_accent = vec3(0.10, 0.17, 0.29); 
+            float mask = smoothstep(0.4, 0.9, n2 * 0.5 + 0.5);
+            vec3 final_color = mix(color_bg, color_accent, mask * 0.03); 
+            float pulse = sin(u_time * 0.8) * 0.5 + 0.5;
+            final_color += color_accent * mask * 0.01 * pulse;
+            gl_FragColor = vec4(final_color, 1.0);
+        }`;
+            function cs(type, src) {
+                const s = gl.createShader(type);
+                gl.shaderSource(s, src);
+                gl.compileShader(s);
+                return s;
+            }
+            const prog = gl.createProgram();
+            gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+            gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+            const pos = gl.getAttribLocation(prog, 'a_position');
+            gl.enableVertexAttribArray(pos);
+            gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+            const uTime = gl.getUniformLocation(prog, 'u_time');
+            const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+            function render(t) {
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                if (uTime) gl.uniform1f(uTime, t * 0.001);
+                if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+            render(0);
+        })();
+    </script>
+</div>
+
+<!-- Sidebar Navigation (9 items as per structure 9)-->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low flex flex-col py-stack-lg border-r border-outline-variant z-40 hidden md:flex">
+    <div class="px-6 mb-stack-lg flex items-center gap-3">
+        <img alt="Mritunjay Logo" class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwN0V8JsGdY0mrdy4iBmogZc0bb2nNj4GER20ewbzogjKO0fifSmvvFsb2ONVKUV3LrtWOA_uXzigX4yE1hdEHfiK28LMf_hbN2iGxeGTElfiF1zBItUJdd7ie8DskPx2V3eKExvTJav6us0lPer78bJMtPfsVZUEeicUZLvOO0OZ8GEfixOB02C-I1zXxcxGeLCwWzc1ie7PCgHr0KJHaJfeYevyjazN9pSVzPHk6DQEbCJbDP-FHeGirTG4_qn93eEzQ7sEA0OvG">
+        <div>
+            <h1 class="font-headline-md text-headline-md text-primary leading-none">Mritunjay</h1>
+            <p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Healthcare OS</p>
+        </div>
+    </div>
+    <nav class="flex-1 flex flex-col gap-1 px-3"><a class="flex items-center gap-4 px-4 py-3 text-primary font-semibold border-l-4 border-clinical-blue bg-surface-bright transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-md">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-body-md">Consultation</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md">Timeline</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">article</span>
+<span class="font-body-md">Reports</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">medication</span>
+<span class="font-body-md">Medicines</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">healing</span>
+<span class="font-body-md">Recovery</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">family_restroom</span>
+<span class="font-body-md">Family</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-body-md">Profile</span>
+</a></nav>
+    <div class="px-3 flex flex-col gap-1 mt-auto">
+        <a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="font-body-md text-body-md">Settings</span>
+        </a>
+        <a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all" href="#">
+            <span class="material-symbols-outlined">contact_support</span>
+            <span class="font-body-md text-body-md">Support</span>
+        </a>
+    </div>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 flex flex-col relative min-h-screen z-10">
+    <!-- Top App Bar -->
+    <header class="w-full top-0 sticky z-30 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant px-gutter h-20 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <button class="md:hidden p-2">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="flex flex-col">
+                <h2 class="font-headline-md text-headline-md text-primary">Good Morning, Mr. Singh</h2>
+                <p class="font-body-md text-on-surface-variant">We're here to help you stay healthy.</p>
+            </div>
+        </div>
+        <div class="absolute left-1/2 -translate-x-1/2 hidden xl:block">
+            <h1 class="font-headline-md text-primary font-bold">Home</h1>
+        </div>
+        <div class="flex items-center gap-stack-md">
+            <div class="relative hidden sm:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input class="bg-surface-container-low border-outline-variant border rounded-full pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-clinical-blue text-body-md" placeholder="Search records..." type="text">
+            </div>
+            <button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-urgent-red rounded-full"></span>
+            </button>
+            <div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant cursor-pointer active:opacity-80">
+                <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1bFwHF8OQciwJTl-3v0ELQsrh0Cwf-aW1XETE4eCHMvYP9GDQa6lEO34oHz6oCrMquQr0iTbv8OqYoyEGU19EEHwpfUmiLE6yS5zD0zdIcPIAoTZ_gX4W1SIoGTg2CSFHKTHl04NfktivhlCW0D_t7cjcdQMBokhnVbv0TsqlDuGRjGZufXZ5EbjLjvSbqYJej0FHoQFsgHesca3JXkbSbavT-dhnWt1LXSr9i2zJZL0MnGlW8LXpzcnM064OR5VLaCCk9ENcEf12">
+            </div>
+        </div>
+    </header>
+
+    <!-- Workspace Area -->
+    <div class="p-gutter flex-1 flex flex-col xl:flex-row gap-gutter">
+        
+        <!-- Central Workspace -->
+        <div class="flex-[2] flex flex-col gap-stack-lg fade-in">
+            
+            <!-- Hero Health Metrics -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-0 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+                <div class="p-6 border-b md:border-b-0 md:border-r border-outline-variant bg-surface-bright/50">
+                    <span class="font-label-caps text-xs text-on-surface-variant uppercase tracking-widest mb-2 block">Health Status</span>
+                    <div class="flex items-center gap-3">
+                        <span class="w-3 h-3 bg-recovery-green rounded-full animate-pulse shadow-[0_0_8px_rgba(25,135,84,0.4)]"></span>
+                        <h3 class="font-headline-md text-primary">Stable</h3>
+                    </div>
+                </div>
+                <div class="p-6 border-b md:border-b-0 md:border-r border-outline-variant">
+                    <span class="font-label-caps text-xs text-on-surface-variant uppercase tracking-widest mb-2 block">Current Focus</span>
+                    <h3 class="font-headline-md text-primary">Continue recovery</h3>
+                </div>
+                <div class="p-6">
+                    <span class="font-label-caps text-xs text-on-surface-variant uppercase tracking-widest mb-2 block">Care Stage</span>
+                    <h3 class="font-headline-md text-primary">Recovery Day 3 of 7</h3>
+                </div>
+            </section>
+
+            <!-- Primary Action Card: AI Consultation (Dominant CTA) -->
+            <section class="relative bg-primary text-white rounded-xl p-8 overflow-hidden shadow-xl border border-primary-container">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+                    <span class="material-symbols-outlined text-[260px]" style="font-variation-settings: 'wght' 100;">psychology</span>
+                </div>
+                <div class="relative z-10 max-w-xl">
+                    <span class="inline-block bg-clinical-blue/20 text-clinical-blue border border-clinical-blue/30 font-label-caps text-[10px] px-3 py-1 rounded-full mb-6 uppercase tracking-widest">Recommended Action</span>
+                    <h3 class="font-display-lg text-headline-lg mb-3">Start AI Consultation</h3>
+                    <p class="font-body-lg text-primary-fixed-dim/80 mb-8 max-w-md">Tell us how you're feeling and we'll prepare everything for your doctor. This helps us provide faster, more accurate care.</p>
+                    <button class="bg-clinical-blue hover:bg-secondary transition-all transform active:scale-95 text-white px-10 py-4 rounded-lg font-headline-md flex items-center gap-3 shadow-lg shadow-clinical-blue/30">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        Start Consultation
+                    </button>
+                </div>
+            </section>
+
+            <!-- Today's Health Summary -->
+            <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+                <div class="flex justify-between items-center mb-6 border-b border-outline-variant pb-4">
+                    <h4 class="font-label-caps text-xs text-on-surface-variant uppercase tracking-widest">Today's Health Summary</h4>
+                    <span class="text-on-surface-variant font-clinical-data text-clinical-data">2 of 5 Tasks Done</span>
+                </div>
+                <div class="space-y-4">
+                    <!-- Medication Item -->
+                    <div class="flex items-center justify-between p-4 bg-surface-bright rounded-lg border border-outline-variant hover:border-clinical-blue transition-colors group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-clinical-blue/10 flex items-center justify-center text-clinical-blue group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">pill</span>
+                            </div>
+                            <div>
+                                <p class="font-clinical-data text-clinical-data text-on-surface text-lg">Lisinopril 10mg</p>
+                                <p class="text-on-surface-variant font-body-md text-sm">Morning dose · Before breakfast</p>
+                            </div>
+                        </div>
+                        <button class="bg-surface-container-lowest border border-outline-variant hover:border-clinical-blue hover:text-clinical-blue px-6 py-2 rounded-lg font-body-md transition-all active:scale-95">Mark Taken</button>
+                    </div>
+                    
+                    <!-- Recovery Check -->
+                    <div class="flex items-center justify-between p-4 bg-surface-bright rounded-lg border border-outline-variant hover:border-clinical-blue transition-colors group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-caution-amber/10 flex items-center justify-center text-caution-amber group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">respiratory_rate</span>
+                            </div>
+                            <div>
+                                <p class="font-clinical-data text-clinical-data text-on-surface text-lg">Respiratory Check</p>
+                                <p class="text-on-surface-variant font-body-md text-sm">Peak flow meter measurement</p>
+                            </div>
+                        </div>
+                        <button class="bg-clinical-blue text-white px-6 py-2 rounded-lg font-body-md transition-all hover:bg-secondary active:scale-95">Complete Now</button>
+                    </div>
+                    
+                    <!-- Completed/Status Status -->
+                    <div class="flex items-center gap-4 p-4 opacity-50 bg-surface-container-low/30 rounded-lg">
+                        <div class="w-12 h-12 rounded-full bg-recovery-green/10 flex items-center justify-center text-recovery-green">
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </div>
+                        <div>
+                            <p class="font-clinical-data text-clinical-data text-on-surface">Hypertension Management</p>
+                            <p class="text-on-surface-variant font-body-md text-sm">Within target range for 48 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Side Panel -->
+        <aside class="flex-1 flex flex-col gap-stack-lg fade-in" style="animation-delay: 0.2s">
+            
+            <!-- Recovery Progress -->
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+                <h4 class="font-label-caps text-xs text-on-surface-variant mb-6 uppercase tracking-widest">Recovery Progress</h4>
+                <div class="flex flex-col items-center">
+                    <div class="w-44 h-44 circular-progress rounded-full flex items-center justify-center mb-6">
+                        <div class="flex flex-col items-center">
+                            <span class="font-display-lg text-display-lg text-primary leading-none">65%</span>
+                            <span class="font-label-caps text-xs text-on-surface-variant">Care Plan</span>
+                        </div>
+                    </div>
+                    <p class="text-center font-body-md text-on-surface-variant text-sm">Stage 3/7 complete. Maintain current meds for stability.</p>
+                </div>
+            </div>
+
+            <!-- Vital Trends -->
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h4 class="font-label-caps text-xs text-on-surface-variant uppercase tracking-widest">Vital Trends</h4>
+                    <span class="material-symbols-outlined text-on-surface-variant text-sm">show_chart</span>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="font-label-caps text-[10px] text-on-surface-variant font-bold">HEART RATE</span>
+                            <div class="flex items-center gap-1 text-recovery-green">
+                                <span class="material-symbols-outlined text-xs">trending_down</span>
+                                <span class="font-clinical-data text-clinical-data">72 BPM</span>
+                            </div>
+                        </div>
+                        <div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+                            <div class="h-full bg-clinical-blue w-[70%]"></div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="font-label-caps text-[10px] text-on-surface-variant font-bold">BLOOD PRESSURE</span>
+                            <div class="flex items-center gap-1 text-caution-amber">
+                                <span class="material-symbols-outlined text-xs">trending_up</span>
+                                <span class="font-clinical-data text-clinical-data">128/84</span>
+                            </div>
+                        </div>
+                        <div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+                            <div class="h-full bg-caution-amber w-[85%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Feed: Recent Activity prioritized below health tasks -->
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+                <h4 class="font-label-caps text-xs text-on-surface-variant mb-6 uppercase tracking-widest">Recent Activity</h4>
+                <div class="space-y-6">
+                    <div class="flex gap-4 border-l-2 border-clinical-blue/30 pl-5 py-0.5 relative">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-clinical-blue"></div>
+                        <div>
+                            <p class="font-clinical-data text-clinical-data text-on-surface">Lab Report: Lipid Panel</p>
+                            <p class="text-on-surface-variant font-body-md text-xs">Yesterday, 4:30 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 border-l-2 border-outline-variant pl-5 py-0.5 relative">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-outline-variant"></div>
+                        <div>
+                            <p class="font-clinical-data text-clinical-data text-on-surface">Prescription Updated</p>
+                            <p class="text-on-surface-variant font-body-md text-xs">June 11, 2023</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 border-l-2 border-outline-variant pl-5 py-0.5 relative opacity-60">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-surface-container-lowest border-2 border-outline-variant"></div>
+                        <div class="">
+                            <p class="font-clinical-data text-clinical-data text-on-surface">Dr. Aris: Follow-up</p>
+                            <p class="text-on-surface-variant font-body-md text-xs">June 08, 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full mt-8 py-3 text-clinical-blue font-body-md hover:bg-surface-container-high transition-colors rounded-lg flex items-center justify-center gap-2 group">
+                    View Full Timeline
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Quick Access (Below content, above fold if possible) -->
+    <div class="px-gutter pb-gutter">
+        <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <button class="flex flex-col items-center justify-center gap-2 p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-clinical-blue hover:bg-surface-bright transition-all group shadow-sm active:scale-95">
+                <span class="material-symbols-outlined text-primary group-hover:text-clinical-blue transition-colors">article</span>
+                <span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Reports</span>
+            </button>
+            <button class="flex flex-col items-center justify-center gap-2 p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-clinical-blue hover:bg-surface-bright transition-all group shadow-sm active:scale-95">
+                <span class="material-symbols-outlined text-primary group-hover:text-clinical-blue transition-colors">history</span>
+                <span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Timeline</span>
+            </button>
+            <button class="flex flex-col items-center justify-center gap-2 p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-clinical-blue hover:bg-surface-bright transition-all group shadow-sm active:scale-95">
+                <span class="material-symbols-outlined text-primary group-hover:text-clinical-blue transition-colors">medication</span>
+                <span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Medicines</span>
+            </button>
+            <button class="flex flex-col items-center justify-center gap-2 p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-clinical-blue hover:bg-surface-bright transition-all group shadow-sm active:scale-95">
+                <span class="material-symbols-outlined text-primary group-hover:text-clinical-blue transition-colors">healing</span>
+                <span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Recovery</span>
+            </button>
+            <button class="flex flex-col items-center justify-center gap-2 p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-clinical-blue hover:bg-surface-bright transition-all group shadow-sm active:scale-95">
+                <span class="material-symbols-outlined text-primary group-hover:text-clinical-blue transition-colors">family_restroom</span>
+                <span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Family</span>
+            </button>
+            <button class="flex flex-col items-center justify-center gap-2 p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-clinical-blue hover:bg-surface-bright transition-all group shadow-sm active:scale-95">
+                <span class="material-symbols-outlined text-primary group-hover:text-clinical-blue transition-colors">account_circle</span>
+                <span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-tighter">Profile</span>
+            </button>
+        </section>
+    </div></main></body></html>
