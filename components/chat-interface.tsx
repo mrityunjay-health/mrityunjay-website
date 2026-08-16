@@ -103,7 +103,7 @@ export function ChatInterface(): ReactElement {
   const showDoctor = act === 4;
 
   return (
-    <section id="chat-interface" className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter layer-bridge bg-clinical-white">
+    <section id="chat-interface" className="py-6 sm:py-16 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter layer-bridge bg-clinical-white">
       <div className="w-full max-w-5xl mx-auto relative">
         <div className="bg-clinical-overlay/40 backdrop-blur-md border border-data-node/20 rounded-2xl sm:rounded-[2rem] shadow-2xl overflow-hidden min-h-[480px] sm:min-h-0 sm:aspect-[16/9] flex flex-col">
           {/* Window chrome */}

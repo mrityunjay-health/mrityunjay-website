@@ -19,30 +19,30 @@ export function Hero(): ReactElement {
     offset: ["start start", "end end"]
   });
 
-  // Framer Motion transforms for scroll zoom (Scaled for 250vh height)
-  const svgScale = useTransform(scrollYProgress, [0, 0.15, 0.55], [1, 1, 80]);
+  // Framer Motion transforms for scroll zoom (Scaled for responsive heights)
+  const svgScale = useTransform(scrollYProgress, [0, 0.1, 0.45], [1, 1, 80]);
   
   // Fade out standard content (Slide 1)
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -50]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.15], [0, -50]);
 
   // Fade IN a background-colored overlay as we get close to max zoom
-  const maskOverlayOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
+  const maskOverlayOpacity = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
 
   // Fade out the SVG word behind the mask overlay
-  const svgOpacity = useTransform(scrollYProgress, [0.6, 0.7], [1, 0]);
+  const svgOpacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
 
   // Reveal the next section content (Slide 2: Intelligence Section)
-  // Fully revealed by 0.85 so the user doesn't get "stuck" for long before normal scrolling resumes
-  const revealOpacity = useTransform(scrollYProgress, [0.65, 0.85], [0, 1]);
-  const revealY = useTransform(scrollYProgress, [0.65, 0.85], [50, 0]);
+  // Fully revealed by 0.85 to minimize dead scroll space before the next section
+  const revealOpacity = useTransform(scrollYProgress, [0.55, 0.85], [0, 1]);
+  const revealY = useTransform(scrollYProgress, [0.55, 0.85], [50, 0]);
   // Use a string to control pointer events: none when hidden, auto when visible.
-  const revealPointerEvents = useTransform(scrollYProgress, (v) => v > 0.65 ? "auto" : "none");
+  const revealPointerEvents = useTransform(scrollYProgress, (v) => v > 0.55 ? "auto" : "none");
 
   const reduced = useReducedMotion();
 
   return (
-    <section ref={targetRef} className="relative h-[250vh] bg-background w-full">
+    <section ref={targetRef} className="relative h-[150vh] lg:h-[250vh] bg-background w-full">
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
         
         {/* The Crisp SVG Text that scales infinitely */}
@@ -149,18 +149,18 @@ export function Hero(): ReactElement {
         {/* Slide 2: Intelligence Section */}
         <motion.div
           style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents as any }}
-          className="absolute inset-0 z-30 flex flex-col items-center w-full overflow-y-auto pt-20 pb-4"
+          className="absolute inset-0 z-30 flex flex-col items-center justify-start w-full px-4 sm:px-6 md:px-gutter pt-16 sm:pt-24 pb-8 sm:pb-12"
         >
-          <div className="w-full max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter py-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div>
-                <span className="font-label-caps text-xs sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.3em] block mb-3 sm:mb-4 uppercase">
+          <div className="w-full max-w-container-max mx-auto py-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
+              <div className="flex flex-col">
+                <span className="font-label-caps text-[9px] sm:text-xs text-primary tracking-[0.2em] sm:tracking-[0.3em] block mb-2 sm:mb-4 uppercase">
                   THE MISSING LAYER
                 </span>
-                <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg text-primary leading-tight mb-4 sm:mb-6">
+                <h2 className="font-headline-lg text-2xl sm:text-4xl lg:text-headline-lg text-primary leading-tight mb-3 sm:mb-6">
                   Healthcare without Mritunjay is fragmented by design.
                 </h2>
-                <p className="font-body-lg text-base sm:text-body-lg text-on-surface-variant mb-6 sm:mb-8">
+                <p className="font-body-lg text-sm sm:text-base lg:text-body-lg text-on-surface-variant mb-5 sm:mb-8 leading-snug">
                   Hospitals treat symptoms. Specialists view slices. Mritunjay connects the narrative.
                   We sit between you and the complexity of the medical system, ensuring your story is
                   never lost and your doctors are never guessing.
@@ -178,55 +178,55 @@ export function Hero(): ReactElement {
                       body: "Your history follows you, not the provider. You own the bridge; they simply use it to treat you better.",
                     },
                   ].map((item) => (
-                    <div key={item.title} className="flex gap-4 items-start">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-clinical-white text-lg sm:text-xl">
+                    <div key={item.title} className="flex gap-3 sm:gap-4 items-start">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-primary rounded-full flex items-center justify-center shrink-0 mt-1">
+                        <span className="material-symbols-outlined text-clinical-white text-sm sm:text-lg lg:text-xl">
                           {item.icon}
                         </span>
                       </div>
-                      <div>
-                        <h4 className="font-headline-md text-lg sm:text-[20px] text-primary mb-1.5 sm:mb-2">
+                      <div className="flex-1">
+                        <h4 className="font-headline-md text-base sm:text-lg lg:text-[20px] text-primary mb-1 sm:mb-1.5">
                           {item.title}
                         </h4>
-                        <p className="font-body-md text-sm sm:text-base text-on-surface-variant">{item.body}</p>
+                        <p className="font-body-md text-xs sm:text-sm lg:text-base text-on-surface-variant leading-tight">{item.body}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <div className="relative flex flex-col items-center justify-center p-4 sm:p-8 lg:p-12 border border-data-node/20 rounded-2xl sm:rounded-[3rem] bg-clinical-white/50">
-                  <div className="text-center mb-8 sm:mb-12">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-3 sm:mb-4">
-                      <span className="material-symbols-outlined text-primary text-2xl sm:text-3xl">person</span>
+              <div className="mt-4 sm:mt-0">
+                <div className="relative flex flex-col items-center justify-center p-3 sm:p-6 lg:p-12 border border-data-node/20 rounded-xl sm:rounded-2xl lg:rounded-[3rem] bg-clinical-white/50">
+                  <div className="text-center mb-3 sm:mb-8 lg:mb-12">
+                    <div className="w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-1 sm:mb-3 lg:mb-4">
+                      <span className="material-symbols-outlined text-primary text-base sm:text-2xl lg:text-3xl">person</span>
                     </div>
-                    <span className="font-label-caps text-[10px] tracking-widest text-secondary">
+                    <span className="font-label-caps text-[7px] sm:text-[10px] tracking-widest text-secondary">
                       THE INDIVIDUAL
                     </span>
                   </div>
-                  <div className="w-full h-16 sm:h-24 flex justify-center relative">
+                  <div className="w-full h-8 sm:h-16 lg:h-24 flex justify-center relative">
                     <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container to-primary animate-pulse" />
-                    <span className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 font-label-caps text-[8px] sm:text-[9px] opacity-40">
+                    <span className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 font-label-caps text-[6px] sm:text-[8px] lg:text-[9px] opacity-40">
                       HISTORY FLOW
                     </span>
                   </div>
-                  <div className="w-full bg-primary p-4 sm:p-6 md:p-8 rounded-2xl text-clinical-white text-center shadow-2xl relative z-10 border border-memory-glow/20">
-                    <span className="font-label-caps text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.4em] block mb-2 opacity-60">
+                  <div className="w-full bg-primary p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl text-clinical-white text-center shadow-lg sm:shadow-2xl relative z-10 border border-memory-glow/20">
+                    <span className="font-label-caps text-[6px] sm:text-[9px] lg:text-[10px] tracking-[0.1em] sm:tracking-[0.2em] lg:tracking-[0.4em] block mb-1 sm:mb-2 opacity-60">
                       INTELLIGENCE LAYER
                     </span>
-                    <h3 className="font-headline-md text-xl sm:text-2xl mb-2">MRITUNJAY</h3>
-                    <p className="font-body-md text-xs sm:text-[13px] opacity-70">
+                    <h3 className="font-headline-md text-sm sm:text-xl lg:text-2xl mb-0.5 sm:mb-2">MRITUNJAY</h3>
+                    <p className="font-body-md text-[9px] sm:text-xs lg:text-[13px] opacity-70 leading-tight">
                       Synthesizing records into actionable medical narratives.
                     </p>
                   </div>
-                  <div className="w-full h-16 sm:h-24 flex justify-center relative">
+                  <div className="w-full h-8 sm:h-16 lg:h-24 flex justify-center relative">
                     <div className="w-0.5 h-full bg-gradient-to-b from-primary to-secondary-container opacity-50" />
-                    <span className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 font-label-caps text-[8px] sm:text-[9px] opacity-40">
+                    <span className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 font-label-caps text-[6px] sm:text-[8px] lg:text-[9px] opacity-40">
                       PREPARED INSIGHT
                     </span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 w-full">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2 lg:gap-4 w-full">
                     {[
                       { icon: "local_hospital", label: "HOSPITALS" },
                       { icon: "medical_services", label: "SPECIALISTS" },
@@ -234,12 +234,12 @@ export function Hero(): ReactElement {
                     ].map((item) => (
                       <div
                         key={item.label}
-                        className="bg-surface-container p-3 sm:p-4 rounded-xl text-center border border-data-node/20"
+                        className="bg-surface-container p-2 sm:p-3 lg:p-4 rounded-lg sm:rounded-xl text-center border border-data-node/20 flex flex-col items-center justify-center"
                       >
-                        <span className="material-symbols-outlined text-primary text-lg sm:text-xl mb-1">
+                        <span className="material-symbols-outlined text-primary text-sm sm:text-lg lg:text-xl mb-0.5 sm:mb-1">
                           {item.icon}
                         </span>
-                        <span className="block font-label-caps text-[9px] sm:text-[10px]">{item.label}</span>
+                        <span className="block font-label-caps text-[6px] sm:text-[9px] lg:text-[10px]">{item.label}</span>
                       </div>
                     ))}
                   </div>
