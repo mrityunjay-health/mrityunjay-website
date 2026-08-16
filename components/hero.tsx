@@ -2,466 +2,253 @@
 
 import Link from "next/link";
 import {
-  AnimatePresence,
-  animate,
   motion,
-  useMotionValue,
   useReducedMotion,
+  useScroll,
+  useTransform,
 } from "framer-motion";
-import { useEffect, useState, type ReactElement } from "react";
-
-const FULL_MESSAGE =
-  "The specialist will see you now. I have summarized your last 3 years of cardiac data for them.";
-
-const USER_MESSAGE = "Will they see the reaction I had to the medication in 2024?";
-
-// 5-act narrative loop. Order matters: each act stages the next layer of the story.
-type Act = 1 | 2 | 3 | 4 | 5;
-const NEXT_ACT: Record<Act, Act> = { 1: 2, 2: 3, 3: 4, 4: 5, 5: 1 };
-
-const ACT_MS: Record<Act, number> = {
-  1: 3600, // inquiry: AI types
-  2: 1500, // understanding: user question + connection
-  3: 3400, // synthesis: processing, ECG, brief materializes
-  4: 2400, // review: doctor overlay, counter ticks, check draws
-  5: 2400, // reset: orchestrated exit, version increments, loop
-};
+import { useRef, type ReactElement } from "react";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
-const EASE_SPRING = { type: "spring" as const, stiffness: 220, damping: 26 };
-
-function useTyped(text: string, active: boolean, speed = 28): string {
-  const reduced = useReducedMotion();
-  const [typed, setTyped] = useState(reduced ? text : "");
-  useEffect(() => {
-    if (reduced) {
-      setTyped(text);
-      return;
-    }
-    if (!active) return;
-    setTyped("");
-    let i = 0;
-    const id = setInterval(() => {
-      i += 1;
-      setTyped(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
-    }, speed);
-    return () => clearInterval(id);
-  }, [active, text, speed, reduced]);
-  return typed;
-}
-
-function AnimatedCounter({ active, persist }: { active: boolean; persist: boolean }): ReactElement {
-  const count = useMotionValue(0);
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    const unsub = count.on("change", (v) => setDisplay(Math.round(v)));
-    return () => unsub();
-  }, [count]);
-  useEffect(() => {
-    if (active) {
-      const controls = animate(count, 100, { duration: 2.2, ease: EASE_OUT });
-      return () => controls.stop();
-    }
-    if (persist) {
-      count.set(100);
-      return undefined;
-    }
-    count.set(0);
-    return undefined;
-  }, [active, persist, count]);
-  return <span>{display}</span>;
-}
 
 export function Hero(): ReactElement {
+  const targetRef = useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Framer Motion transforms for scroll zoom (Scaled for 250vh height)
+  const svgScale = useTransform(scrollYProgress, [0, 0.15, 0.55], [1, 1, 80]);
+  
+  // Fade out standard content (Slide 1)
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.25], [0, -50]);
+
+  // Fade IN a background-colored overlay as we get close to max zoom
+  const maskOverlayOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
+
+  // Fade out the SVG word behind the mask overlay
+  const svgOpacity = useTransform(scrollYProgress, [0.6, 0.7], [1, 0]);
+
+  // Reveal the next section content (Slide 2: Intelligence Section)
+  // Fully revealed by 0.85 so the user doesn't get "stuck" for long before normal scrolling resumes
+  const revealOpacity = useTransform(scrollYProgress, [0.65, 0.85], [0, 1]);
+  const revealY = useTransform(scrollYProgress, [0.65, 0.85], [50, 0]);
+  // Use a string to control pointer events: none when hidden, auto when visible.
+  const revealPointerEvents = useTransform(scrollYProgress, (v) => v > 0.65 ? "auto" : "none");
+
   const reduced = useReducedMotion();
-  const [act, setAct] = useState<Act>(1);
-  const [version, setVersion] = useState(81);
-  const typing = useTyped(FULL_MESSAGE, act === 1, 26);
-
-  // Reduced motion: pin to the "prepared for expert" final state. No loop.
-  useEffect(() => {
-    if (!reduced) return;
-    setAct(4);
-  }, [reduced]);
-
-  // Sequence orchestrator — single timer that hands off to the next act.
-  useEffect(() => {
-    if (reduced) return;
-    const id = setTimeout(() => {
-      if (act === 5) {
-        setVersion((v) => v + 1);
-      }
-      setAct((prev) => NEXT_ACT[prev]);
-    }, ACT_MS[act]);
-    return () => clearTimeout(id);
-  }, [act, reduced]);
-
-  const showAI = act < 5;
-  const showUser = act >= 2 && act < 5;
-  const showProcessing = act === 3;
-  const showBrief = act >= 3 && act < 5;
-  const showDoctor = act === 4;
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter overflow-hidden">
-      <div className="max-w-4xl mx-auto text-center z-10 mb-8 sm:mb-16">
-        <motion.span
-          initial={reduced ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: EASE_OUT }}
-          className="font-label-caps text-[10px] sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.4em] mb-3 sm:mb-4 block uppercase"
+    <section ref={targetRef} className="relative h-[250vh] bg-background w-full">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
+        
+        {/* The Crisp SVG Text that scales infinitely */}
+        <motion.div 
+          style={{ 
+            scale: svgScale, 
+            opacity: svgOpacity,
+            position: 'absolute',
+            zIndex: 10,
+            // Transform origin set to roughly the center of the 'U'
+            transformOrigin: '53% 50%' 
+          }}
+          className="pointer-events-none inset-0 flex items-center justify-center w-full"
         >
-          THE INTELLIGENT LAYER
-        </motion.span>
-        <motion.h1
-          initial={reduced ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.1, ease: EASE_OUT }}
-          className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none"
-        >
-          Healthcare that finally remembers you.
-        </motion.h1>
-        <motion.p
-          initial={reduced ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2, ease: EASE_OUT }}
-          className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10"
-        >
-          Treatment happens at the hospital. Understanding begins with Mritunjay.
-          We are the intelligent bridge between your history and your future care.
-        </motion.p>
+          <svg viewBox="0 0 2500 300" className="w-full max-w-full overflow-visible">
+            <text 
+              x="50%" 
+              y="50%" 
+              dominantBaseline="middle" 
+              textAnchor="middle" 
+              className="font-display-hero font-extrabold text-[220px] fill-primary/10 tracking-tighter"
+            >
+              MRITUNJAY<tspan className="fill-secondary/10">.</tspan>
+            </text>
+          </svg>
+        </motion.div>
+
+        {/* Slide 1: Initial Content */}
         <motion.div
-          initial={reduced ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: EASE_OUT }}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 w-full max-w-md sm:max-w-none mx-auto"
+          style={{ opacity: contentOpacity, y: contentY }}
+          className="max-w-4xl mx-auto text-center z-15 w-full relative flex flex-col items-center"
         >
-          <Link
-            href="/waitlist"
-            className="w-full sm:w-auto bg-primary text-clinical-white px-6 sm:px-10 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-opacity-90 transition-all rounded-full text-center"
+          <motion.span
+            initial={reduced ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: EASE_OUT }}
+            className="font-label-caps text-[10px] sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.4em] mb-3 sm:mb-4 block uppercase"
           >
-            JOIN 2026 WAITING LIST
-          </Link>
-          <a
-            href="#intelligence"
-            className="w-full sm:w-auto border border-primary text-primary px-6 sm:px-10 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary hover:text-clinical-white transition-all rounded-full flex items-center justify-center gap-2 text-center"
+            THE INTELLIGENT LAYER
+          </motion.span>
+          <h1 className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none flex flex-wrap justify-center">
+            <span className="sr-only">Healthcare that finally remembers you.</span>
+            {["Healthcare", "that", "finally", "remembers", "you."].map((word, i) => (
+              <span
+                key={i}
+                className="mr-[0.26em] inline-block overflow-hidden pb-[0.1em] -mb-[0.1em] align-bottom last:mr-0"
+              >
+                <motion.span
+                  initial={reduced ? false : { y: "115%", filter: "blur(8px)", opacity: 0 }}
+                  animate={{ y: 0, filter: "blur(0px)", opacity: 1 }}
+                  transition={
+                    reduced
+                      ? undefined
+                      : {
+                          y: { duration: 1.1, ease: EASE_OUT, delay: i * 0.07 },
+                          filter: { duration: 0.9, ease: "easeOut", delay: i * 0.07 },
+                          opacity: { duration: 0.7, ease: "easeOut", delay: i * 0.07 },
+                        }
+                  }
+                  className="inline-block will-change-transform"
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
+          <motion.p
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 1.1, ease: "easeOut" }}
+            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10"
           >
-            <span className="material-symbols-outlined text-[18px] sm:text-[20px]">play_circle</span>
-            EXPLORE THE LAYER
-          </a>
+            Treatment happens at the hospital. Understanding begins with Mritunjay.
+            We are the intelligent bridge between your history and your future care.
+          </motion.p>
+          <motion.div
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 w-full max-w-md sm:max-w-none mx-auto"
+          >
+            <Link
+              href="/waitlist"
+              className="w-full sm:w-auto bg-primary text-clinical-white px-6 sm:px-10 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-opacity-90 transition-all rounded-full text-center"
+            >
+              JOIN 2026 WAITING LIST
+            </Link>
+            <a
+              href="#intelligence"
+              className="w-full sm:w-auto border border-primary text-primary px-6 sm:px-10 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary hover:text-clinical-white transition-all rounded-full flex items-center justify-center gap-2 text-center"
+            >
+              <span className="material-symbols-outlined text-[18px] sm:text-[20px]">play_circle</span>
+              EXPLORE THE LAYER
+            </a>
+          </motion.div>
+        </motion.div>
+
+        {/* Mask Overlay */}
+        <motion.div
+          style={{ opacity: maskOverlayOpacity }}
+          className="absolute inset-0 bg-clinical-white z-20 will-change-[opacity] pointer-events-none"
+        />
+
+        {/* Slide 2: Intelligence Section */}
+        <motion.div
+          style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents as any }}
+          className="absolute inset-0 z-30 flex flex-col items-center w-full overflow-y-auto pt-20 pb-4"
+        >
+          <div className="w-full max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter py-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div>
+                <span className="font-label-caps text-xs sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.3em] block mb-3 sm:mb-4 uppercase">
+                  THE MISSING LAYER
+                </span>
+                <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg text-primary leading-tight mb-4 sm:mb-6">
+                  Healthcare without Mritunjay is fragmented by design.
+                </h2>
+                <p className="font-body-lg text-base sm:text-body-lg text-on-surface-variant mb-6 sm:mb-8">
+                  Hospitals treat symptoms. Specialists view slices. Mritunjay connects the narrative.
+                  We sit between you and the complexity of the medical system, ensuring your story is
+                  never lost and your doctors are never guessing.
+                </p>
+                <div className="space-y-4 sm:space-y-6">
+                  {[
+                    {
+                      icon: "hub",
+                      title: "The Understanding Layer",
+                      body: "We organize the clerical chaos into clinical insight before you even walk into the waiting room.",
+                    },
+                    {
+                      icon: "shield_person",
+                      title: "Sovereign Data Memory",
+                      body: "Your history follows you, not the provider. You own the bridge; they simply use it to treat you better.",
+                    },
+                  ].map((item) => (
+                    <div key={item.title} className="flex gap-4 items-start">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
+                        <span className="material-symbols-outlined text-clinical-white text-lg sm:text-xl">
+                          {item.icon}
+                        </span>
+                      </div>
+                      <div>
+                        <h4 className="font-headline-md text-lg sm:text-[20px] text-primary mb-1.5 sm:mb-2">
+                          {item.title}
+                        </h4>
+                        <p className="font-body-md text-sm sm:text-base text-on-surface-variant">{item.body}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="relative flex flex-col items-center justify-center p-4 sm:p-8 lg:p-12 border border-data-node/20 rounded-2xl sm:rounded-[3rem] bg-clinical-white/50">
+                  <div className="text-center mb-8 sm:mb-12">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-3 sm:mb-4">
+                      <span className="material-symbols-outlined text-primary text-2xl sm:text-3xl">person</span>
+                    </div>
+                    <span className="font-label-caps text-[10px] tracking-widest text-secondary">
+                      THE INDIVIDUAL
+                    </span>
+                  </div>
+                  <div className="w-full h-16 sm:h-24 flex justify-center relative">
+                    <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container to-primary animate-pulse" />
+                    <span className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 font-label-caps text-[8px] sm:text-[9px] opacity-40">
+                      HISTORY FLOW
+                    </span>
+                  </div>
+                  <div className="w-full bg-primary p-4 sm:p-6 md:p-8 rounded-2xl text-clinical-white text-center shadow-2xl relative z-10 border border-memory-glow/20">
+                    <span className="font-label-caps text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.4em] block mb-2 opacity-60">
+                      INTELLIGENCE LAYER
+                    </span>
+                    <h3 className="font-headline-md text-xl sm:text-2xl mb-2">MRITUNJAY</h3>
+                    <p className="font-body-md text-xs sm:text-[13px] opacity-70">
+                      Synthesizing records into actionable medical narratives.
+                    </p>
+                  </div>
+                  <div className="w-full h-16 sm:h-24 flex justify-center relative">
+                    <div className="w-0.5 h-full bg-gradient-to-b from-primary to-secondary-container opacity-50" />
+                    <span className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 font-label-caps text-[8px] sm:text-[9px] opacity-40">
+                      PREPARED INSIGHT
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 w-full">
+                    {[
+                      { icon: "local_hospital", label: "HOSPITALS" },
+                      { icon: "medical_services", label: "SPECIALISTS" },
+                      { icon: "groups", label: "PRIMARY CARE" },
+                    ].map((item) => (
+                      <div
+                        key={item.label}
+                        className="bg-surface-container p-3 sm:p-4 rounded-xl text-center border border-data-node/20"
+                      >
+                        <span className="material-symbols-outlined text-primary text-lg sm:text-xl mb-1">
+                          {item.icon}
+                        </span>
+                        <span className="block font-label-caps text-[9px] sm:text-[10px]">{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
-
-      {/* Hero product interface mock */}
-      <motion.div
-        initial={reduced ? false : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, delay: 0.8, ease: EASE_OUT }}
-        className="w-full max-w-5xl mx-auto relative"
-      >
-        <div className="bg-clinical-white/80 backdrop-blur-md border border-data-node/20 rounded-2xl sm:rounded-[2rem] shadow-2xl overflow-hidden min-h-[480px] sm:min-h-0 sm:aspect-[16/9] flex flex-col">
-          {/* Window chrome */}
-          <div className="h-10 sm:h-12 border-b border-data-node/10 flex items-center px-4 sm:px-6 gap-2 shrink-0">
-            <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-data-node/30" />
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-data-node/30" />
-              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-data-node/30" />
-            </div>
-            <div className="mx-auto font-label-caps text-[9px] sm:text-[10px] opacity-40 tracking-widest tabular-nums">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={version}
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 0.4, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.4, ease: EASE_OUT }}
-                  className="inline-block"
-                >
-                  MRITUNJAY INTELLIGENCE LAYER // V.{String(version).padStart(3, "0")}
-                </motion.span>
-              </AnimatePresence>
-            </div>
-          </div>
-
-          <div className="flex-1 p-4 sm:p-6 md:p-10 relative font-body-md overflow-hidden flex flex-col justify-between">
-            {/* Conversation column */}
-            <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto w-full">
-              {/* AI message — Act 1: types; Act 2-4: holds; Act 5: exits */}
-              <AnimatePresence>
-                {showAI && (
-                  <motion.div
-                    key="ai-msg"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8, transition: { duration: 0.5, ease: EASE_OUT } }}
-                    transition={{ duration: 0.8, ease: EASE_OUT }}
-                    className="flex items-start gap-3 sm:gap-4"
-                  >
-                    <motion.div
-                      animate={
-                        reduced
-                          ? undefined
-                          : {
-                              scale: act === 1 ? [1, 1.08, 1] : 1,
-                            }
-                      }
-                      transition={
-                        act === 1
-                          ? { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
-                          : { duration: 0.6, ease: EASE_OUT }
-                      }
-                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-sm"
-                    >
-                      <span className="material-symbols-outlined text-clinical-white text-xs sm:text-sm">
-                        smart_toy
-                      </span>
-                    </motion.div>
-                    <div className="bg-surface-container p-3 sm:p-4 rounded-2xl rounded-tl-none text-primary min-h-[3rem] sm:min-h-[3.5rem]">
-                      <p className="font-headline-md text-sm sm:text-base md:text-[20px]">
-                        {act >= 2 || reduced ? FULL_MESSAGE : typing}
-                        {!reduced && (act === 1 || typing.length < FULL_MESSAGE.length) && (
-                          <span className="typing-cursor" aria-hidden="true" />
-                        )}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* User response — slides in from right with spring */}
-              <AnimatePresence>
-                {showUser && (
-                  <motion.div
-                    key="user-msg"
-                    initial={{ opacity: 0, x: 32, scale: 0.96 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: 32, transition: { duration: 0.5, ease: EASE_OUT } }}
-                    transition={EASE_SPRING}
-                    className="flex items-start gap-3 sm:gap-4 justify-end"
-                  >
-                    <div className="bg-primary text-clinical-white p-3 sm:p-4 rounded-2xl rounded-tr-none shadow-sm">
-                      <p className="text-xs sm:text-sm md:text-[18px]">{USER_MESSAGE}</p>
-                    </div>
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
-                      <span className="material-symbols-outlined text-clinical-white text-xs sm:text-sm">
-                        person
-                      </span>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Processing indicators — Act 3 only */}
-            <AnimatePresence>
-              {showProcessing && (
-                <motion.div
-                  key="processing"
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  variants={{
-                    hidden: { opacity: 0 },
-                    show: { opacity: 1, transition: { staggerChildren: 0.35 } },
-                    exit: { opacity: 0, transition: { duration: 0.4, ease: EASE_OUT } },
-                  }}
-                  className="pt-8 space-y-3"
-                >
-                  {[
-                    { label: "SURFACING AUG 2024 ADVERSE REACTION...", live: true },
-                    { label: "FLAGGING FOR PHYSICIAN REVIEW...", live: false },
-                  ].map((item) => (
-                    <motion.div
-                      key={item.label}
-                      variants={{
-                        hidden: { opacity: 0, x: -8 },
-                        show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE_OUT } },
-                      }}
-                      className="flex items-center gap-3 text-secondary"
-                    >
-                      {item.live ? (
-                        <div className="w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full animate-spin shrink-0" />
-                      ) : (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.7, type: "spring", stiffness: 300, damping: 18 }}
-                          className="w-4 h-4 rounded-full bg-green-500/20 flex items-center justify-center shrink-0"
-                        >
-                          <span className="material-symbols-outlined text-green-600 text-[12px]">
-                            check
-                          </span>
-                        </motion.div>
-                      )}
-                      <span
-                        className={`font-label-caps text-[11px] ${item.live ? "" : "opacity-70"}`}
-                      >
-                        {item.label}
-                      </span>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Brief card — Act 3-4 */}
-            <AnimatePresence>
-              {showBrief && (
-                <motion.div
-                  key="brief"
-                  initial={{ opacity: 0, y: "110%" }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{
-                    opacity: 0,
-                    y: "110%",
-                    transition: { duration: 0.7, ease: EASE_OUT },
-                  }}
-                  transition={{ ...EASE_SPRING, delay: act === 3 ? 0.6 : 0 }}
-                  className="absolute inset-x-2 sm:inset-x-6 md:inset-x-10 bottom-2 sm:bottom-6 md:bottom-10"
-                >
-                  <div className="bg-primary text-clinical-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl border border-clinical-white/10 relative overflow-hidden">
-                    {/* ECG sweep line that draws across the brief */}
-                    <svg
-                      viewBox="0 0 800 8"
-                      preserveAspectRatio="none"
-                      className="absolute top-0 left-0 w-full h-2 opacity-50"
-                      aria-hidden="true"
-                    >
-                      <motion.path
-                        d="M0 4 L60 4 L80 1 L100 7 L120 4 L260 4 L280 1 L300 7 L320 4 L800 4"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1.6, ease: EASE_OUT, delay: 0.4 }}
-                      />
-                    </svg>
-
-                    <div className="flex justify-between items-start mb-4 sm:mb-6">
-                      <h3 className="font-headline-md text-base sm:text-xl md:text-[22px]">Intelligent Brief</h3>
-                      <span className="font-label-caps text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-1 bg-clinical-white/10 rounded-full shrink-0 ml-2">
-                        READY FOR DOCTOR
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
-                      {[
-                        { label: "CRITICAL FLAG", value: "Lisinopril Intolerance" },
-                        {
-                          label: "HISTORY DEPTH",
-                          valueNode: (
-                            <p className="text-base sm:text-xl tabular-nums">
-                              <AnimatedCounter active={act === 3} persist={act >= 3} />% Mapped
-                            </p>
-                          ),
-                        },
-                        { label: "STATUS", value: "Prepared" },
-                      ].map((item, i) => (
-                        <motion.div
-                          key={item.label}
-                          initial={{ opacity: 0, y: 6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.8 + i * 0.15, ease: EASE_OUT }}
-                          className="border-l border-clinical-white/20 pl-3 sm:pl-4"
-                        >
-                          <p className="font-label-caps text-[9px] sm:text-[10px] opacity-50">{item.label}</p>
-                          {"value" in item ? (
-                            <p className="text-base sm:text-xl">{item.value}</p>
-                          ) : (
-                            item.valueNode
-                          )}
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Doctor overlay — Act 4 only */}
-            <AnimatePresence>
-              {showDoctor && (
-                <motion.div
-                  key="doctor"
-                  initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                  animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
-                  exit={{
-                    opacity: 0,
-                    backdropFilter: "blur(0px)",
-                    transition: { duration: 0.7, ease: EASE_OUT },
-                  }}
-                  transition={{ duration: 0.9, ease: EASE_OUT }}
-                  className="absolute inset-0 flex items-center justify-center bg-clinical-white/40 pointer-events-none will-change-[opacity] p-4"
-                >
-                  <motion.div
-                    initial={{ scale: 0.88, opacity: 0, y: 8 }}
-                    animate={{ scale: 1, opacity: 1, y: 0 }}
-                    exit={{ scale: 0.94, opacity: 0, transition: { duration: 0.5, ease: EASE_OUT } }}
-                    transition={EASE_SPRING}
-                    className="bg-clinical-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl shadow-2xl border border-data-node/20 text-center max-w-[92%] sm:max-w-md mx-auto"
-                  >
-                    <motion.div
-                      initial={{ scale: 0, rotate: -90 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ delay: 0.3, ...EASE_SPRING }}
-                      className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-primary-fixed mx-auto mb-4 sm:mb-6 flex items-center justify-center"
-                    >
-                      <span className="material-symbols-outlined text-primary text-2xl sm:text-4xl">
-                        verified
-                      </span>
-                    </motion.div>
-                    <motion.h4
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5, duration: 0.6, ease: EASE_OUT }}
-                      className="font-headline-md text-xl sm:text-2xl text-primary mb-1"
-                    >
-                      Prepared for the Expert
-                    </motion.h4>
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.7, duration: 0.6 }}
-                      className="font-label-caps text-[11px] text-secondary mb-6"
-                    >
-                      THE DOCTOR HAS YOUR FULL CONTEXT
-                    </motion.p>
-
-                    {/* Self-drawing check + approval line */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.9, duration: 0.4 }}
-                      className="flex items-center justify-center gap-3 text-green-600 font-label-caps tracking-widest"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                      >
-                        <motion.path
-                          d="M4 12.5 L10 18 L20 6"
-                          initial={{ pathLength: 0 }}
-                          animate={{ pathLength: 1 }}
-                          transition={{ duration: 0.7, delay: 1.0, ease: EASE_OUT }}
-                        />
-                      </svg>
-                      <span>NO DATA LEFT BEHIND</span>
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 }
