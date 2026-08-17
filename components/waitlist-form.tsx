@@ -20,21 +20,21 @@ const INITIAL_FORM_DATA: WaitlistFormData = {
 
 const INTEREST_OPTIONS: Record<WaitlistRole, ReadonlyArray<{ readonly value: string; readonly label: string }>> = {
   patient: [
-    { value: "longitudinal_memory", label: "Longitudinal Cardiac and Medical Memory" },
+    { value: "longitudinal_memory", label: "Longitudinal Cardiac & Medical Memory" },
     { value: "physician_synthesis", label: "Pre-Consultation Clinical Briefs" },
-    { value: "medication_history", label: "Historical Reaction and Medication Tracking" },
+    { value: "medication_history", label: "Historical Reaction & Medication Tracking" },
     { value: "family_records", label: "Multi-Generational Health Context" },
   ],
   physician: [
-    { value: "clinical_briefs", label: "Clinical Pre-Review and EHR Record Synthesis" },
+    { value: "clinical_briefs", label: "Clinical Pre-Review & EHR Record Synthesis" },
     { value: "longitudinal_timeline", label: "Patient Journey Timeline Reconstruction" },
     { value: "partner_program", label: "2026 Flagship Clinical Vanguard Program" },
-    { value: "research_collaboration", label: "Clinical Validation and Trials" },
+    { value: "research_collaboration", label: "Clinical Validation & Trials" },
   ],
   enterprise: [
-    { value: "health_system_integration", label: "Health System and EHR Data Layer Integration" },
+    { value: "health_system_integration", label: "Health System & EHR Data Layer Integration" },
     { value: "specialty_clinic_pilot", label: "Multi-Site Specialty Clinic Deployment" },
-    { value: "security_compliance", label: "Enterprise HIPAA and BAA Infrastructure" },
+    { value: "security_compliance", label: "Enterprise HIPAA & BAA Infrastructure" },
     { value: "custom_intelligence", label: "Custom Domain Intelligence Layer" },
   ],
 };
@@ -105,14 +105,14 @@ function SuccessConfirmation({
   };
 
   return (
-    <div className="bg-clinical-white border border-data-node/40 p-6 sm:p-10 shadow-double-bezel rounded-2xl max-w-2xl mx-auto text-left space-y-8">
+    <div className="bg-clinical-white border border-data-node/40 p-6 sm:p-10 shadow-double-bezel rounded-2xl max-w-2xl mx-auto text-left space-y-8 animate-fade-in-up">
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 rounded-full bg-primary text-clinical-white flex items-center justify-center font-headline-md text-xl shadow-sm">
           ✓
         </div>
         <div>
           <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-widest uppercase block">
-            CONFIRMED // 2026 VANGUARD QUEUE
+            CONFIRMED // 2026 CLINICAL ACCESS QUEUE
           </span>
           <h2 className="font-headline-md text-2xl text-primary">
             Position Reserved
@@ -121,9 +121,9 @@ function SuccessConfirmation({
       </div>
 
       <p className="font-body-lg text-sm sm:text-base text-on-surface-variant leading-relaxed">
-        Thank you for securing your position on the Mritunjay flagship queue for{" "}
+        Thank you for reserving your clinical access key for{" "}
         <strong className="text-primary font-semibold">{data.email}</strong>. Our clinical onboarding
-        team will reach out with your verified access credentials prior to the 2026 release.
+        team will reach out with your private enclave credentials prior to the 2026 flagship release.
       </p>
 
       {/* Access Token Double-Bezel Card */}
@@ -131,7 +131,7 @@ function SuccessConfirmation({
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
             <span className="font-mono text-[10px] text-on-surface-variant tracking-wider block uppercase mb-0.5">
-              PRIORITY ACCESS TOKEN
+              SOVEREIGN ACCESS TOKEN
             </span>
             <span className="font-mono text-lg sm:text-xl text-primary font-bold tracking-wider">
               {data.priorityId}
@@ -155,10 +155,25 @@ function SuccessConfirmation({
             <span className="font-bold text-primary text-sm tabular-nums">#{data.queuePosition}</span>
           </div>
           <div>
-            <span className="text-on-surface-variant block text-[10px] uppercase">Target Onboarding</span>
+            <span className="text-on-surface-variant block text-[10px] uppercase">Target Rollout</span>
             <span className="font-bold text-primary text-sm">{data.estimatedOnboarding}</span>
           </div>
         </div>
+      </div>
+
+      {/* Attentive Patient Journey Roadmap (Principle 11 & 13) */}
+      <div className="p-4 bg-primary/5 rounded-xl border border-primary/10 space-y-2 text-xs font-body-md text-primary">
+        <div className="font-mono text-[11px] font-semibold uppercase tracking-wider flex items-center gap-2">
+          <span className="material-symbols-outlined text-base">info</span>
+          <span>What Happens Next (Principle 11)</span>
+        </div>
+        <p className="text-secondary leading-relaxed text-[11px]">
+          1. Your token secures your position in our 2026 clinical vanguard queue.
+          <br />
+          2. No medical records are collected until your personal zero-trust enclave is created.
+          <br />
+          3. You will receive an invitation to configure your continuous medical memory with full sovereignty.
+        </p>
       </div>
 
       <div className="pt-2 text-center sm:text-left">
@@ -179,6 +194,7 @@ export function WaitlistForm(): ReactElement {
   const [formData, setFormData] = useState<WaitlistFormData>(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState<WaitlistFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStep, setSubmissionStep] = useState<string>("Establishing zero-trust enclave...");
   const [apiError, setApiError] = useState<string | null>(null);
   const [successData, setSuccessData] = useState<WaitlistSuccessData | null>(null);
 
@@ -186,12 +202,12 @@ export function WaitlistForm(): ReactElement {
     const newErrors: Record<string, string> = {};
 
     if (!formData.fullName.trim()) {
-      newErrors.fullName = "Full name is required";
+      newErrors.fullName = "Please enter your name so we can address your clinical brief";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = "Email address is required";
+      newErrors.email = "Please enter your email to receive your access token";
     } else if (!emailRegex.test(formData.email.trim())) {
       newErrors.email = "Please enter a valid email address";
     }
@@ -199,12 +215,12 @@ export function WaitlistForm(): ReactElement {
     if (formData.role !== "patient" && !formData.organization.trim()) {
       newErrors.organization =
         formData.role === "physician"
-          ? "Practice or hospital name is required"
-          : "Health system or organization name is required";
+          ? "Please enter your practice or hospital name"
+          : "Please enter your health system or institution name";
     }
 
     if (!formData.agreedToTerms) {
-      newErrors.agreedToTerms = "You must agree to receive 2026 flagship updates";
+      newErrors.agreedToTerms = "Please agree to receive 2026 clinical access communications";
     }
 
     setErrors(newErrors);
@@ -217,6 +233,11 @@ export function WaitlistForm(): ReactElement {
 
     setIsSubmitting(true);
     setApiError(null);
+    setSubmissionStep("Establishing zero-trust enclave...");
+
+    const stepTimer = setTimeout(() => {
+      setSubmissionStep("Generating patient priority token...");
+    }, 600);
 
     void (async () => {
       try {
@@ -230,6 +251,7 @@ export function WaitlistForm(): ReactElement {
           const errData = (await res.json()) as { error?: string };
           setApiError(errData.error || "Failed to complete registration. Please try again.");
           setIsSubmitting(false);
+          clearTimeout(stepTimer);
           return;
         }
 
@@ -239,6 +261,7 @@ export function WaitlistForm(): ReactElement {
         setApiError("Network error. Please check your connection and try again.");
       } finally {
         setIsSubmitting(false);
+        clearTimeout(stepTimer);
       }
     })();
   };
@@ -289,18 +312,32 @@ export function WaitlistForm(): ReactElement {
       initial={reduced ? undefined : { opacity: 0, y: 16 }}
       animate={reduced ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="bg-clinical-white border border-data-node/40 p-5 sm:p-8 lg:p-12 shadow-double-bezel rounded-2xl max-w-3xl mx-auto text-left"
+      className="bg-clinical-white border border-data-node/40 p-5 sm:p-8 lg:p-12 shadow-double-bezel rounded-2xl max-w-3xl mx-auto text-left space-y-8"
     >
-      <div className="mb-8 border-b border-data-node/20 pb-6">
+      {/* Zero-Trust Promise Header (Principle 2: Reduce Anxiety Before Reducing Clicks) */}
+      <div className="p-4 bg-surface-container-low border border-data-node/30 rounded-xl flex items-start gap-3 text-xs font-body-md text-primary">
+        <span className="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">verified_user</span>
+        <div>
+          <span className="font-mono text-xs font-semibold tracking-wider uppercase block text-primary">
+            ZERO-TRUST DATA SOVEREIGNTY PROMISE
+          </span>
+          <p className="text-secondary text-[11px] leading-relaxed mt-0.5">
+            Your medical privacy is sovereign. We do not ask for clinical records, portal credentials, or
+            medical histories during waitlist registration.
+          </p>
+        </div>
+      </div>
+
+      <div className="border-b border-data-node/20 pb-6">
         <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-wider uppercase block mb-3">
-          STEP 1 OF 2 // SELECT PROFILE TYPE
+          STEP 1 OF 2 // SELECT ONBOARDING TRACK
         </span>
         <div role="tablist" aria-label="Profile Role Type" className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <RoleTabButton
             id="tab-patient"
             active={formData.role === "patient"}
             label="Patient / Individual"
-            description="Secure longitudinal health continuity across providers."
+            description="Secure longitudinal health continuity across all doctors."
             onClick={() => handleRoleSelect("patient")}
           />
           <RoleTabButton
@@ -468,11 +505,11 @@ export function WaitlistForm(): ReactElement {
             {isSubmitting ? (
               <>
                 <span className="w-4 h-4 border-2 border-clinical-white border-t-transparent rounded-full animate-spin" />
-                <span>RESERVING POSITION...</span>
+                <span className="font-mono text-xs">{submissionStep}</span>
               </>
             ) : (
               <>
-                <span>JOIN 2026 FLAGSHIP WAITING LIST</span>
+                <span>RESERVE 2026 ACCESS POSITION</span>
                 <span className="w-5 h-5 rounded-full bg-clinical-white/15 group-hover:bg-clinical-white/25 flex items-center justify-center transition-colors">
                   <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
                 </span>

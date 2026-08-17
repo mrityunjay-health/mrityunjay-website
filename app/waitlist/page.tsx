@@ -5,9 +5,9 @@ import { WaitlistForm } from "@/components/waitlist-form";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "2026 Flagship Access | Mritunjay Healthcare Intelligence",
+  title: "2026 Clinical Access | Mritunjay Healthcare Intelligence",
   description:
-    "Join the priority waiting list for Mritunjay's 2026 Flagship Launch. Secure your health narrative across providers with continuous medical memory.",
+    "Reserve priority access for Mritunjay's 2026 Clinical Release. Secure your health narrative across providers with continuous medical memory.",
 };
 
 function TrustBadge({
@@ -39,17 +39,17 @@ export default function WaitlistPage(): ReactElement {
       <Nav />
       <main className="pt-24 sm:pt-28 pb-16 sm:pb-24 lg:pb-section-gap-lg bg-clinical-overlay min-h-screen">
         <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter text-center space-y-8 sm:space-y-12">
-          {/* Header Section */}
+          {/* Header Section (Principle 1 & Principle 2: Reduce Anxiety Before Reducing Clicks) */}
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
             <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-[0.25em] block uppercase">
-              STRICTLY LIMITED RELEASE // EST. 2026
+              2026 CLINICAL ACCESS INITIATIVE
             </span>
             <h1 className="font-headline-lg text-3xl sm:text-5xl lg:text-headline-lg text-primary tracking-tight">
-              Secure Your History.
+              Ensure your healthcare starts with understanding.
             </h1>
             <p className="font-body-lg text-base sm:text-body-lg text-on-surface-variant leading-relaxed">
-              We are currently onboarding initial clinical partners, specialists, and patients for the
-              2026 flagship launch. Ensure your healthcare narrative starts with understanding.
+              We are onboarding clinical partners, cardiologists, and patients for the 2026 flagship release.
+              Reserve your position in the sovereign health memory enclave.
             </p>
           </div>
 
@@ -59,23 +59,23 @@ export default function WaitlistPage(): ReactElement {
           {/* Clinical Trust & Compliance Highlights */}
           <div className="max-w-4xl mx-auto pt-8 sm:pt-12">
             <span className="font-mono text-[10px] sm:text-xs text-on-surface-variant tracking-widest uppercase block mb-4 sm:mb-6 font-semibold">
-              CLINICAL INTEGRITY & PRIVACY ASSURANCES
+              CLINICAL INTEGRITY & ZERO-TRUST ASSURANCES
             </span>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               <TrustBadge
-                icon="HIPAA // BAA"
-                title="Strict Compliance"
-                description="Built on zero-trust enterprise infrastructure with end-to-end encryption for all health records."
+                icon="HIPAA // BAA READY"
+                title="End-to-End Encryption"
+                description="Built on zero-trust enterprise infrastructure with military-grade 256-bit encryption for all records."
               />
               <TrustBadge
                 icon="DATA SOVEREIGNTY"
                 title="Patient Ownership"
-                description="Your medical narrative belongs entirely to you. Export or revoke provider access anytime."
+                description="Your medical narrative belongs entirely to you. You grant and revoke provider access at your discretion."
               />
               <TrustBadge
-                icon="CLINICAL SYNTHESIS"
-                title="Physician Centrality"
-                description="Designed alongside cardiac and internal specialists to augment consultation clarity."
+                icon="PHYSICIAN GUIDANCE"
+                title="Clinician Centrality"
+                description="Engineered alongside internal medicine and cardiology specialists to augment direct consultation care."
               />
             </div>
           </div>

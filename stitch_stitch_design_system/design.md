@@ -3,6 +3,37 @@ Purpose
 This document defines the visual language, interaction philosophy, and UX principles for every interface in Mritunjay.
 Every screen, component, animation, illustration, interaction, and workflow must follow this document.
 This document is the single source of truth for design.
+
+---
+
+# The 20 Mritunjay Design Principles
+
+1. **We Design for Humans, Not Screens**: People open Mritunjay because they are scared, in pain, confused, or vulnerable. Every screen must acknowledge that emotional reality.
+2. **Reduce Anxiety Before Reducing Clicks**: Less fear > fewer taps. Confidence matters as much as interaction count.
+3. **Understanding Comes Before Action**: Interface must answer: What is happening? Why is it happening? What happens next? Only then ask them to act.
+4. **Information Appears When It Becomes Useful**: Progressive disclosure. No clutter, no dashboards full of numbers.
+5. **One Screen, One Purpose**: Home = "I understand my current health"; Consultation = "The system understands me"; Prescription = "I know exactly what to do"; Recovery = "I know whether I am improving".
+6. **Silence Is a Feature**: Healthcare apps constantly shout. We don't. Silence builds trust.
+7. **Motion Must Explain, Never Decorate**: Animation explains progress, relationship, continuity, transition, attention. Never for entertainment.
+8. **Every Wait Has Meaning**: Never show generic "Loading...". Show meaningful progress ("Analyzing 36 months of cardiac data...", "Cross-referencing medication safety...").
+9. **The System Should Feel Attentive**: Attention builds trust ("I remember your allergy", "Your doctor already reviewed your context").
+10. **Technology Must Become Invisible**: Users should think "My healthcare became easier", not "What an amazing AI". The technology disappears; the care remains.
+11. **The Next Step Is Always Obvious**: Patients should always know where they are, what is happening, and what happens next.
+12. **Build Confidence Before Complexity**: Build understanding gradually before exposing advanced medical complexity.
+13. **Every Interaction Builds Memory**: Nothing disappears. Every consultation, report, and recovery adds to a lifelong health story.
+14. **Design for Recovery, Not Consultation**: Most healthcare apps end with prescription. We continue helping through recovery.
+15. **Trust Is the Interface**: Built through consistency, predictable behavior, and strict data sovereignty.
+16. **Make Complex Systems Feel Simple**: Hide complexity, never hide important information.
+17. **Every Pixel Must Earn Its Place**: Minimalism is disciplined decision-making. If removing something improves clarity, remove it.
+18. **Context Before Content**: Ask "Does the patient need this now?" before displaying information.
+19. **Calm Is a Competitive Advantage**: When someone closes Mritunjay, they should feel calmer than when they opened it.
+20. **Design for the Next 10 Years**: Avoid short-lived trends. Build timeless systems.
+
+### Aesthetic Feeling
+- Calm, Quiet, Precise, Warm, Intelligent, Trustworthy, Human, Spacious, Thoughtful, Effortless.
+
+---
+
 Product Identity
 Mritunjay is not a telemedicine application.
 It is an AI-native Healthcare Operating System.

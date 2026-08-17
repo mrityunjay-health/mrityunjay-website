@@ -21,14 +21,14 @@ export function Hero(): ReactElement {
   });
 
   // Cellular microscope dive: scales the biological cell canvas into its glowing nucleus
-  const cellScale = useTransform(scrollYProgress, [0, 0.15, 0.52], [1, 1.3, 36]);
+  const cellScale = useTransform(scrollYProgress, [0, 0.15, 0.52], [1, 1.25, 36]);
   const cellOpacity = useTransform(scrollYProgress, [0.45, 0.62], [1, 0]);
   
   // Fade out Slide 1 text
   const contentOpacity = useTransform(scrollYProgress, [0, 0.16], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.16], [0, -45]);
 
-  // Optical mask overlay as the microscope penetrates into the chromatin matrix
+  // Optical mask overlay as the microscope enters the clinical matrix
   const maskOverlayOpacity = useTransform(scrollYProgress, [0.45, 0.58], [0, 1]);
 
   // Reveal Slide 2 (Persistent Health Memory Matrix)
@@ -52,7 +52,7 @@ export function Hero(): ReactElement {
             opacity: reduced ? 1 : cellOpacity,
             position: "absolute",
             zIndex: 5,
-            transformOrigin: "50% 50%",
+            transformOrigin: "50% 48%",
           }}
           className="pointer-events-auto inset-0 flex items-center justify-center w-full h-full"
         >
@@ -68,9 +68,9 @@ export function Hero(): ReactElement {
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: EASE_OUT }}
-            className="font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/60 backdrop-blur-xs px-3.5 py-1 rounded-full border border-data-node/30 shadow-xs"
+            className="font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/80 backdrop-blur-xs px-4 py-1 rounded-full border border-data-node/30 shadow-xs"
           >
-            LIVING CLINICAL INTELLIGENCE
+            LIVING HEALTH INTELLIGENCE
           </motion.span>
           <h1 className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none flex flex-wrap justify-center max-w-5xl">
             <span className="sr-only">Healthcare that finally remembers you.</span>
@@ -102,7 +102,7 @@ export function Hero(): ReactElement {
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed bg-clinical-white/60 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none px-4 py-2 sm:px-0 sm:py-0 rounded-xl"
+            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed bg-clinical-white/90 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none px-4 py-2.5 sm:px-0 sm:py-0 rounded-2xl border border-data-node/30 sm:border-none shadow-xs sm:shadow-none"
           >
             Treatment happens at the hospital. Understanding begins with Mritunjay.
             We are the intelligent bridge between your history and your future care.
@@ -197,24 +197,24 @@ export function Hero(): ReactElement {
                     <div className="w-12 h-12 sm:w-16 sm:h-16 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-inner">
                       <span className="material-symbols-outlined text-primary text-xl sm:text-2xl">person</span>
                     </div>
-                    <span className="font-mono text-[9px] sm:text-xs tracking-wider text-secondary font-medium">
-                      INDIVIDUAL RECORD HOLDER
+                    <span className="font-mono text-[9px] sm:text-xs tracking-wider text-secondary font-medium uppercase">
+                      Patient Narrative and History
                     </span>
                   </div>
 
                   <div className="w-full h-8 sm:h-14 flex justify-center relative items-center">
-                    <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container via-primary to-primary animate-pulse" />
-                    <span className="absolute right-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest">
-                      LONGITUDINAL SYNC
+                    <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container via-primary to-primary opacity-60" />
+                    <span className="absolute right-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest uppercase">
+                      Continuous Understanding
                     </span>
                   </div>
 
-                  {/* Core Intelligence Node */}
+                  {/* Core Intelligence Node with Peaceful Breathing */}
                   <div className="w-full bg-primary p-4 sm:p-6 rounded-xl text-clinical-white text-center shadow-double-bezel-dark relative z-10 border border-memory-glow/25">
                     <div className="flex items-center justify-center gap-2 mb-1.5">
-                      <span className="w-2 h-2 rounded-full bg-memory-glow animate-ping" />
+                      <span className="w-2 h-2 rounded-full bg-memory-glow animate-pulse-subtle" />
                       <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-memory-glow">
-                        INTELLIGENCE MATRIX ACTIVE
+                        ACTIVE CLINICAL MEMORY
                       </span>
                     </div>
                     <h3 className="font-headline-md text-lg sm:text-2xl mb-1">MRITUNJAY</h3>
@@ -225,8 +225,8 @@ export function Hero(): ReactElement {
 
                   <div className="w-full h-8 sm:h-14 flex justify-center relative items-center">
                     <div className="w-0.5 h-full bg-gradient-to-b from-primary to-secondary-container opacity-60" />
-                    <span className="absolute left-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest">
-                      SYNTHESIZED BRIEF
+                    <span className="absolute left-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest uppercase">
+                      Physician Synthesis
                     </span>
                   </div>
 

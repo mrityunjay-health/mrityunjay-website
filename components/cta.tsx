@@ -13,17 +13,17 @@ export function Cta(): ReactElement {
 
       <Reveal className="max-w-3xl mx-auto space-y-6 sm:space-y-8 relative z-10">
         <span className="font-mono text-xs text-memory-glow tracking-[0.25em] block uppercase font-semibold">
-          STRICTLY LIMITED RELEASE // EST. 2026
+          2026 CLINICAL ACCESS INITIATIVE
         </span>
         <h2 className="font-headline-lg text-3xl sm:text-5xl lg:text-headline-lg tracking-tight">
           Ensure your medical story begins with understanding.
         </h2>
-        <p className="font-body-lg text-base sm:text-body-lg opacity-80 max-w-xl mx-auto leading-relaxed">
+        <p className="font-body-lg text-base sm:text-body-lg opacity-85 max-w-xl mx-auto leading-relaxed">
           We are currently onboarding initial clinical partners, specialists, and patients for the 2026 flagship release.
         </p>
 
         {/* Button-in-Button CTA Architecture */}
-        <div className="pt-4 sm:pt-6 flex justify-center">
+        <div className="pt-2 sm:pt-4 flex justify-center">
           <Link
             href="/waitlist"
             className="group inline-flex items-center gap-4 bg-clinical-white text-primary pl-8 pr-4 py-4 sm:py-5 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-surface-bright transition-all rounded-full shadow-2xl active:scale-[0.98]"
@@ -35,6 +35,13 @@ export function Cta(): ReactElement {
               </span>
             </span>
           </Link>
+        </div>
+
+        {/* Upfront Zero-Trust Privacy Reassurances (Principle 2 & Principle 15) */}
+        <div className="pt-4 flex flex-wrap justify-center items-center gap-4 sm:gap-6 font-mono text-[11px] text-clinical-white/60">
+          <span>• No records requested during registration</span>
+          <span>• Zero third-party data sharing</span>
+          <span>• End-to-end encrypted</span>
         </div>
       </Reveal>
     </section>

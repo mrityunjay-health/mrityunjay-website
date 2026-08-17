@@ -4,16 +4,42 @@
 
 Mritunjay is a public marketing website and clinical intelligence workstation for an AI-powered healthcare operating system. It bridges the gap between a patient's fragmented medical history and the clinicians who treat them, ensuring no data is left behind before a consultation begins.
 
-The site is built with Next.js 15 App Router, React 19, Tailwind CSS, and Framer Motion, with high-end editorial storytelling, an interactive clinical synthesis terminal, and a 2026 flagship waitlist backed by Supabase.
+The interface is built upon the **20 Mritunjay Design Principles**, engineered to reduce anxiety, build understanding, and provide tranquil clinical clarity.
 
-## ✨ Highlights
+---
 
-- **Cinematic Hero & Intelligence Layer** — Word-by-word reveal storytelling paired with a 5-tier diagnostic flow matrix.
-- **Interactive Clinical Workstation** — Interactive terminal allowing clinicians and patients to scrub through real-time physician briefs, longitudinal timelines, and adverse reaction telemetry.
-- **Scientific Minimalism & Double-Bezel Design** — High-end nested container architecture with hairlines, specular inner highlights, and authentic clinical metrics (`font-mono tabular-nums`).
-- **2026 Flagship Waitlist** — Dedicated `/waitlist` intake for patients, clinicians, and health systems with instant priority token issuance.
-- **Supabase Persistence** — Registrations stored in PostgreSQL with Row-Level Security (RLS) and serverless validation.
-- **Accessible & Zero Overflow** — WCAG 2.2 AA compliant, `prefers-reduced-motion` fallbacks, and verified zero horizontal overflow across 375px mobile to 4K desktop.
+## 🏛 The Mritunjay Design Principles
+
+1. **We Design for Humans, Not Screens** — Acknowledging the emotional reality of fear, pain, and vulnerability.
+2. **Reduce Anxiety Before Reducing Clicks** — Less fear > fewer taps.
+3. **Understanding Comes Before Action** — Explaining *what*, *why*, and *what happens next* before asking for decisions.
+4. **Information Appears When It Becomes Useful** — Progressive disclosure without clutter.
+5. **One Screen, One Purpose** — Single, focused cognitive objective per viewport.
+6. **Silence Is a Feature** — Calm, uncluttered interfaces that build trust without shouting.
+7. **Motion Must Explain, Never Decorate** — Animations that communicate clinical continuity and understanding.
+8. **Every Wait Has Meaning** — Transparent progress indicators instead of generic loading spinners.
+9. **The System Should Feel Attentive** — Proactive memory and recognition of patient context.
+10. **Technology Must Become Invisible** — The technology disappears; the human care remains.
+11. **The Next Step Is Always Obvious** — Clarity on where you are, what is happening, and what comes next.
+12. **Build Confidence Before Complexity** — Gradual medical understanding.
+13. **Every Interaction Builds Memory** — Nothing is lost; every consultation adds to a lifelong health story.
+14. **Design for Recovery, Not Consultation** — Continuing support beyond the prescription.
+15. **Trust Is the Interface** — Built through consistency, predictable behavior, and data sovereignty.
+16. **Make Complex Systems Feel Simple** — Hiding complexity while never hiding vital information.
+17. **Every Pixel Must Earn Its Place** — Disciplined, intentional decision-making.
+18. **Context Before Content** — Information delivered strictly when needed.
+19. **Calm Is a Competitive Advantage** — Leaving patients calmer than when they arrived.
+20. **Design for the Next 10 Years** — Timeless, recognizable by its feeling: *Calm, Quiet, Precise, Warm, Intelligent, Trustworthy, Human, Spacious, Thoughtful, and Effortless*.
+
+---
+
+## ✨ Features & Architecture
+
+- **Bioluminescent Living Cell Hero** — Procedural canvas background with resting cardiac rhythm (60–65 BPM), deformable lipid bilayer, and non-linear microscopic scroll zoom.
+- **Interactive Clinical Workstation Terminal** — Tabbed exploration (*Pre-Consultation Brief*, *Longitudinal Timeline*, *Adverse Reactions*) with patient recovery projections.
+- **Continuous Medical Ledger** — Unbroken chronological timeline connecting historical baselines, prescription adjustments, and active symptom correlation.
+- **2026 Flagship Waitlist** — Zero-trust data intake backed by Supabase PostgreSQL with Row-Level Security (RLS).
+- **Accessible & Responsive** — WCAG 2.2 AA compliant, zero horizontal overflow across 375px mobile to 4K desktop, and `prefers-reduced-motion` support.
 
 ## 🛠 Tech Stack
 
@@ -21,18 +47,11 @@ The site is built with Next.js 15 App Router, React 19, Tailwind CSS, and Framer
 | ----- | ---------- |
 | Framework | Next.js 15.1 (App Router, Server Components) |
 | UI & Styling | React 19, Tailwind CSS 3.4 |
-| Motion | Framer Motion 11.18 |
+| Motion | Framer Motion 11.18, HTML5 Canvas 2D Engine |
 | Database | Supabase (PostgreSQL + RLS) |
 | Language | TypeScript strict mode (zero `any`, zero `as`) |
 
 ## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18.18+ (tested on Node 22/24)
-- Supabase Project (optional for local run; the app falls back to demo mode without credentials)
-
-### Install & Run
 
 ```bash
 npm install
@@ -41,45 +60,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-### Environment Variables
-
-Copy `.env.example` to `.env.local` and add your Supabase credentials:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-actual-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-actual-service-role-key
-```
-
-> [!NOTE]
-> Without Supabase credentials, the `/api/waitlist` endpoint runs in fallback simulation mode and generates priority access tokens without persisting to a live database.
-
-### Database Setup
-
-Apply the migration in `supabase/migrations/20260729000000_create_waitlist.sql` to your Supabase project:
-
-```bash
-supabase db push
-```
-
 ## 📁 Project Structure
 
 ```
 app/                 Next.js App Router (pages, layouts, API routes)
   api/waitlist/      POST /api/waitlist (validation + persistence)
   waitlist/          Dedicated 2026 flagship waitlist page
-components/          Section & feature components (hero, chat-interface, outcomes, etc.)
+components/          Section & feature components (hero, living-cell, chat-interface, outcomes, etc.)
 lib/                 Utilities & Supabase client helper
 types/               Shared TypeScript interfaces
 supabase/migrations/ PostgreSQL schema + RLS policies
 stitch_reference_driven_generator/  Creative briefs & editorial references
 stitch_stitch_design_system/        Master design system specifications
-```
-
-## 🧪 Verification
-
-```bash
-npx tsc --noEmit   # type check — 0 errors
-npm run lint       # ESLint — 0 warnings/errors
-npm run build      # production build (static generation)
 ```

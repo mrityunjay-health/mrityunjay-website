@@ -8,7 +8,7 @@ export function Footer(): ReactElement {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
           <Link
             href="/"
-            className="flex items-center gap-2 font-headline-md text-2xl md:text-headline-md text-primary tracking-tighter"
+            className="flex items-center gap-2.5 font-headline-md text-2xl md:text-headline-md text-primary tracking-tighter"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-primary" />
             <span>Mritunjay</span>
@@ -31,18 +31,18 @@ export function Footer(): ReactElement {
           </div>
 
           {/* Live Status Indicator */}
-          <div className="flex items-center gap-2 font-mono text-[11px] text-green-700 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
+          <div className="flex items-center gap-2 font-mono text-[11px] text-green-700 bg-green-500/10 px-3.5 py-1.5 rounded-full border border-green-500/20">
             <span className="w-2 h-2 rounded-full bg-green-600 animate-pulse" />
-            <span>ALL SYSTEMS OPERATIONAL</span>
+            <span>CLINICAL ENCLAVE ONLINE</span>
           </div>
         </div>
 
         {/* Trust Badges & Copyright */}
         <div className="pt-8 border-t border-data-node/20 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-[10px] text-secondary text-center sm:text-left">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap justify-center sm:justify-start items-center gap-3 sm:gap-4">
             <span>HIPAA COMPLIANT</span>
             <span>•</span>
-            <span>ZERO-TRUST SOVEREIGNTY</span>
+            <span>ZERO-TRUST DATA SOVEREIGNTY</span>
             <span>•</span>
             <span>256-BIT ENCRYPTION</span>
           </div>
