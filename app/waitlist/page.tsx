@@ -20,10 +20,10 @@ function TrustBadge({
   readonly description: string;
 }): ReactElement {
   return (
-    <div className="bg-clinical-white border border-data-node/40 p-5 sm:p-6 rounded text-left space-y-2">
+    <div className="bg-clinical-white border border-data-node/30 p-5 sm:p-6 rounded-2xl shadow-double-bezel text-left space-y-2">
       <div className="text-primary font-mono text-[10px] sm:text-xs font-semibold tracking-widest uppercase flex items-center gap-2">
         <span className="w-2 h-2 rounded-full bg-primary" aria-hidden="true" />
-        {icon}
+        <span>{icon}</span>
       </div>
       <h3 className="font-headline-md text-base sm:text-lg text-primary">{title}</h3>
       <p className="font-body-md text-xs text-on-surface-variant leading-relaxed">
@@ -41,13 +41,13 @@ export default function WaitlistPage(): ReactElement {
         <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter text-center space-y-8 sm:space-y-12">
           {/* Header Section */}
           <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
-            <span className="font-label-caps text-[10px] sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.4em] block uppercase">
+            <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-[0.25em] block uppercase">
               STRICTLY LIMITED RELEASE // EST. 2026
             </span>
-            <h1 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg text-primary">
+            <h1 className="font-headline-lg text-3xl sm:text-5xl lg:text-headline-lg text-primary tracking-tight">
               Secure Your History.
             </h1>
-            <p className="font-body-lg text-base sm:text-body-lg text-on-surface-variant">
+            <p className="font-body-lg text-base sm:text-body-lg text-on-surface-variant leading-relaxed">
               We are currently onboarding initial clinical partners, specialists, and patients for the
               2026 flagship launch. Ensure your healthcare narrative starts with understanding.
             </p>
@@ -58,7 +58,7 @@ export default function WaitlistPage(): ReactElement {
 
           {/* Clinical Trust & Compliance Highlights */}
           <div className="max-w-4xl mx-auto pt-8 sm:pt-12">
-            <span className="font-label-caps text-[10px] sm:text-xs text-on-surface-variant tracking-widest uppercase block mb-4 sm:mb-6">
+            <span className="font-mono text-[10px] sm:text-xs text-on-surface-variant tracking-widest uppercase block mb-4 sm:mb-6 font-semibold">
               CLINICAL INTEGRITY & PRIVACY ASSURANCES
             </span>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
@@ -75,7 +75,7 @@ export default function WaitlistPage(): ReactElement {
               <TrustBadge
                 icon="CLINICAL SYNTHESIS"
                 title="Physician Centrality"
-                description="Designed alongside cardiac & internal specialists to augment consultation clarity."
+                description="Designed alongside cardiac and internal specialists to augment consultation clarity."
               />
             </div>
           </div>

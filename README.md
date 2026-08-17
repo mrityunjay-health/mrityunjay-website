@@ -2,36 +2,37 @@
 
 > Healthcare that finally remembers you.
 
-Mritunjay is a public marketing website for an AI-powered healthcare intelligence layer. It bridges the gap between a patient's fragmented medical history and the clinicians who treat them — ensuring no data is left behind before a consultation begins.
+Mritunjay is a public marketing website and clinical intelligence workstation for an AI-powered healthcare operating system. It bridges the gap between a patient's fragmented medical history and the clinicians who treat them, ensuring no data is left behind before a consultation begins.
 
-The site is a Next.js App Router application with editorial storytelling, a cinematic 5-act hero animation, and a 2026 flagship waitlist backed by Supabase.
+The site is built with Next.js 15 App Router, React 19, Tailwind CSS, and Framer Motion, with high-end editorial storytelling, an interactive clinical synthesis terminal, and a 2026 flagship waitlist backed by Supabase.
 
 ## ✨ Highlights
 
-- **5-act closed-loop hero animation** — a continuous narrative: inquiry → understanding → synthesis → review → reset, with a live counter, ECG line draw, and version increment per loop.
-- **Editorial storytelling** — every section tells a story about continuous medical memory, physician centrality, and sovereign data, rather than listing features.
-- **2026 flagship waitlist** — a dedicated `/waitlist` page with role-based intake (patient, clinician, health system), client + server validation, and a priority access token on confirmation.
-- **Supabase persistence** — waitlist registrations are stored in PostgreSQL with Row-Level Security enabled.
-- **Accessible & responsive** — WCAG 2.2 AA, `prefers-reduced-motion` support, keyboard-navigable, zero horizontal overflow from 375px mobile up to desktop.
+- **Cinematic Hero & Intelligence Layer** — Word-by-word reveal storytelling paired with a 5-tier diagnostic flow matrix.
+- **Interactive Clinical Workstation** — Interactive terminal allowing clinicians and patients to scrub through real-time physician briefs, longitudinal timelines, and adverse reaction telemetry.
+- **Scientific Minimalism & Double-Bezel Design** — High-end nested container architecture with hairlines, specular inner highlights, and authentic clinical metrics (`font-mono tabular-nums`).
+- **2026 Flagship Waitlist** — Dedicated `/waitlist` intake for patients, clinicians, and health systems with instant priority token issuance.
+- **Supabase Persistence** — Registrations stored in PostgreSQL with Row-Level Security (RLS) and serverless validation.
+- **Accessible & Zero Overflow** — WCAG 2.2 AA compliant, `prefers-reduced-motion` fallbacks, and verified zero horizontal overflow across 375px mobile to 4K desktop.
 
-## 🛠 Tech stack
+## 🛠 Tech Stack
 
 | Layer | Technology |
 | ----- | ---------- |
-| Framework | Next.js 15 (App Router, static generation) |
-| UI | React 19, Tailwind CSS 3.4 |
-| Motion | Framer Motion 11 |
+| Framework | Next.js 15.1 (App Router, Server Components) |
+| UI & Styling | React 19, Tailwind CSS 3.4 |
+| Motion | Framer Motion 11.18 |
 | Database | Supabase (PostgreSQL + RLS) |
-| Language | TypeScript (strict mode, zero `any`/`as`) |
+| Language | TypeScript strict mode (zero `any`, zero `as`) |
 
-## 🚀 Getting started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18.18+ (tested with 22/24)
-- A Supabase project (optional for local run — the app falls back to simulated responses without credentials)
+- Node.js 18.18+ (tested on Node 22/24)
+- Supabase Project (optional for local run; the app falls back to demo mode without credentials)
 
-### Install & run
+### Install & Run
 
 ```bash
 npm install
@@ -40,9 +41,9 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-### Environment variables
+### Environment Variables
 
-Copy `.env.example` to `.env.local` and fill in your Supabase project credentials:
+Copy `.env.example` to `.env.local` and add your Supabase credentials:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
@@ -51,30 +52,28 @@ SUPABASE_SERVICE_ROLE_KEY=your-actual-service-role-key
 ```
 
 > [!NOTE]
-> Without Supabase credentials the `/api/waitlist` endpoint and form still work in demo mode — they return a simulated priority token instead of persisting.
+> Without Supabase credentials, the `/api/waitlist` endpoint runs in fallback simulation mode and generates priority access tokens without persisting to a live database.
 
-### Database setup
+### Database Setup
 
-Apply the migration to your Supabase project (or use `supabase db push`):
+Apply the migration in `supabase/migrations/20260729000000_create_waitlist.sql` to your Supabase project:
 
 ```bash
 supabase db push
 ```
 
-The migration in `supabase/migrations/20260729000000_create_waitlist.sql` creates the `public.waitlist` table, indexes, and RLS policies (public inserts, service-role reads).
-
-## 📁 Project structure
+## 📁 Project Structure
 
 ```
 app/                 Next.js App Router (pages, layouts, API routes)
-  api/waitlist/      POST /api/waitlist — validates & persists registrations
+  api/waitlist/      POST /api/waitlist (validation + persistence)
   waitlist/          Dedicated 2026 flagship waitlist page
-components/          Section & feature components (hero, outcomes, form, nav…)
-lib/                 Utilities (Supabase client helper)
-types/               Shared TypeScript contracts (waitlist types)
-supabase/migrations/ SQL schema + RLS policies
-stitch_reference_driven_generator/  Design briefs & creative references
-stitch_stitch_design_system/        Design system specifications
+components/          Section & feature components (hero, chat-interface, outcomes, etc.)
+lib/                 Utilities & Supabase client helper
+types/               Shared TypeScript interfaces
+supabase/migrations/ PostgreSQL schema + RLS policies
+stitch_reference_driven_generator/  Creative briefs & editorial references
+stitch_stitch_design_system/        Master design system specifications
 ```
 
 ## 🧪 Verification
@@ -84,12 +83,3 @@ npx tsc --noEmit   # type check — 0 errors
 npm run lint       # ESLint — 0 warnings/errors
 npm run build      # production build (static generation)
 ```
-
-## 📄 Scripts
-
-| Script            | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | Start the development server         |
-| `npm run build`   | Build for production                 |
-| `npm run start`   | Start the production server          |
-| `npm run lint`    | Run ESLint                           |

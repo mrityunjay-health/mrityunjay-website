@@ -8,6 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useRef, type ReactElement } from "react";
+import { LivingCellBackground } from "./living-cell-background";
 
 const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
@@ -16,74 +17,62 @@ export function Hero(): ReactElement {
   
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
 
-  // Framer Motion transforms for scroll zoom (Scaled for responsive heights)
-  const svgScale = useTransform(scrollYProgress, [0, 0.1, 0.45], [1, 1, 80]);
+  // Cellular microscope dive: scales the biological cell canvas into its glowing nucleus
+  const cellScale = useTransform(scrollYProgress, [0, 0.15, 0.52], [1, 1.3, 36]);
+  const cellOpacity = useTransform(scrollYProgress, [0.45, 0.62], [1, 0]);
   
-  // Fade out standard content (Slide 1)
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.15], [0, -50]);
+  // Fade out Slide 1 text
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.16], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.16], [0, -45]);
 
-  // Fade IN a background-colored overlay as we get close to max zoom
-  const maskOverlayOpacity = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
+  // Optical mask overlay as the microscope penetrates into the chromatin matrix
+  const maskOverlayOpacity = useTransform(scrollYProgress, [0.45, 0.58], [0, 1]);
 
-  // Fade out the SVG word behind the mask overlay
-  const svgOpacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
-
-  // Reveal the next section content (Slide 2: Intelligence Section)
-  // Fully revealed by 0.85 to minimize dead scroll space before the next section
+  // Reveal Slide 2 (Persistent Health Memory Matrix)
   const revealOpacity = useTransform(scrollYProgress, [0.55, 0.85], [0, 1]);
   const revealY = useTransform(scrollYProgress, [0.55, 0.85], [50, 0]);
-  // Use a string to control pointer events: none when hidden, auto when visible.
-  const revealPointerEvents = useTransform(scrollYProgress, (v) => v > 0.55 ? "auto" : "none");
+  const revealPointerEvents = useTransform(
+    scrollYProgress,
+    (v) => (v > 0.55 ? ("auto" as const) : ("none" as const))
+  );
 
   const reduced = useReducedMotion();
 
   return (
-    <section ref={targetRef} className="relative h-[150vh] lg:h-[250vh] bg-background w-full">
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
+    <section ref={targetRef} className="relative h-[160vh] lg:h-[250vh] bg-background w-full">
+      <div className="sticky top-0 min-h-[100dvh] overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
         
-        {/* The Crisp SVG Text that scales infinitely */}
+        {/* Living Animated Biological Cell Background with Scroll Zoom */}
         <motion.div 
           style={{ 
-            scale: svgScale, 
-            opacity: svgOpacity,
-            position: 'absolute',
-            zIndex: 10,
-            // Transform origin set to roughly the center of the 'U'
-            transformOrigin: '53% 50%' 
+            scale: reduced ? 1 : cellScale, 
+            opacity: reduced ? 1 : cellOpacity,
+            position: "absolute",
+            zIndex: 5,
+            transformOrigin: "50% 50%",
           }}
-          className="pointer-events-none inset-0 flex items-center justify-center w-full"
+          className="pointer-events-auto inset-0 flex items-center justify-center w-full h-full"
         >
-          <svg viewBox="0 0 2500 300" className="w-full max-w-full overflow-visible">
-            <text 
-              x="50%" 
-              y="50%" 
-              dominantBaseline="middle" 
-              textAnchor="middle" 
-              className="font-display-hero font-extrabold text-[220px] fill-primary/10 tracking-tighter"
-            >
-              MRITUNJAY<tspan className="fill-secondary/10">.</tspan>
-            </text>
-          </svg>
+          <LivingCellBackground className="w-full h-full absolute inset-0" />
         </motion.div>
 
-        {/* Slide 1: Initial Content */}
+        {/* Slide 1: Initial Editorial Content */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="max-w-4xl mx-auto text-center z-15 w-full relative flex flex-col items-center"
+          className="max-w-4xl mx-auto text-center z-15 w-full relative flex flex-col items-center pointer-events-auto"
         >
           <motion.span
-            initial={reduced ? false : { opacity: 0, y: 20 }}
+            initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: EASE_OUT }}
-            className="font-label-caps text-[10px] sm:text-label-caps text-primary tracking-[0.2em] sm:tracking-[0.4em] mb-3 sm:mb-4 block uppercase"
+            transition={{ duration: 1.0, ease: EASE_OUT }}
+            className="font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/60 backdrop-blur-xs px-3.5 py-1 rounded-full border border-data-node/30 shadow-xs"
           >
-            THE INTELLIGENT LAYER
+            LIVING CLINICAL INTELLIGENCE
           </motion.span>
-          <h1 className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none flex flex-wrap justify-center">
+          <h1 className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none flex flex-wrap justify-center max-w-5xl">
             <span className="sr-only">Healthcare that finally remembers you.</span>
             {["Healthcare", "that", "finally", "remembers", "you."].map((word, i) => (
               <span
@@ -112,8 +101,8 @@ export function Hero(): ReactElement {
           <motion.p
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.1, ease: "easeOut" }}
-            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10"
+            transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
+            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed bg-clinical-white/60 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none px-4 py-2 sm:px-0 sm:py-0 rounded-xl"
           >
             Treatment happens at the hospital. Understanding begins with Mritunjay.
             We are the intelligent bridge between your history and your future care.
@@ -121,26 +110,31 @@ export function Hero(): ReactElement {
           <motion.div
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 w-full max-w-md sm:max-w-none mx-auto"
           >
             <Link
               href="/waitlist"
-              className="w-full sm:w-auto bg-primary text-clinical-white px-6 sm:px-10 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-opacity-90 transition-all rounded-full text-center"
+              className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-primary text-clinical-white px-7 sm:px-9 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary/95 transition-all rounded-full text-center shadow-sm active:scale-[0.98]"
             >
-              JOIN 2026 WAITING LIST
+              <span>JOIN 2026 WAITING LIST</span>
+              <span className="w-5 h-5 rounded-full bg-clinical-white/15 group-hover:bg-clinical-white/25 flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-[13px] text-clinical-white group-hover:translate-x-0.5 transition-transform">
+                  arrow_forward
+                </span>
+              </span>
             </Link>
             <a
               href="#intelligence"
-              className="w-full sm:w-auto border border-primary text-primary px-6 sm:px-10 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary hover:text-clinical-white transition-all rounded-full flex items-center justify-center gap-2 text-center"
+              className="w-full sm:w-auto border border-primary/30 text-primary bg-clinical-white/80 backdrop-blur-xs px-6 sm:px-8 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary hover:text-clinical-white transition-all rounded-full flex items-center justify-center gap-2 text-center"
             >
-              <span className="material-symbols-outlined text-[18px] sm:text-[20px]">play_circle</span>
-              EXPLORE THE LAYER
+              <span className="material-symbols-outlined text-[18px] sm:text-[20px]">layers</span>
+              <span>EXPLORE THE LAYER</span>
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Mask Overlay */}
+        {/* Optical Mask Overlay */}
         <motion.div
           style={{ opacity: maskOverlayOpacity }}
           className="absolute inset-0 bg-clinical-white z-20 will-change-[opacity] pointer-events-none"
@@ -148,19 +142,20 @@ export function Hero(): ReactElement {
 
         {/* Slide 2: Intelligence Section */}
         <motion.div
-          style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents as any }}
-          className="absolute inset-0 z-30 flex flex-col items-center justify-start w-full px-4 sm:px-6 md:px-gutter pt-16 sm:pt-24 pb-8 sm:pb-12"
+          id="intelligence"
+          style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents }}
+          className="absolute inset-0 z-30 flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-gutter pt-20 sm:pt-24 pb-8 sm:pb-12"
         >
           <div className="w-full max-w-container-max mx-auto py-2">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="flex flex-col">
-                <span className="font-label-caps text-[9px] sm:text-xs text-primary tracking-[0.2em] sm:tracking-[0.3em] block mb-2 sm:mb-4 uppercase">
-                  THE MISSING LAYER
+                <span className="font-mono text-[9px] sm:text-xs text-primary tracking-[0.25em] block mb-2 sm:mb-4 uppercase font-semibold">
+                  PERSISTENT HEALTH MEMORY
                 </span>
                 <h2 className="font-headline-lg text-2xl sm:text-4xl lg:text-headline-lg text-primary leading-tight mb-3 sm:mb-6">
                   Healthcare without Mritunjay is fragmented by design.
                 </h2>
-                <p className="font-body-lg text-sm sm:text-base lg:text-body-lg text-on-surface-variant mb-5 sm:mb-8 leading-snug">
+                <p className="font-body-lg text-sm sm:text-base lg:text-body-lg text-on-surface-variant mb-5 sm:mb-8 leading-relaxed">
                   Hospitals treat symptoms. Specialists view slices. Mritunjay connects the narrative.
                   We sit between you and the complexity of the medical system, ensuring your story is
                   never lost and your doctors are never guessing.
@@ -170,25 +165,25 @@ export function Hero(): ReactElement {
                     {
                       icon: "hub",
                       title: "The Understanding Layer",
-                      body: "We organize the clerical chaos into clinical insight before you even walk into the waiting room.",
+                      body: "Organizing clerical chaos into clinical insight before you step into the consultation room.",
                     },
                     {
                       icon: "shield_person",
                       title: "Sovereign Data Memory",
-                      body: "Your history follows you, not the provider. You own the bridge; they simply use it to treat you better.",
+                      body: "Your history follows you, not the provider. You own the bridge; doctors use it to treat you with precision.",
                     },
                   ].map((item) => (
                     <div key={item.title} className="flex gap-3 sm:gap-4 items-start">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-primary rounded-full flex items-center justify-center shrink-0 mt-1">
-                        <span className="material-symbols-outlined text-clinical-white text-sm sm:text-lg lg:text-xl">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                        <span className="material-symbols-outlined text-clinical-white text-sm sm:text-lg">
                           {item.icon}
                         </span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-headline-md text-base sm:text-lg lg:text-[20px] text-primary mb-1 sm:mb-1.5">
+                        <h4 className="font-headline-md text-base sm:text-lg lg:text-[20px] text-primary mb-1">
                           {item.title}
                         </h4>
-                        <p className="font-body-md text-xs sm:text-sm lg:text-base text-on-surface-variant leading-tight">{item.body}</p>
+                        <p className="font-body-md text-xs sm:text-sm lg:text-base text-on-surface-variant leading-snug">{item.body}</p>
                       </div>
                     </div>
                   ))}
@@ -196,37 +191,47 @@ export function Hero(): ReactElement {
               </div>
 
               <div className="mt-4 sm:mt-0">
-                <div className="relative flex flex-col items-center justify-center p-3 sm:p-6 lg:p-12 border border-data-node/20 rounded-xl sm:rounded-2xl lg:rounded-[3rem] bg-clinical-white/50">
-                  <div className="text-center mb-3 sm:mb-8 lg:mb-12">
-                    <div className="w-10 h-10 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-1 sm:mb-3 lg:mb-4">
-                      <span className="material-symbols-outlined text-primary text-base sm:text-2xl lg:text-3xl">person</span>
+                {/* Double-Bezel Nested Architecture Container */}
+                <div className="relative flex flex-col items-center justify-center p-4 sm:p-6 lg:p-10 border border-data-node/30 rounded-2xl lg:rounded-3xl bg-clinical-white shadow-double-bezel">
+                  <div className="text-center mb-3 sm:mb-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-inner">
+                      <span className="material-symbols-outlined text-primary text-xl sm:text-2xl">person</span>
                     </div>
-                    <span className="font-label-caps text-[7px] sm:text-[10px] tracking-widest text-secondary">
-                      THE INDIVIDUAL
+                    <span className="font-mono text-[9px] sm:text-xs tracking-wider text-secondary font-medium">
+                      INDIVIDUAL RECORD HOLDER
                     </span>
                   </div>
-                  <div className="w-full h-8 sm:h-16 lg:h-24 flex justify-center relative">
-                    <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container to-primary animate-pulse" />
-                    <span className="absolute top-1/2 -translate-y-1/2 right-2 sm:right-4 font-label-caps text-[6px] sm:text-[8px] lg:text-[9px] opacity-40">
-                      HISTORY FLOW
+
+                  <div className="w-full h-8 sm:h-14 flex justify-center relative items-center">
+                    <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container via-primary to-primary animate-pulse" />
+                    <span className="absolute right-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest">
+                      LONGITUDINAL SYNC
                     </span>
                   </div>
-                  <div className="w-full bg-primary p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl text-clinical-white text-center shadow-lg sm:shadow-2xl relative z-10 border border-memory-glow/20">
-                    <span className="font-label-caps text-[6px] sm:text-[9px] lg:text-[10px] tracking-[0.1em] sm:tracking-[0.2em] lg:tracking-[0.4em] block mb-1 sm:mb-2 opacity-60">
-                      INTELLIGENCE LAYER
-                    </span>
-                    <h3 className="font-headline-md text-sm sm:text-xl lg:text-2xl mb-0.5 sm:mb-2">MRITUNJAY</h3>
-                    <p className="font-body-md text-[9px] sm:text-xs lg:text-[13px] opacity-70 leading-tight">
-                      Synthesizing records into actionable medical narratives.
+
+                  {/* Core Intelligence Node */}
+                  <div className="w-full bg-primary p-4 sm:p-6 rounded-xl text-clinical-white text-center shadow-double-bezel-dark relative z-10 border border-memory-glow/25">
+                    <div className="flex items-center justify-center gap-2 mb-1.5">
+                      <span className="w-2 h-2 rounded-full bg-memory-glow animate-ping" />
+                      <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-memory-glow">
+                        INTELLIGENCE MATRIX ACTIVE
+                      </span>
+                    </div>
+                    <h3 className="font-headline-md text-lg sm:text-2xl mb-1">MRITUNJAY</h3>
+                    <p className="font-body-md text-xs sm:text-sm text-clinical-white/80 max-w-sm mx-auto">
+                      Continuous synthesis of EHR records, lab values, and symptom timelines.
                     </p>
                   </div>
-                  <div className="w-full h-8 sm:h-16 lg:h-24 flex justify-center relative">
-                    <div className="w-0.5 h-full bg-gradient-to-b from-primary to-secondary-container opacity-50" />
-                    <span className="absolute top-1/2 -translate-y-1/2 left-2 sm:left-4 font-label-caps text-[6px] sm:text-[8px] lg:text-[9px] opacity-40">
-                      PREPARED INSIGHT
+
+                  <div className="w-full h-8 sm:h-14 flex justify-center relative items-center">
+                    <div className="w-0.5 h-full bg-gradient-to-b from-primary to-secondary-container opacity-60" />
+                    <span className="absolute left-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest">
+                      SYNTHESIZED BRIEF
                     </span>
                   </div>
-                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2 lg:gap-4 w-full">
+
+                  {/* Providers Grid */}
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
                     {[
                       { icon: "local_hospital", label: "HOSPITALS" },
                       { icon: "medical_services", label: "SPECIALISTS" },
@@ -234,12 +239,12 @@ export function Hero(): ReactElement {
                     ].map((item) => (
                       <div
                         key={item.label}
-                        className="bg-surface-container p-2 sm:p-3 lg:p-4 rounded-lg sm:rounded-xl text-center border border-data-node/20 flex flex-col items-center justify-center"
+                        className="bg-surface-container-low p-2.5 sm:p-3 rounded-lg text-center border border-data-node/30 flex flex-col items-center justify-center shadow-sm"
                       >
-                        <span className="material-symbols-outlined text-primary text-sm sm:text-lg lg:text-xl mb-0.5 sm:mb-1">
+                        <span className="material-symbols-outlined text-primary text-base sm:text-lg mb-0.5">
                           {item.icon}
                         </span>
-                        <span className="block font-label-caps text-[6px] sm:text-[9px] lg:text-[10px]">{item.label}</span>
+                        <span className="block font-mono text-[8px] sm:text-[9px] text-primary font-medium tracking-wider">{item.label}</span>
                       </div>
                     ))}
                   </div>

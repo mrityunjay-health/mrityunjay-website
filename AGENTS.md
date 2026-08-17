@@ -6,7 +6,7 @@
 - **REMOVE rules** when: obsolete, unused 10+ sessions, superseded.
 - **PRUNE at 300 lines**: sort by `[ ]` marker, drop oldest. Merge similar. Compress.
 - **TRACK**: `[v0]` original, `[v1]` learned, `[v2+]` refined. Never remove `[v0]`.
-- **Session marker at EOF**: `<!-- sessions: N, last: YYYY-MM-DD -->`
+- **Session marker at EOF**: `<!-- sessions: 4, last: 2026-08-17 -->`
 
 Public Next.js marketing website for Mritunjay — AI-powered healthcare intelligence. Editorial storytelling, premium design, scientific elegance.
 
@@ -17,16 +17,25 @@ Public Next.js marketing website for Mritunjay — AI-powered healthcare intelli
 - Performance is brand. Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms).
 - WCAG 2.2 AA. Contrast 4.5:1. Keyboard nav. Screen reader ready.
 - Every section intentionally designed. Nothing feels generated.
-- **Skill-first**: search skills before any task. Load matching skills.
+- **Skill-first**: search skills before any task. Load matching skills (`brandkit`, `design-taste-frontend`, `high-end-visual-design`, `gpt-taste`, `industrial-brutalist-ui`, `full-output-enforcement`, `redesign-existing-projects`).
 - **Caveman ultra**: drop filler. Fragments OK. Code/docs: normal English.
-- **Stitch design authority**: `stitch_stitch_design_system/stitch.md` is the master design brief. `stitch_reference_driven_generator/prompt.md` is the creative brief. Reference before any UI work.
+- **Stitch design authority**: `stitch_stitch_design_system/stitch.md` is master design brief. `stitch_reference_driven_generator/prompt.md` is creative brief. Reference before any UI work.
 
-## Stack
-Next.js 14+ (App Router, Server Components). Tailwind CSS. Framer Motion. TypeScript strict. Static generation preferred. No backend, no DB.
+## Stack [v2]
+Next.js 15.1 (App Router, Server Components). React 19. Tailwind CSS 3.4. Framer Motion 11.18. TypeScript strict. Supabase (PostgreSQL + RLS) for waitlist persistence and API endpoints (`/api/waitlist`).
+
+## Design Taste Rules & Aesthetic Discipline [v2]
+- **Three Dials Configuration**: `DESIGN_VARIANCE: 4`, `MOTION_INTENSITY: 3`, `VISUAL_DENSITY: 6` (clinical trust, calm telemetry, high diagnostic rigor).
+- **Double-Bezel (Doppelrand) Architecture**: Nested card containers with subtle outer rings, hairlines (`border border-data-node/30`), inner specular highlights, and concentric radii.
+- **Zero Em-Dash Rule**: Absolute ban on em-dashes (`—`) across headlines, eyebrows, pills, body copy, and quotes. Use hyphens, colons, or periods.
+- **Anti-AI Tell Prohibition**: No numbered section eyebrows (`OUTCOME 01`), no 3-dot macOS window traffic lights, no 3-column equal white-card rows, no robot icons (`smart_toy`), and no generic skeleton rectangles.
+- **Hero Headline Rule**: Hero H1 fits within 2 lines on desktop (`max-w-5xl` or `max-w-6xl`). Maximum 4 text elements total in hero stack.
+- **Monospace Clinical Telemetry**: All lab values, vitals, confidence scores, and tokens use monospace with tabular figures (`font-mono tabular-nums`).
+- **Tactile Button Architecture**: Button-in-button pills with nested circular icon capsules and active haptic feedback (`active:scale-[0.98]`).
 
 ## TypeScript Rules [v0]
 - No `any`, `as`, `@ts-ignore`, `!`
-- Explicit return types on exports. `interface` for public API, `type` for unions.
+- Explicit return types on exports (`: ReactElement`). `interface` for public API, `type` for unions.
 - `readonly` immutable props. `satisfies` for config. `const` assertions for literals.
 
 ## Component Rules [v0]
@@ -38,10 +47,11 @@ Next.js 14+ (App Router, Server Components). Tailwind CSS. Framer Motion. TypeSc
 
 ## Animation Rules [v1]
 - Framer Motion for meaningful motion only. No decorative animation.
+- Living Biological Cell engine: Procedural Canvas with harmonic Simplex noise, 65 BPM cardiac pulse, double-rim lipid refraction, synaptic sparks, and scroll-driven microscopic nucleus dive.
 - Motion communicates: learning, memory, growth, understanding, connection.
 - Respect `prefers-reduced-motion`. Use `useReducedMotion` or CSS `@media`.
 - Scroll-triggered reveals with `framer-motion` `useInView` or IntersectionObserver.
-- Shaders (WebGL) for hero only — meaningful, not decorative.
+- Animate strictly via `transform` and `opacity`. Never animate `top`, `left`, `width`, or `height`.
 
 ## Stitch Design Reference [v1]
 The canonical design docs live in `stitch_reference_driven_generator/` and `stitch_stitch_design_system/`:
@@ -71,52 +81,20 @@ Order: React/Next → framer-motion → components → lib → types. `import ty
 - TODO: `TODO(@username): desc`. No unowned TODOs.
 
 ## Forbidden
-`any`, `as`, `@ts-ignore`, `var`, `==`, `eval()`, `delete`, `for...in`, inline styles, `console.log` in prod, hardcoded text (use constants), commented-out code, floating promises, index as list key.
+`any`, `as`, `@ts-ignore`, `var`, `==`, `eval()`, `delete`, `for...in`, inline styles, `console.log` in prod, hardcoded text (use constants), commented-out code, floating promises, index as list key, em-dashes in copy.
 
 ## Required Practices
 strict mode, ESLint, Prettier, pre-commit (lint+type-check), CI (lint+type-check+build), Lighthouse CI, human review.
 
 ## Skill Discovery [v1]
 - Check skills FIRST. Search by domain: frontend, animation, design, SEO, performance, accessibility.
-- `skill(name="frontend-design")` for UI patterns. `skill(name="gsap-framer-scroll-animation")` for motion. `skill(name="seo")` for SEO. `skill(name="accessibility")` for a11y.
-
-## Self-Awareness Protocol [v1]
-Before every action: What? Why? Which doc? Am I rushing? Intentional or random?
-
-## 12-Gate Workflow
-0. INTENT: flag design/brand/performance. Search skills. One question if ambiguous.
-1. UNDERSTANDING: read all related code. Read stitch docs. Never propose blind.
-2. RESEARCH: grep patterns, check existing implementations.
-3. ARCHITECTURE: component tree, data flow (props), server vs client split.
-4. TRADEOFFS: approach + 2 alternatives + why chosen.
-5. PLAN: atomic steps (< 3 tool calls each).
-6. RISK: brand/UX/a11y/performance/regression. HIGH = human confirm.
-7. CODE: types first, then animation, then layout. Match stitch design system.
-8. SELF-REVIEW: zero errors, tests pass, diff reviewed, Lighthouse passes.
-9. REFACTOR: simplify, extract patterns, improve names. Re-verify.
-10. TESTING: component tests for interactive elements. A11y audit. Visual regression check.
-11. VERIFICATION: build, type-check, lint, format, Lighthouse (LCP < 2.5s, CLS < 0.1, INP < 200ms), bundle < 300KB.
-12. DOCUMENT: update design docs if patterns changed. NEVER merge without human.
-Gates 1, 6, 8, 11 never skippable.
-
-## Quality (5-pt scale)
-| Category | Min | Critical? |
-|----------|-----|-----------|
-| Design/Brand | 4 | Cannot waive |
-| Type Safety | 3 | Cannot waive |
-| Performance | 3 | |
-| Accessibility | 3 | Cannot waive |
-| Motion/UX | 3 | |
-| Code Quality | 3 | |
-| Testing | 2 | |
-| Docs | 2 | |
+- `skill(name="brandkit")`, `skill(name="design-taste-frontend")`, `skill(name="high-end-visual-design")`, `skill(name="gpt-taste")`, `skill(name="industrial-brutalist-ui")`, `skill(name="full-output-enforcement")`, `skill(name="redesign-existing-projects")`.
 
 ## Performance Targets
 - LCP < 2.5s. CLS < 0.1. INP < 200ms. TBT < 200ms.
 - Bundle < 300KB per route. Images WebP/AVIF, lazy loaded except hero.
 - Fonts: `next/font` with `display: swap`. Preload critical fonts.
 - Lighthouse score ≥ 95 all categories.
-- CI enforces Lighthouse budgets. Violations block merge.
 
 ## Accessibility
 - WCAG 2.2 AA. Contrast 4.5:1. Keyboard navigation visible.
@@ -124,28 +102,18 @@ Gates 1, 6, 8, 11 never skippable.
 - Skip-to-content link. Focus management for modals/overlays.
 - Reduced motion respected. `prefers-reduced-motion` media query.
 
-## SEO
-- Meta tags per page (title, description, OG). Structured data (JSON-LD).
-- Sitemap.xml generated. Robots.txt. Semantic HTML hierarchy (h1 > h2 > h3).
-- Canonical URLs. `next/head` or metadata API for all pages.
-
-## Definition of Done
-- Matches stitch design specs. All acceptance criteria met.
-- Zero type/lint errors. Lighthouse ≥ 95. Bundle within budget.
-- A11y audited. `prefers-reduced-motion` handled.
-- Error boundaries on all client components. Loading states.
-- Responsive: mobile + tablet + desktop. Touch targets ≥ 44px.
-- Human review completed. No unowned TODOs.
-
-## File Structure
+## File Structure [v2]
 ```
-app/           Next.js App Router (pages, layouts, API routes)
-components/    React components (organized by section/domain)
-lib/           Utilities, constants, helpers
-public/        Static assets (images, fonts)
-styles/        Global CSS, Tailwind config
-stitch_reference_driven_generator/  Design briefs (creative brief, site arch, brand)
-stitch_stitch_design_system/        Design system (UI specs, prototypes, components)
+app/                 Next.js App Router (pages, layouts, API routes)
+  api/waitlist/      POST /api/waitlist endpoint (validation + persistence)
+  waitlist/          Dedicated 2026 flagship waitlist page
+components/          React components (hero, chat-interface, outcomes, etc.)
+lib/                 Utilities, Supabase client helper
+types/               Shared TypeScript interfaces (waitlist contracts)
+supabase/migrations/ PostgreSQL schema + RLS policies
+public/              Static assets (images, fonts)
+stitch_reference_driven_generator/  Design briefs & creative references
+stitch_stitch_design_system/        Design system specifications
 ```
 
-<!-- sessions: 3, last: 2026-07-22 -->
+<!-- sessions: 4, last: 2026-08-17 -->

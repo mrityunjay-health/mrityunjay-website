@@ -37,10 +37,20 @@ const config: Config = {
         "clinical-white": "#FFFFFF",
       },
       borderRadius: {
-        DEFAULT: "0.125rem",
-        lg: "0.25rem",
-        xl: "0.5rem",
-        full: "0.75rem",
+        none: "0px",
+        sm: "0.125rem",
+        DEFAULT: "0.25rem",
+        md: "0.375rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+        full: "9999px",
+      },
+      boxShadow: {
+        "double-bezel": "0 0 0 1px rgba(0, 23, 54, 0.06), 0 2px 8px -2px rgba(0, 0, 0, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9)",
+        "double-bezel-dark": "0 0 0 1px rgba(255, 255, 255, 0.12), 0 12px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.2)",
+        "artifact": "0 4px 20px -2px rgba(0, 23, 54, 0.06), 0 0 0 1px rgba(209, 213, 219, 0.4)",
       },
       spacing: {
         "margin-mobile": "20px",
@@ -58,6 +68,7 @@ const config: Config = {
         "body-md": ["var(--font-manrope)", "sans-serif"],
         quote: ["var(--font-newsreader)", "serif"],
         "headline-md": ["var(--font-newsreader)", "serif"],
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
       },
       fontSize: {
         "headline-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.01em", fontWeight: "400" }],
@@ -73,16 +84,21 @@ const config: Config = {
         "container-max": "1280px",
       },
       animation: {
-        "fade-in-up": "fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-in-up": "fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "blink": "blink 1s step-end infinite",
+        "pulse-subtle": "pulseSubtle 3s ease-in-out infinite",
       },
       keyframes: {
         fadeInUp: {
-          from: { opacity: "0", transform: "translateY(20px)" },
+          from: { opacity: "0", transform: "translateY(16px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         blink: {
           "50%": { opacity: "0" },
+        },
+        pulseSubtle: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
         },
       },
     },

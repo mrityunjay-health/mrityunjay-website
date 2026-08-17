@@ -41,12 +41,11 @@ body {
   color: #001b3d;
 }
 
-/* Background pattern overlay */
+/* Background subtle clinical gradient */
 .bg-clinical-overlay {
-  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCK4B0RZ27r959XxMI05hUc4omQfF3ajZvS-nKC5jSRjoGkkcnAJTHNc3MZ3yu2ZRiI1kT-mwMChCCAqfML9BW0y-n862B4ly-ANG0PtGISLHskmhvvKiaEjKG3l_HEkQVPLfUScTVmDaQnF8Oh_V8HPJcRiaO79Mqu6BNvuTiFCOklyrqFkPPhrsFrvcKYrRi3omoVtLlM7_X4S6TNOEUsIL1opOGgp-sipEC0KbyovFz1fZBdCnIJw");
-  background-attachment: fixed;
-  background-size: cover;
-  background-blend-mode: overlay;
+  background-color: #f9f9f9;
+  background-image: radial-gradient(rgba(0, 23, 54, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Layer bridge gradient */
@@ -56,23 +55,23 @@ body {
 
 /* Artifact shadow */
 .artifact-shadow {
-  box-shadow: 0 4px 24px -12px rgba(0, 23, 54, 0.12);
+  box-shadow: 0 4px 24px -12px rgba(0, 23, 54, 0.12), 0 0 0 1px rgba(209, 213, 219, 0.3);
 }
 
-/* Scroll-reveal animation - applied via data-reveal="in" attribute set by Reveal */
+/* Scroll-reveal animation */
 @keyframes revealIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 [data-reveal="in"] {
-  animation: revealIn 1.2s cubic-bezier(0.2, 1, 0.3, 1) both;
+  animation: revealIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Process line dash */
 .process-line {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: dash 3s linear forwards;
+  animation: dash 2.5s linear forwards;
 }
 @keyframes dash {
   to { stroke-dashoffset: 0; }

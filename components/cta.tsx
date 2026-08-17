@@ -8,21 +8,32 @@ export function Cta(): ReactElement {
       id="waitlist"
       className="py-16 sm:py-24 lg:py-section-gap-lg bg-primary text-clinical-white px-4 sm:px-6 md:px-gutter text-center relative overflow-hidden"
     >
-      <Reveal className="max-w-3xl mx-auto space-y-6 sm:space-y-10 relative z-10">
-        <span className="font-label-caps text-[10px] sm:text-label-caps text-memory-glow tracking-[0.2em] sm:tracking-[0.4em] block uppercase">
+      {/* Background Subtle Gradient Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(165,216,255,0.08)_0,transparent_70%)] pointer-events-none" />
+
+      <Reveal className="max-w-3xl mx-auto space-y-6 sm:space-y-8 relative z-10">
+        <span className="font-mono text-xs text-memory-glow tracking-[0.25em] block uppercase font-semibold">
           STRICTLY LIMITED RELEASE // EST. 2026
         </span>
-        <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg">Secure your history.</h2>
-        <p className="font-body-lg text-base sm:text-body-lg opacity-70">
-          We are currently onboarding initial clinical partners and patients for the 2026 flagship
-          launch. Ensure your healthcare narrative starts with understanding.
+        <h2 className="font-headline-lg text-3xl sm:text-5xl lg:text-headline-lg tracking-tight">
+          Ensure your medical story begins with understanding.
+        </h2>
+        <p className="font-body-lg text-base sm:text-body-lg opacity-80 max-w-xl mx-auto leading-relaxed">
+          We are currently onboarding initial clinical partners, specialists, and patients for the 2026 flagship release.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 sm:pt-8 w-full max-w-md sm:max-w-none mx-auto">
+
+        {/* Button-in-Button CTA Architecture */}
+        <div className="pt-4 sm:pt-6 flex justify-center">
           <Link
             href="/waitlist"
-            className="bg-clinical-white text-primary px-6 sm:px-12 py-4 sm:py-5 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-surface-bright hover:scale-[1.02] transition-all w-full sm:w-auto rounded text-center"
+            className="group inline-flex items-center gap-4 bg-clinical-white text-primary pl-8 pr-4 py-4 sm:py-5 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-surface-bright transition-all rounded-full shadow-2xl active:scale-[0.98]"
           >
-            JOIN 2026 WAITING LIST
+            <span>JOIN 2026 FLAGSHIP WAITING LIST</span>
+            <span className="w-8 h-8 rounded-full bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center transition-colors">
+              <span className="material-symbols-outlined text-base text-primary group-hover:translate-x-0.5 transition-transform">
+                arrow_forward
+              </span>
+            </span>
           </Link>
         </div>
       </Reveal>

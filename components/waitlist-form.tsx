@@ -20,21 +20,21 @@ const INITIAL_FORM_DATA: WaitlistFormData = {
 
 const INTEREST_OPTIONS: Record<WaitlistRole, ReadonlyArray<{ readonly value: string; readonly label: string }>> = {
   patient: [
-    { value: "longitudinal_memory", label: "Longitudinal Cardiac & Medical Memory" },
+    { value: "longitudinal_memory", label: "Longitudinal Cardiac and Medical Memory" },
     { value: "physician_synthesis", label: "Pre-Consultation Clinical Briefs" },
-    { value: "medication_history", label: "Historical Reaction & Medication Tracking" },
+    { value: "medication_history", label: "Historical Reaction and Medication Tracking" },
     { value: "family_records", label: "Multi-Generational Health Context" },
   ],
   physician: [
-    { value: "clinical_briefs", label: "AI Pre-Review & EHR Record Synthesis" },
+    { value: "clinical_briefs", label: "Clinical Pre-Review and EHR Record Synthesis" },
     { value: "longitudinal_timeline", label: "Patient Journey Timeline Reconstruction" },
     { value: "partner_program", label: "2026 Flagship Clinical Vanguard Program" },
-    { value: "research_collaboration", label: "Clinical Validation & Trials" },
+    { value: "research_collaboration", label: "Clinical Validation and Trials" },
   ],
   enterprise: [
-    { value: "health_system_integration", label: "Health System & EHR Data Layer Integration" },
+    { value: "health_system_integration", label: "Health System and EHR Data Layer Integration" },
     { value: "specialty_clinic_pilot", label: "Multi-Site Specialty Clinic Deployment" },
-    { value: "security_compliance", label: "Enterprise HIPAA & BAA Infrastructure" },
+    { value: "security_compliance", label: "Enterprise HIPAA and BAA Infrastructure" },
     { value: "custom_intelligence", label: "Custom Domain Intelligence Layer" },
   ],
 };
@@ -60,14 +60,14 @@ function RoleTabButton({
       aria-controls={`${id}-panel`}
       id={id}
       onClick={onClick}
-      className={`flex-1 text-left p-5 border transition-all rounded ${
+      className={`flex-1 text-left p-4 sm:p-5 border transition-all rounded-xl active:scale-[0.98] ${
         active
-          ? "bg-primary text-clinical-white border-primary ring-1 ring-primary shadow-sm"
-          : "bg-clinical-white text-on-surface border-data-node/40 hover:border-primary/40 hover:bg-surface-container-low"
+          ? "bg-primary text-clinical-white border-primary shadow-double-bezel-dark"
+          : "bg-clinical-white text-on-surface border-data-node/30 hover:border-primary/40 hover:bg-surface-container-low"
       }`}
     >
-      <div className="flex items-center justify-between mb-1">
-        <span className="font-label-caps text-label-caps tracking-widest uppercase">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="font-mono text-xs font-semibold tracking-wider uppercase">
           {label}
         </span>
         <span
@@ -99,61 +99,64 @@ function SuccessConfirmation({
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Fallback if clipboard API unavailable
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     }
   };
 
   return (
-    <div className="bg-clinical-white border border-data-node/40 p-8 sm:p-12 shadow-sm rounded max-w-2xl mx-auto text-left space-y-8">
+    <div className="bg-clinical-white border border-data-node/40 p-6 sm:p-10 shadow-double-bezel rounded-2xl max-w-2xl mx-auto text-left space-y-8">
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-headline-md text-xl">
+        <div className="w-12 h-12 rounded-full bg-primary text-clinical-white flex items-center justify-center font-headline-md text-xl shadow-sm">
           ✓
         </div>
         <div>
-          <span className="font-label-caps text-label-caps text-primary tracking-widest uppercase block">
-            CONFIRMED // 2026 VANGUARD
+          <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-widest uppercase block">
+            CONFIRMED // 2026 VANGUARD QUEUE
           </span>
-          <h2 className="font-headline-md text-headline-md text-primary">
+          <h2 className="font-headline-md text-2xl text-primary">
             Position Reserved
           </h2>
         </div>
       </div>
 
-      <p className="font-body-lg text-body-md text-on-surface-variant">
+      <p className="font-body-lg text-sm sm:text-base text-on-surface-variant leading-relaxed">
         Thank you for securing your position on the Mritunjay flagship queue for{" "}
-        <strong className="text-primary font-medium">{data.email}</strong>. Our clinical onboarding
-        team will reach out prior to the 2026 release.
+        <strong className="text-primary font-semibold">{data.email}</strong>. Our clinical onboarding
+        team will reach out with your verified access credentials prior to the 2026 release.
       </p>
 
-      <div className="bg-surface-container-low p-6 rounded border border-data-node/30 space-y-4">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      {/* Access Token Double-Bezel Card */}
+      <div className="bg-surface-container-low p-5 sm:p-6 rounded-xl border border-data-node/30 space-y-4 shadow-sm">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div>
-            <span className="font-label-caps text-[10px] text-on-surface-variant tracking-wider block uppercase">
+            <span className="font-mono text-[10px] text-on-surface-variant tracking-wider block uppercase mb-0.5">
               PRIORITY ACCESS TOKEN
             </span>
-            <span className="font-mono text-lg text-primary font-semibold tracking-wider">
+            <span className="font-mono text-lg sm:text-xl text-primary font-bold tracking-wider">
               {data.priorityId}
             </span>
           </div>
           <button
             type="button"
             onClick={() => void handleCopy()}
-            className="bg-primary text-clinical-white font-label-caps text-label-caps px-5 py-2.5 rounded hover:bg-primary/90 transition-all text-xs tracking-wider"
+            className="group inline-flex items-center gap-2 bg-primary text-clinical-white font-mono text-xs px-4 py-2 rounded-full hover:bg-primary/90 transition-all active:scale-[0.98]"
           >
-            {copied ? "COPIED TO CLIPBOARD" : "COPY TOKEN"}
+            <span>{copied ? "COPIED" : "COPY TOKEN"}</span>
+            <span className="material-symbols-outlined text-[13px]">
+              {copied ? "done" : "content_copy"}
+            </span>
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-data-node/20 text-xs font-body-md">
+        <div className="grid grid-cols-2 gap-4 pt-4 border-t border-data-node/20 text-xs font-mono">
           <div>
-            <span className="text-on-surface-variant block">Queue Rank</span>
-            <span className="font-semibold text-primary text-sm">#{data.queuePosition}</span>
+            <span className="text-on-surface-variant block text-[10px] uppercase">Queue Position</span>
+            <span className="font-bold text-primary text-sm tabular-nums">#{data.queuePosition}</span>
           </div>
           <div>
-            <span className="text-on-surface-variant block">Target Onboarding</span>
-            <span className="font-semibold text-primary text-sm">{data.estimatedOnboarding}</span>
+            <span className="text-on-surface-variant block text-[10px] uppercase">Target Onboarding</span>
+            <span className="font-bold text-primary text-sm">{data.estimatedOnboarding}</span>
           </div>
         </div>
       </div>
@@ -162,9 +165,9 @@ function SuccessConfirmation({
         <button
           type="button"
           onClick={onReset}
-          className="text-xs font-label-caps tracking-widest text-primary hover:underline"
+          className="text-xs font-mono tracking-wider text-primary hover:underline uppercase"
         >
-          SUBMIT ANOTHER REGISTRATION
+          Submit another registration
         </button>
       </div>
     </div>
@@ -176,6 +179,7 @@ export function WaitlistForm(): ReactElement {
   const [formData, setFormData] = useState<WaitlistFormData>(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState<WaitlistFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
   const [successData, setSuccessData] = useState<WaitlistSuccessData | null>(null);
 
   const validateForm = (): boolean => {
@@ -206,8 +210,6 @@ export function WaitlistForm(): ReactElement {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
-  const [apiError, setApiError] = useState<string | null>(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -284,16 +286,16 @@ export function WaitlistForm(): ReactElement {
 
   return (
     <motion.div
-      initial={reduced ? undefined : { opacity: 0, y: 20 }}
+      initial={reduced ? undefined : { opacity: 0, y: 16 }}
       animate={reduced ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="bg-clinical-white border border-data-node/40 p-4 sm:p-8 lg:p-12 shadow-sm rounded-lg max-w-3xl mx-auto text-left"
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="bg-clinical-white border border-data-node/40 p-5 sm:p-8 lg:p-12 shadow-double-bezel rounded-2xl max-w-3xl mx-auto text-left"
     >
       <div className="mb-8 border-b border-data-node/20 pb-6">
-        <span className="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase block mb-3">
+        <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-wider uppercase block mb-3">
           STEP 1 OF 2 // SELECT PROFILE TYPE
         </span>
-        <div role="tablist" aria-label="Profile Role Type" className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div role="tablist" aria-label="Profile Role Type" className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <RoleTabButton
             id="tab-patient"
             active={formData.role === "patient"}
@@ -305,7 +307,7 @@ export function WaitlistForm(): ReactElement {
             id="tab-physician"
             active={formData.role === "physician"}
             label="Clinician / Specialist"
-            description="Early clinical synthesis & pre-review tools for practice."
+            description="Early clinical synthesis and pre-review tools for practice."
             onClick={() => handleRoleSelect("physician")}
           />
           <RoleTabButton
@@ -319,12 +321,12 @@ export function WaitlistForm(): ReactElement {
       </div>
 
       {apiError && (
-        <div className="mb-6 p-4 bg-error/10 border border-error/30 text-error rounded font-body-md text-sm flex items-center justify-between">
+        <div className="mb-6 p-4 bg-error/10 border border-error/30 text-error rounded-xl font-body-md text-sm flex items-center justify-between">
           <span>{apiError}</span>
           <button
             type="button"
             onClick={() => setApiError(null)}
-            className="text-xs uppercase font-label-caps tracking-wider underline ml-4"
+            className="text-xs uppercase font-mono tracking-wider underline ml-4"
           >
             DISMISS
           </button>
@@ -334,7 +336,7 @@ export function WaitlistForm(): ReactElement {
       <form onSubmit={handleSubmit} noValidate className="space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="fullName" className="block font-label-caps text-label-caps text-primary tracking-wider uppercase mb-2">
+            <label htmlFor="fullName" className="block font-mono text-xs text-primary font-semibold tracking-wider uppercase mb-2">
               Full Name <span className="text-error">*</span>
             </label>
             <input
@@ -347,8 +349,8 @@ export function WaitlistForm(): ReactElement {
               aria-invalid={Boolean(errors.fullName)}
               aria-describedby={errors.fullName ? "fullName-error" : undefined}
               placeholder="e.g. Dr. Eleanor Vance"
-              className={`w-full bg-surface-container-low border text-on-surface font-body-md text-body-md px-4 py-3.5 rounded outline-none transition-all focus:ring-1 focus:ring-primary ${
-                errors.fullName ? "border-error" : "border-data-node/50 focus:border-primary"
+              className={`w-full bg-surface-container-low border text-on-surface font-body-md text-sm sm:text-base px-4 py-3.5 rounded-lg outline-none transition-all focus:ring-1 focus:ring-primary ${
+                errors.fullName ? "border-error" : "border-data-node/40 focus:border-primary"
               }`}
             />
             {errors.fullName && (
@@ -359,7 +361,7 @@ export function WaitlistForm(): ReactElement {
           </div>
 
           <div>
-            <label htmlFor="email" className="block font-label-caps text-label-caps text-primary tracking-wider uppercase mb-2">
+            <label htmlFor="email" className="block font-mono text-xs text-primary font-semibold tracking-wider uppercase mb-2">
               Email Address <span className="text-error">*</span>
             </label>
             <input
@@ -372,8 +374,8 @@ export function WaitlistForm(): ReactElement {
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "email-error" : undefined}
               placeholder={formData.role === "patient" ? "name@domain.com" : "doctor@hospital.org"}
-              className={`w-full bg-surface-container-low border text-on-surface font-body-md text-body-md px-4 py-3.5 rounded outline-none transition-all focus:ring-1 focus:ring-primary ${
-                errors.email ? "border-error" : "border-data-node/50 focus:border-primary"
+              className={`w-full bg-surface-container-low border text-on-surface font-body-md text-sm sm:text-base px-4 py-3.5 rounded-lg outline-none transition-all focus:ring-1 focus:ring-primary ${
+                errors.email ? "border-error" : "border-data-node/40 focus:border-primary"
               }`}
             />
             {errors.email && (
@@ -386,7 +388,7 @@ export function WaitlistForm(): ReactElement {
 
         {formData.role !== "patient" && (
           <div>
-            <label htmlFor="organization" className="block font-label-caps text-label-caps text-primary tracking-wider uppercase mb-2">
+            <label htmlFor="organization" className="block font-mono text-xs text-primary font-semibold tracking-wider uppercase mb-2">
               {formData.role === "physician" ? "Hospital / Practice Name" : "Health System / Institution"}{" "}
               <span className="text-error">*</span>
             </label>
@@ -402,8 +404,8 @@ export function WaitlistForm(): ReactElement {
               placeholder={
                 formData.role === "physician" ? "e.g. Johns Hopkins Cardiology" : "e.g. Mayo Clinic Network"
               }
-              className={`w-full bg-surface-container-low border text-on-surface font-body-md text-body-md px-4 py-3.5 rounded outline-none transition-all focus:ring-1 focus:ring-primary ${
-                errors.organization ? "border-error" : "border-data-node/50 focus:border-primary"
+              className={`w-full bg-surface-container-low border text-on-surface font-body-md text-sm sm:text-base px-4 py-3.5 rounded-lg outline-none transition-all focus:ring-1 focus:ring-primary ${
+                errors.organization ? "border-error" : "border-data-node/40 focus:border-primary"
               }`}
             />
             {errors.organization && (
@@ -415,7 +417,7 @@ export function WaitlistForm(): ReactElement {
         )}
 
         <div>
-          <label htmlFor="primaryInterest" className="block font-label-caps text-label-caps text-primary tracking-wider uppercase mb-2">
+          <label htmlFor="primaryInterest" className="block font-mono text-xs text-primary font-semibold tracking-wider uppercase mb-2">
             Primary Area of Focus
           </label>
           <select
@@ -423,7 +425,7 @@ export function WaitlistForm(): ReactElement {
             name="primaryInterest"
             value={formData.primaryInterest}
             onChange={handleTextChange}
-            className="w-full bg-surface-container-low border border-data-node/50 text-on-surface font-body-md text-body-md px-4 py-3.5 rounded outline-none transition-all focus:ring-1 focus:ring-primary focus:border-primary"
+            className="w-full bg-surface-container-low border border-data-node/40 text-on-surface font-body-md text-sm sm:text-base px-4 py-3.5 rounded-lg outline-none transition-all focus:ring-1 focus:ring-primary focus:border-primary"
           >
             {INTEREST_OPTIONS[formData.role].map((option) => (
               <option key={option.value} value={option.value}>
@@ -461,15 +463,20 @@ export function WaitlistForm(): ReactElement {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary text-clinical-white py-3.5 sm:py-4 px-4 sm:px-8 font-label-caps text-[11px] sm:text-label-caps tracking-widest rounded hover:bg-primary/90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 text-center"
+            className="group flex items-center justify-center gap-3 w-full bg-primary text-clinical-white py-4 px-8 font-label-caps text-xs sm:text-label-caps tracking-widest rounded-full hover:bg-primary/95 transition-all shadow-md active:scale-[0.98] disabled:opacity-50 text-center"
           >
             {isSubmitting ? (
               <>
                 <span className="w-4 h-4 border-2 border-clinical-white border-t-transparent rounded-full animate-spin" />
-                RESERVING POSITION...
+                <span>RESERVING POSITION...</span>
               </>
             ) : (
-              "JOIN 2026 FLAGSHIP WAITING LIST"
+              <>
+                <span>JOIN 2026 FLAGSHIP WAITING LIST</span>
+                <span className="w-5 h-5 rounded-full bg-clinical-white/15 group-hover:bg-clinical-white/25 flex items-center justify-center transition-colors">
+                  <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
+                </span>
+              </>
             )}
           </button>
         </div>
