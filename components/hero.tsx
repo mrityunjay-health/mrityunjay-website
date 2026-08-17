@@ -45,13 +45,13 @@ export function Hero(): ReactElement {
     <section ref={targetRef} className="relative h-[160vh] lg:h-[250vh] bg-background w-full">
       <div className="sticky top-0 min-h-[100dvh] overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
         
-        {/* Living Animated Biological Cell Background with Scroll Zoom */}
+        {/* Layer 0: Living Animated Biological Cell Background (Strict z-0) */}
         <motion.div 
           style={{ 
             scale: reduced ? 1 : cellScale, 
             opacity: reduced ? 1 : cellOpacity,
             position: "absolute",
-            zIndex: 5,
+            zIndex: 0,
             transformOrigin: "50% 48%",
           }}
           className="pointer-events-auto inset-0 flex items-center justify-center w-full h-full"
@@ -59,16 +59,16 @@ export function Hero(): ReactElement {
           <LivingCellBackground className="w-full h-full absolute inset-0" />
         </motion.div>
 
-        {/* Slide 1: Initial Editorial Content */}
+        {/* Layer 10: Slide 1 Initial Editorial Content (Foreground z-10) */}
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="max-w-4xl mx-auto text-center z-15 w-full relative flex flex-col items-center pointer-events-auto"
+          className="max-w-4xl mx-auto text-center z-10 w-full relative flex flex-col items-center pointer-events-none"
         >
           <motion.span
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: EASE_OUT }}
-            className="font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/80 backdrop-blur-xs px-4 py-1 rounded-full border border-data-node/30 shadow-xs"
+            className="pointer-events-auto font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/80 backdrop-blur-xs px-4 py-1 rounded-full border border-data-node/30 shadow-xs"
           >
             LIVING HEALTH INTELLIGENCE
           </motion.span>
@@ -111,11 +111,11 @@ export function Hero(): ReactElement {
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.9, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 w-full max-w-md sm:max-w-none mx-auto"
+            className="pointer-events-auto flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-8 sm:mb-12 w-full max-w-md sm:max-w-none mx-auto"
           >
             <Link
               href="/waitlist"
-              className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-primary text-clinical-white px-7 sm:px-9 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary/95 transition-all rounded-full text-center shadow-sm active:scale-[0.98]"
+              className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-primary text-clinical-white px-7 sm:px-9 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary/95 transition-all rounded-full text-center shadow-md active:scale-[0.98]"
             >
               <span>JOIN 2026 WAITING LIST</span>
               <span className="w-5 h-5 rounded-full bg-clinical-white/15 group-hover:bg-clinical-white/25 flex items-center justify-center transition-colors">
@@ -134,13 +134,13 @@ export function Hero(): ReactElement {
           </motion.div>
         </motion.div>
 
-        {/* Optical Mask Overlay */}
+        {/* Layer 20: Optical Mask Overlay (Strict z-20) */}
         <motion.div
           style={{ opacity: maskOverlayOpacity }}
           className="absolute inset-0 bg-clinical-white z-20 will-change-[opacity] pointer-events-none"
         />
 
-        {/* Slide 2: Intelligence Section */}
+        {/* Layer 30: Slide 2 Intelligence Section (Strict z-30) */}
         <motion.div
           id="intelligence"
           style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents }}
