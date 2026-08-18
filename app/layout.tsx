@@ -51,8 +51,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${newsreader.variable} ${manrope.variable} ${hankenGrotesk.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="bg-clinical-white text-on-surface antialiased font-body-md text-body-md">
+      <body
+        className="bg-clinical-white text-on-surface antialiased font-body-md text-body-md"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
