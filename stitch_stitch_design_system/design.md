@@ -34,6 +34,114 @@ This document is the single source of truth for design.
 
 ---
 
+# Source of Truth
+This design bible is reconciled against the canonical Mritunjay blueprint (Notion: `https://app.notion.com/p/Mritunjay-38b47734352680a8a002c1f0ddc7ed70`) and applied for the website only. We draw on: Laws of Mritunjay, Philosophy of Mritunjay, Product Principles, Mritunjay Design Principles, The Experience Principles, Our AI Principle, Clinical Principles, and Volume 2 Human Psychology. Product-internal architecture (databases, APIs, model routing) is out of scope for this repo.
+
+# The 10 Laws of Mritunjay (non-negotiable)
+1. Patients never repeat themselves. If they do, the system failed.
+2. Doctors never start from zero. Every consultation begins with complete context, never a blank page.
+3. Every interaction must reduce anxiety. Every color, motion, and notification must answer: does this reduce anxiety? If not, delete it.
+4. AI exists to reduce thinking. Never create work. Always remove work.
+5. Information exists only once. Everything references one source of truth.
+6. The system always knows more tomorrow than yesterday. Every visit improves memory, reasoning, personalization, recovery, and doctor understanding.
+7. Context before intelligence. Ask "What do we already know?" before "Answer this." Memory first, reasoning second, generation last.
+8. Every decision is explainable. Doctors ask why and get an answer; patients ask why and get a simpler answer.
+9. The doctor owns the clinical decision. AI assists. Never replaces.
+10. The product feels invisible. If users notice software, we failed. They should notice healthcare becoming easier.
+
+---
+
+# The 20 Experience Principles (designing trust, not screens)
+Healthcare is not just a medical experience; it is an emotional experience. Every interaction should reduce uncertainty, increase understanding, and help people move toward better health with confidence. These are distinct from the Design Principles: we are not designing screens, we are designing trust.
+
+1. **Reduce uncertainty** - the biggest problem in healthcare is uncertainty. Every screen answers: what is happening, is this serious, what should I do, did my doctor receive this, am I getting better.
+2. **Build trust before intelligence** - people trust healthcare long before they trust AI. AI is never the hero; trust is.
+3. **Patients should feel understood** - continuously communicate "we understand your situation": we remembered your allergy, we reviewed your previous reports, your doctor has already read your summary.
+4. **Doctors should feel prepared** - every consultation begins with organized history, summarized reports, medications, allergies, timeline, and an AI-generated clinical summary.
+5. **One continuous journey** - the experience should never feel like moving between separate products; transitions matter.
+6. **Every wait has purpose** - never "Loading...". Show meaningful work: reviewing previous reports, preparing your doctor's summary, checking medication safety.
+7. **Make progress visible** - show advancement (consultation ████░░░░, doctor ready ████████, recovery day 2 of 7). This builds momentum.
+8. **Information appears at the right time** - progressive disclosure. Never overwhelm, never hide.
+9. **Every action has immediate feedback** - the patient should never wonder "did it upload, did it save, did the doctor receive it?".
+10. **AI works quietly** - like electricity: always present, rarely noticed. Never "look how smart our AI is".
+11. **Human decisions stay human** - distinguish AI-generated information, doctor-reviewed advice, and the final clinical decision.
+12. **The next step is always clear** - at any moment: where am I, what's happening, what's next. Navigation is clarity.
+13. **Continue caring after the consultation** - medicine reminders, recovery tracking, follow-ups, preventive guidance. Supported, not abandoned.
+14. **Personalize through memory** - allergies, preferences, chronic conditions, medications, prior consultations, recovery patterns. Never rebuild the story.
+15. **Empower without overwhelming** - translate medical concepts accurately into plain language; offer more detail for those who want it.
+16. **Calm is part of the treatment** - spacing, typography, color, motion, language, and timing all reduce stress. Calm is not decoration; calm is care.
+17. **Design for exceptional cases** - emergencies, poor connectivity, incomplete information, uncertain diagnoses, doctor unavailability, interrupted consultations.
+18. **Respect the user's time** - never ask for information the system already knows. Time is part of healthcare quality.
+19. **Every interaction improves the relationship** - the user should trust Mritunjay more after each interaction. Trust compounds.
+20. **Leave people better than you found them** - more informed, more confident, more prepared, more hopeful, more supported. That is the measure of success.
+
+## Experience Review Checklist (use before shipping any feature)
+- **Clarity**: does the user know where they are, what's happening, what's next?
+- **Trust**: is it obvious what the AI did, clear what the doctor decided, uncertainty explained honestly?
+- **Cognitive load**: can we remove a step, a decision, or unnecessary information?
+- **Emotional state**: does it reduce anxiety, increase confidence, feel respectful?
+- **Continuity**: does it build on what the system already knows, avoid repetition, fit the journey?
+- **Safety**: are urgent situations handled appropriately, is there a clear path to human help?
+
+---
+
+# Human Psychology Drivers
+Design for the person, not the screen. These come from the Patient and Doctor Psychology docs.
+
+## Patient Needs Pyramid
+```
+Level 5  Long-term Health
+Level 4  Confidence
+Level 3  Understanding
+Level 2  Trust
+Level 1  Safety
+```
+You cannot build confidence without trust. You cannot build trust without safety.
+
+## The 10 Patient Needs
+Safety, Understanding, Control, Predictability (people fear uncertainty more than bad news), Being Heard, Competence, Human Connection, Progress, Memory, Hope (never false reassurance, always a constructive next step).
+
+## Patient Trust Model
+Professional design → reliable behavior → visible understanding → transparent actions → doctor validation → long-term consistency → trust. One interaction is not enough; trust compounds.
+
+## Patient Experience Rules
+- Never surprise patients with important decisions.
+- Never use fear as a growth tactic.
+- Never overwhelm with medical terminology.
+- Always explain the next step.
+- Always acknowledge uncertainty honestly.
+- Always remember what the patient has already shared.
+- Always provide a clear path to human help.
+
+## Doctor Needs Pyramid
+```
+Level 5  Professional Fulfillment
+Level 4  Clinical Confidence
+Level 3  Efficiency
+Level 2  Reliable Information
+Level 1  Patient Safety
+```
+Everything rests on patient safety.
+
+## The 10 Doctor Needs
+Safety, Trustworthy information, Control (never feel overridden), Efficiency (every unnecessary click reduces attention for care), Clinical focus, Professional respect, Transparency, Continuity, Reduced cognitive load, Better outcomes.
+
+## Core working belief for the site
+Doctors don't need another application; they need fewer obstacles between them and good clinical care. They want clarity, efficiency, confidence, and control.
+
+---
+
+# The AI Manifesto
+> AI is not the clinician. AI is not the patient. AI is the intelligence layer that continuously understands, organizes, and connects health information so that patients and clinicians can make better decisions together. Its success is measured not by how intelligent it appears, but by how much safer, simpler, and more effective healthcare becomes.
+
+## AI design guidance for the site
+- Explain observable work, not hidden reasoning ("reviewing previous reports", "checking medication safety"). Never expose internal chain-of-thought.
+- Express uncertainty honestly; escalate when confidence is low. Safety overrides convenience.
+- Structured data is more valuable than conversation; play back what the system knows.
+- Measure success by outcomes (safer, simpler, more effective healthcare), not by how intelligent the AI appears.
+
+---
+
 Product Identity
 Mritunjay is not a telemedicine application.
 It is an AI-native Healthcare Operating System.

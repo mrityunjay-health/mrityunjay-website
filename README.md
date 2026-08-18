@@ -8,6 +8,63 @@ The interface is built upon the **20 Mritunjay Design Principles**, engineered t
 
 ---
 
+## 📡 The 2026 Blueprint (source of truth)
+
+Reconciled from the canonical Mritunjay Notion blueprint and applied here for the website only. The living document lives at [`app.notion.com/p/Mritunjay-38b47734352680a8a002c1f0ddc7ed70`](https://app.notion.com/p/Mritunjay-38b47734352680a8a002c1f0ddc7ed70).
+
+### Positioning
+
+> Mritunjay is an AI-powered healthcare operating system that continuously understands every patient's health, helps them receive the right care faster, and enables doctors to make better clinical decisions with less effort.
+
+### Vision
+
+> To build the world's most trusted healthcare intelligence platform that ensures every person receives the right care at the right time, with complete understanding of their lifelong health.
+
+**No patient should ever have to start from zero again.** Mritunjay becomes the patient's lifelong health intelligence layer.
+
+Healthcare today is fragmented: every doctor starts from zero, every hospital stores different records, and every patient repeats the same story.
+
+### Mission
+
+> To reduce human suffering by making healthcare dramatically more intelligent, more personalized, more accessible, and more trustworthy through collaboration between AI and clinicians, not replacement of clinicians.
+
+We don't replace doctors; we amplify them. We don't replace hospitals; we connect them. We strengthen human judgment with better information and reasoning.
+
+### The problem we are solving
+
+Healthcare is broken because information is broken:
+- **Patients** repeat their history, forget medicines, lose reports, don't know which doctor to visit, receive fragmented care, and get almost no follow-up.
+- **Doctors** spend enormous time collecting information, work with incomplete histories, read hundreds of pages manually, repeat questions already answered, and face a documentation burden.
+- **Hospitals** have fragmented systems, lack interoperability, duplicate work, and struggle with operational efficiency.
+
+Mritunjay fixes the information problem before trying to fix the medical problem.
+
+### Product philosophy
+
+Healthcare should feel **calm, personal, intelligent, proactive, and continuous**, never *confusing, reactive, fragmented, or stressful*.
+
+### Who it is for
+
+- **Primary user**: a patient with a non-emergency medical problem who wants quick, trustworthy access to care.
+- **Secondary user**: an online doctor who wants to review patients efficiently.
+
+### Journeys the site tells
+
+- **Patient:** Feels unwell → opens Mritunjay → the AI already knows the history → symptoms described naturally → AI retrieves memory and reports → AI asks the missing questions → risk analysis → doctor matching → AI summary reaches the doctor → video consultation → prescription → medicine reminders → recovery tracking → timeline updated → continuous monitoring.
+- **Doctor:** Login → today's queue → patient summary → timeline → medical history → AI clinical reasoning → lab trends → consultation → modify AI recommendation → prescription → follow-up → feedback improves the AI.
+- **AI:** Conversation → retrieve memory → retrieve reports → lab trends → extract symptoms → medical reasoning → clinical guidelines → risk detection → differential → evidence → treatment suggestions → prescription draft → doctor review → learning.
+
+### What makes Mritunjay different
+
+Most healthcare apps: *Appointment → Doctor → Prescription → Done.*
+Mritunjay: *Continuous Health Memory → AI Understanding → Clinical Reasoning → Doctor Collaboration → Continuous Recovery → Long-term Health Intelligence.*
+
+### The 10 Laws
+
+Patients never repeat themselves; doctors never start from zero; every interaction reduces anxiety; AI reduces thinking; information exists once; the system always knows more tomorrow; context before intelligence; every decision is explainable; the doctor owns the clinical decision; the product feels invisible. The complete Laws, Experience Principles, and psychology drivers live in `AGENTS.md` and `stitch_stitch_design_system/design.md`.
+
+---
+
 ## 🏛 The Mritunjay Design Principles
 
 1. **We Design for Humans, Not Screens** — Acknowledging the emotional reality of fear, pain, and vulnerability.

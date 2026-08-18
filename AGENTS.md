@@ -6,9 +6,9 @@
 - **REMOVE rules** when: obsolete, unused 10+ sessions, superseded.
 - **PRUNE at 300 lines**: sort by `[ ]` marker, drop oldest. Merge similar. Compress.
 - **TRACK**: `[v0]` original, `[v1]` learned, `[v2+]` refined. Never remove `[v0]`.
-- **Session marker at EOF**: `<!-- sessions: 5, last: 2026-08-17 -->`
+- **Session marker at EOF**: `<!-- sessions: 6, last: 2026-08-18 -->`
 
-Public Next.js marketing website and clinical intelligence workstation for Mritunjay.
+Public Next.js marketing website and clinical intelligence workstation for Mritunjay: an AI-powered healthcare operating system that continuously understands every patient's health, helps them receive the right care faster, and enables doctors to make better clinical decisions with less effort. No patient should ever have to start from zero again.
 
 ---
 
@@ -46,6 +46,38 @@ If someone sees a screenshot of Mritunjay with the logo removed, they should ins
 - Performance is brand. Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms).
 - WCAG 2.2 AA. Contrast 4.5:1. Keyboard nav. Screen reader ready.
 - Skill-first: `brandkit`, `design-taste-frontend`, `high-end-visual-design`, `gpt-taste`, `industrial-brutalist-ui`, `full-output-enforcement`, `redesign-existing-projects`.
+
+## 📡 Canonical Source of Truth [v1]
+The authoritative Mritunjay blueprint lives in Notion (`https://app.notion.com/p/Mritunjay-38b47734352680a8a002c1f0ddc7ed70`). This repo applies it **as needed, for the website only**. We draw from: Laws of Mritunjay, Philosophy of Mritunjay, Product Principles, Mritunjay Design Principles, The Experience Principles, Our AI Principle, Clinical Principles, and Volume 2 Human Psychology. Product-internal material (database entities, API contracts, model routing, engineering bible) is out of scope for this marketing site.
+
+## The 10 Laws of Mritunjay [v1]
+Non-negotiable. They govern every build and copy decision:
+1. **Patients never repeat themselves** - if they do, the system failed.
+2. **Doctors never start from zero** - every consultation begins with complete context.
+3. **Every interaction must reduce anxiety** - if a color, motion, or screen does not, delete it.
+4. **AI exists to reduce thinking** - never create work, always remove work.
+5. **Information exists only once** - one source of truth, never duplicated.
+6. **The system always knows more tomorrow** - every visit improves memory, reasoning, recovery.
+7. **Context before intelligence** - recall what we know first, reason second, generate last.
+8. **Every decision is explainable** - doctor and patient can both ask "why?" and get an answer.
+9. **The doctor owns the clinical decision** - AI assists, never replaces.
+10. **The product feels invisible** - users notice healthcare becoming easier, not software.
+
+## Primary and Secondary Users [v1]
+- **Primary**: a patient with a non-emergency medical problem who wants quick, trustworthy access to care.
+- **Secondary**: an online doctor who wants to review patients efficiently.
+Everything else can come later; the website speaks to both, patients first.
+
+## Experience Principles (designing trust, not screens) [v1]
+Condensed from The Experience Principles. Full text in `stitch_stitch_design_system/design.md`. The ones that shape this website most:
+- **Reduce uncertainty** - every screen answers: what is happening, is this serious, what should I do, am I getting better.
+- **Build trust before intelligence** - healthcare is trusted long before AI; AI is never the hero.
+- **Patients should feel understood** - "we remembered your allergy", "your doctor has already read your summary".
+- **Make progress visible** - show advancement, never a blank "loading".
+- **AI works quietly** - like electricity: always present, rarely noticed. Never "look how smart our AI is".
+- **Human decisions stay human** - distinguish AI-generated info, doctor-reviewed advice, and the final clinical decision.
+- **Calm is part of the treatment** - spacing, typography, color, motion, language, and timing all reduce stress.
+- **Leave people better than you found them** - informed, confident, prepared, hopeful, supported.
 
 ## Stack [v2]
 Next.js 15.1 (App Router). React 19. Tailwind CSS 3.4. Framer Motion 11.18. TypeScript strict. Supabase (PostgreSQL + RLS) for `/api/waitlist` persistence.
