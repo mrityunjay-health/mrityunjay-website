@@ -39,6 +39,42 @@ const INTEREST_OPTIONS: Record<WaitlistRole, ReadonlyArray<{ readonly value: str
   ],
 };
 
+const SUBMISSION_STEPS: Record<WaitlistRole, ReadonlyArray<string>> = {
+  patient: [
+    "Securing your private enclave",
+    "Linking your patient priority token",
+    "Preparing your 2026 invitation",
+  ],
+  physician: [
+    "Securing your clinical enclave",
+    "Registering your clinician credential",
+    "Preparing your vanguard program brief",
+  ],
+  enterprise: [
+    "Securing your institution enclave",
+    "Provisioning your integration access token",
+    "Preparing your deployment brief",
+  ],
+};
+
+const ONBOARDING_ROADMAP: Record<WaitlistRole, ReadonlyArray<string>> = {
+  patient: [
+    "Your token secures your position in the 2026 clinical vanguard queue.",
+    "No medical records are collected until your personal zero-trust enclave is created.",
+    "You will receive an invitation to configure your continuous health memory with full sovereignty.",
+  ],
+  physician: [
+    "Your clinician credential reserves early access to pre-review and synthesis tools.",
+    "You will receive your Clinical Vanguard onboarding brief with orientation for your practice.",
+    "Your patients can begin joining the memory layer during the 2026 rollout.",
+  ],
+  enterprise: [
+    "Your integration token reserves a deployment slot on the 2026 flagship roadmap.",
+    "Your team receives a technical brief for the health system data layer.",
+    "We will schedule a secure architecture review for your EHR and compliance posture.",
+  ],
+};
+
 function RoleTabButton({
   active,
   label,
@@ -92,6 +128,7 @@ function SuccessConfirmation({
   readonly onReset: () => void;
 }): ReactElement {
   const [copied, setCopied] = useState(false);
+  const roadmap = ONBOARDING_ROADMAP[data.role];
 
   const handleCopy = async (): Promise<void> => {
     try {
@@ -112,18 +149,31 @@ function SuccessConfirmation({
         </div>
         <div>
           <span className="font-mono text-[10px] sm:text-xs text-primary font-semibold tracking-widest uppercase block">
-            CONFIRMED // 2026 CLINICAL ACCESS QUEUE
+            {data.returning
+              ? "RETURNING // 2026 CLINICAL ACCESS QUEUE"
+              : "CONFIRMED // 2026 CLINICAL ACCESS QUEUE"}
           </span>
           <h2 className="font-headline-md text-2xl text-primary">
-            Position Reserved
+            {data.returning ? "Position Already Reserved" : "Position Reserved"}
           </h2>
         </div>
       </div>
 
       <p className="font-body-lg text-sm sm:text-base text-on-surface-variant leading-relaxed">
-        Thank you for reserving your clinical access key for{" "}
-        <strong className="text-primary font-semibold">{data.email}</strong>. Our clinical onboarding
-        team will reach out with your private enclave credentials prior to the 2026 flagship release.
+        {data.returning ? (
+          <>
+            Your email is already in the 2026 clinical access queue. Your existing token is below
+            and our onboarding team will reach out with your private enclave credentials prior to
+            the flagship release.
+          </>
+        ) : (
+          <>
+            Thank you for reserving your clinical access key for{" "}
+            <strong className="text-primary font-semibold">{data.email}</strong>. Our clinical
+            onboarding team will reach out with your private enclave credentials prior to the 2026
+            flagship release.
+          </>
+        )}
       </p>
 
       {/* Access Token Double-Bezel Card */}
@@ -161,19 +211,20 @@ function SuccessConfirmation({
         </div>
       </div>
 
-      {/* Attentive Patient Journey Roadmap (Principle 11 & 13) */}
-      <div className="p-4 bg-primary/5 rounded-xl border border-primary/10 space-y-2 text-xs font-body-md text-primary">
+      {/* Attentive Onboarding Roadmap (role-aware) */}
+      <div className="p-4 bg-primary/5 rounded-xl border border-primary/10 space-y-3 text-xs font-body-md text-primary">
         <div className="font-mono text-[11px] font-semibold uppercase tracking-wider flex items-center gap-2">
           <span className="material-symbols-outlined text-base">info</span>
-          <span>What Happens Next (Principle 11)</span>
+          <span>Your Onboarding Roadmap</span>
         </div>
-        <p className="text-secondary leading-relaxed text-[11px]">
-          1. Your token secures your position in our 2026 clinical vanguard queue.
-          <br />
-          2. No medical records are collected until your personal zero-trust enclave is created.
-          <br />
-          3. You will receive an invitation to configure your continuous medical memory with full sovereignty.
-        </p>
+        <ol className="space-y-2 text-secondary leading-relaxed text-[11px]">
+          {roadmap.map((step, i) => (
+            <li key={step} className="flex items-start gap-2">
+              <span className="text-primary font-semibold shrink-0">{i + 1}.</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
       </div>
 
       <div className="pt-2 text-center sm:text-left">
@@ -194,7 +245,7 @@ export function WaitlistForm(): ReactElement {
   const [formData, setFormData] = useState<WaitlistFormData>(INITIAL_FORM_DATA);
   const [errors, setErrors] = useState<WaitlistFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionStep, setSubmissionStep] = useState<string>("Establishing zero-trust enclave...");
+  const [submissionStepIndex, setSubmissionStepIndex] = useState(0);
   const [apiError, setApiError] = useState<string | null>(null);
   const [successData, setSuccessData] = useState<WaitlistSuccessData | null>(null);
 
@@ -231,12 +282,13 @@ export function WaitlistForm(): ReactElement {
     e.preventDefault();
     if (!validateForm()) return;
 
+    const activeSteps = SUBMISSION_STEPS[formData.role];
     setIsSubmitting(true);
     setApiError(null);
-    setSubmissionStep("Establishing zero-trust enclave...");
+    setSubmissionStepIndex(0);
 
-    const stepTimer = setTimeout(() => {
-      setSubmissionStep("Generating patient priority token...");
+    const stepTicker = window.setInterval(() => {
+      setSubmissionStepIndex((index) => Math.min(index + 1, activeSteps.length - 1));
     }, 600);
 
     void (async () => {
@@ -250,8 +302,6 @@ export function WaitlistForm(): ReactElement {
         if (!res.ok) {
           const errData = (await res.json()) as { error?: string };
           setApiError(errData.error || "Failed to complete registration. Please try again.");
-          setIsSubmitting(false);
-          clearTimeout(stepTimer);
           return;
         }
 
@@ -261,7 +311,7 @@ export function WaitlistForm(): ReactElement {
         setApiError("Network error. Please check your connection and try again.");
       } finally {
         setIsSubmitting(false);
-        clearTimeout(stepTimer);
+        window.clearInterval(stepTicker);
       }
     })();
   };
@@ -504,8 +554,25 @@ export function WaitlistForm(): ReactElement {
           >
             {isSubmitting ? (
               <>
-                <span className="w-4 h-4 border-2 border-clinical-white border-t-transparent rounded-full animate-spin" />
-                <span className="font-mono text-xs">{submissionStep}</span>
+                <span
+                  className="w-2 h-2 rounded-full bg-memory-glow animate-pulse-subtle shrink-0"
+                  aria-hidden="true"
+                />
+                <span className="flex flex-col items-start">
+                  <span className="font-mono text-xs">
+                    {SUBMISSION_STEPS[formData.role][submissionStepIndex]}
+                  </span>
+                  <span className="flex gap-1 mt-1" aria-hidden="true">
+                    {SUBMISSION_STEPS[formData.role].map((_, i) => (
+                      <span
+                        key={i}
+                        className={`w-3 h-0.5 rounded-full transition-colors ${
+                          i <= submissionStepIndex ? "bg-clinical-white" : "bg-clinical-white/30"
+                        }`}
+                      />
+                    ))}
+                  </span>
+                </span>
               </>
             ) : (
               <>

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
+import { getSupabaseAdminClient, getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 import type { WaitlistFormData, WaitlistSuccessData } from "@/types/waitlist";
 
 interface ApiErrorResponse {
@@ -36,12 +36,28 @@ export async function POST(
       return NextResponse.json({ error: "Terms agreement is required" }, { status: 400 });
     }
 
+    if (role !== "patient") {
+      if (!organization || typeof organization !== "string" || organization.trim().length === 0) {
+        return NextResponse.json(
+          {
+            error:
+              role === "physician"
+                ? "Practice or hospital name is required"
+                : "Health system or institution name is required",
+          },
+          { status: 400 }
+        );
+      }
+    }
+
     const cleanEmail = email.trim().toLowerCase();
     const cleanName = fullName.trim();
     const cleanOrg = organization ? organization.trim() : null;
     const cleanInterest = primaryInterest || "general";
 
-    const supabase = getSupabaseClient();
+    // Prefer the service-role client (RLS restricts SELECT to service_role);
+    // fall back to the anon client for local development.
+    const supabase = getSupabaseAdminClient() ?? getSupabaseClient();
 
     if (supabase && isSupabaseConfigured()) {
       // Check if email already exists
@@ -64,6 +80,7 @@ export async function POST(
             estimatedOnboarding: "Q1 2026 Flagship Release",
             role: role as WaitlistFormData["role"],
             email: cleanEmail,
+            returning: true,
           },
           { status: 200 }
         );
@@ -105,6 +122,7 @@ export async function POST(
           estimatedOnboarding: "Q1 2026 Flagship Release",
           role: role as WaitlistFormData["role"],
           email: cleanEmail,
+          returning: false,
         },
         { status: 201 }
       );
@@ -121,6 +139,7 @@ export async function POST(
         estimatedOnboarding: "Q1 2026 Flagship Release",
         role: role as WaitlistFormData["role"],
         email: cleanEmail,
+        returning: false,
       },
       { status: 201 }
     );

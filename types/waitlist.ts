@@ -23,4 +23,5 @@ export interface WaitlistSuccessData {
   readonly estimatedOnboarding: string;
   readonly role: WaitlistRole;
   readonly email: string;
+  readonly returning: boolean;
 }
