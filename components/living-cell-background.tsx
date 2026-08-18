@@ -141,7 +141,7 @@ export function LivingCellBackground({
     }));
 
     // 3. Cytoskeletal Microtubule Filaments
-    const branchCount = 8;
+    const branchCount = width < 768 ? 3 : 8;
     const cytoskeletalBranches: CytoskeletalBranch[] = Array.from({ length: branchCount }, (_, i) => {
       const baseA = (i / branchCount) * Math.PI * 2;
       return {
@@ -156,7 +156,7 @@ export function LivingCellBackground({
     });
 
     // 4. Optical Bokeh & Colloidal Floaters (Z-depth)
-    const bokehCount = 20;
+    const bokehCount = width < 768 ? 6 : 20;
     const bokehParticles: BokehParticle[] = Array.from({ length: bokehCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -548,7 +548,9 @@ export function LivingCellBackground({
         }
       });
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!reduced) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
