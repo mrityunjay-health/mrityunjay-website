@@ -32,23 +32,25 @@ const EASE_SPRING = { type: "spring" as const, stiffness: 220, damping: 26 };
 
 function useTyped(text: string, active: boolean, speed = 26): string {
   const reduced = useReducedMotion();
-  const [typed, setTyped] = useState(reduced ? text : "");
+  const [typed, setTyped] = useState("");
   useEffect(() => {
-    if (reduced) {
-      setTyped(text);
-      return;
-    }
+    if (reduced) return;
     if (!active) return;
-    setTyped("");
     let i = 0;
-    const id = setInterval(() => {
-      i += 1;
+    let first = true;
+    const id = window.setInterval(() => {
+      if (first) {
+        first = false;
+        i = 0;
+      } else {
+        i += 1;
+      }
       setTyped(text.slice(0, i));
-      if (i >= text.length) clearInterval(id);
+      if (i >= text.length) window.clearInterval(id);
     }, speed);
-    return () => clearInterval(id);
+    return () => window.clearInterval(id);
   }, [active, text, speed, reduced]);
-  return typed;
+  return reduced ? text : typed;
 }
 
 function AnimatedCounter({ active, persist }: { active: boolean; persist: boolean }): ReactElement {
@@ -80,11 +82,6 @@ export function ChatInterface(): ReactElement {
   const [isPaused, setIsPaused] = useState(false);
   const typing = useTyped(FULL_MESSAGE, act === 1, 26);
 
-  useEffect(() => {
-    if (!reduced) return;
-    setAct(4);
-  }, [reduced]);
-
   // Sequence orchestrator with pause on user interaction
   useEffect(() => {
     if (reduced || isPaused || activeTab !== "dialogue") return;
@@ -94,11 +91,13 @@ export function ChatInterface(): ReactElement {
     return () => clearTimeout(id);
   }, [act, reduced, isPaused, activeTab]);
 
-  const showAI = act < 5;
-  const showUser = act >= 2 && act < 5;
-  const showProcessing = act === 3;
-  const showBrief = act >= 3 && act < 5;
-  const showDoctor = act === 4;
+  // Reduced motion: settle directly into the doctor-ready (act 4) state
+  const effectiveAct = reduced ? 4 : act;
+  const showAI = effectiveAct < 5;
+  const showUser = effectiveAct >= 2 && effectiveAct < 5;
+  const showProcessing = effectiveAct === 3;
+  const showBrief = effectiveAct >= 3 && effectiveAct < 5;
+  const showDoctor = effectiveAct === 4;
 
   return (
     <section

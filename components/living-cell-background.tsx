@@ -75,8 +75,6 @@ export function LivingCellBackground({
     let targetMouseY = height / 2;
     let mouseX = width / 2;
     let mouseY = height / 2;
-    let prevMouseX = width / 2;
-    let prevMouseY = height / 2;
     let mouseVx = 0;
     let mouseVy = 0;
     let mouseActive = false;
@@ -181,8 +179,6 @@ export function LivingCellBackground({
       // Mouse velocity & viscous interpolation
       mouseVx = targetMouseX - mouseX;
       mouseVy = targetMouseY - mouseY;
-      prevMouseX = mouseX;
-      prevMouseY = mouseY;
       mouseX += mouseVx * 0.035;
       mouseY += mouseVy * 0.035;
 
