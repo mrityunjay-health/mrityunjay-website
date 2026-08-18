@@ -123,8 +123,8 @@ export function ChatInterface(): ReactElement {
               </span>
             </div>
 
-            {/* Interactive View Tabs (Principle 4: Progressive Disclosure) */}
-            <div className="flex items-center gap-1 sm:gap-1.5">
+            {/* Interactive View Tabs (Principle 4: Progressive Disclosure) - horizontally scrollable on narrow viewports */}
+            <div className="flex items-center gap-1 sm:gap-1.5 flex-1 min-w-0 overflow-x-auto no-scrollbar sm:flex-none sm:overflow-visible mx-2 sm:mx-0">
               <button
                 type="button"
                 onClick={() => {
@@ -529,7 +529,7 @@ export function ChatInterface(): ReactElement {
               <div className="space-y-5 animate-fade-in-up">
                 <div>
                   <span className="font-mono text-[10px] text-green-700 uppercase tracking-wider block mb-1 font-semibold">
-                    POST-CONSULTATION TRAJECTORY
+                    AFTER YOUR VISIT
                   </span>
                   <h3 className="font-headline-md text-xl text-primary">
                     Continuous Recovery Pathway

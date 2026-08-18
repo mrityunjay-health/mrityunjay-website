@@ -53,6 +53,9 @@ export default function RootLayout({
       className={`${newsreader.variable} ${manrope.variable} ${hankenGrotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
+      <head>
+        <meta name="theme-color" content="#001736" />
+      </head>
       <body
         className="bg-clinical-white text-on-surface antialiased font-body-md text-body-md"
         suppressHydrationWarning

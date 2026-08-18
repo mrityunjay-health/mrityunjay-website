@@ -117,7 +117,7 @@ export function Hero(): ReactElement {
               href="/waitlist"
               className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-primary text-clinical-white px-7 sm:px-9 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary/95 transition-all rounded-full text-center shadow-md active:scale-[0.98]"
             >
-              <span>JOIN 2026 WAITING LIST</span>
+              <span>JOIN 2026 FLAGSHIP WAITING LIST</span>
               <span className="w-5 h-5 rounded-full bg-clinical-white/15 group-hover:bg-clinical-white/25 flex items-center justify-center transition-colors">
                 <span className="material-symbols-outlined text-[13px] text-clinical-white group-hover:translate-x-0.5 transition-transform">
                   arrow_forward

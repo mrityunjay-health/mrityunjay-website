@@ -150,7 +150,7 @@ export function Nav(): ReactElement {
                 onClick={closeMobileMenu}
                 className="group flex items-center justify-between bg-primary text-clinical-white px-6 py-4 font-label-caps text-xs tracking-widest rounded-full shadow-sm mt-4 active:scale-[0.98]"
               >
-                <span>JOIN 2026 FLAGSHIP LIST</span>
+                <span>JOIN 2026 FLAGSHIP WAITING LIST</span>
                 <span className="w-6 h-6 rounded-full bg-clinical-white/20 flex items-center justify-center">
                   <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                 </span>
