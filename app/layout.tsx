@@ -55,6 +55,12 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#001736" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- Material Symbols is an icon font, not a Google text font (next/font cannot self-host it). The root layout makes this <link> global; the @next/next/no-page-custom-font rule is a Pages Router check. */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        />
       </head>
       <body
         className="bg-clinical-white text-on-surface antialiased font-body-md text-body-md"
