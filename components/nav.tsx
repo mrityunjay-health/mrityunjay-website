@@ -52,6 +52,12 @@ export function Nav(): ReactElement {
             </Link>
             <Link
               className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
+              href="/#how-it-works"
+            >
+              How It Works
+            </Link>
+            <Link
+              className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
               href="/#outcomes"
             >
               Outcomes
@@ -112,6 +118,14 @@ export function Nav(): ReactElement {
                 className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
               >
                 <span>The Intelligence</span>
+                <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
+              </Link>
+              <Link
+                href="/#how-it-works"
+                onClick={closeMobileMenu}
+                className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
+              >
+                <span>How It Works</span>
                 <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
               </Link>
               <Link
