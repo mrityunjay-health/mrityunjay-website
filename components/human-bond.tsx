@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
-import Image from "next/image";
 import { Reveal } from "./intersection-reveal";
+import { HumanBondPortrait } from "./human-bond-portrait";
 
 export function HumanBond(): ReactElement {
   return (
@@ -10,22 +10,40 @@ export function HumanBond(): ReactElement {
         <Reveal className="w-full lg:w-1/2">
           <div className="p-2.5 sm:p-3.5 bg-surface-container-low border border-data-node/30 rounded-3xl shadow-double-bezel">
             <div className="aspect-[4/3] sm:aspect-[4/5] relative overflow-hidden rounded-2xl bg-gradient-to-br from-secondary-container via-surface-container to-primary/20 flex items-center justify-center">
-              <Image
-                alt="Direct eye contact between clinician and patient during consultation"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3Tdvb_ulIuf4HVg1hp-aM8fDOhFEExMIyke5SyLY0F5KeXyTjZK34O_k6MVRgJ0aEAkkBUxXLA2r3oZZgZRg7Rx1e--d7Ps6XD4qH6jmTbyVKC0BN0UpMsBfizZlF9lYjQvvMeAfvgomj6UH4bJvAJymudobZZeLeCCmF1G0Oy4urjkQp9Y6BzleAIZ7aSyduuIf-ItDkycqU6pP7_FJr9fddS4rWNzLzBD-BgUQbLi9vzAgME_pdfw"
-                fill
-                className="object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-700 z-10"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              {/* Clinical Art Backdrop in case image is loading */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-between text-primary/40 pointer-events-none">
-                <span className="font-mono text-[10px] tracking-widest uppercase">CONSULTATION CONTEXT ACTIVE</span>
-                <div className="flex justify-center items-center">
-                  <span className="material-symbols-outlined text-6xl opacity-30">clinical_notes</span>
+              {/* Editorial frame: the primary composition. The external
+                  portrait sits on top of this when it loads; if it ever
+                  fails, the frame is the section. */}
+              <div className="absolute inset-0 p-6 sm:p-8 flex flex-col items-center justify-center text-primary pointer-events-none">
+                <span className="absolute top-4 left-4 font-mono text-[10px] tracking-widest uppercase text-primary/60">
+                  Editorial Frame
+                </span>
+                <span className="absolute top-4 right-4 font-mono text-[10px] tracking-widest uppercase text-primary/60">
+                  Consultation
+                </span>
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 rounded-full bg-clinical-white border border-data-node/40 flex items-center justify-center shadow-inner">
+                    <span className="w-4 h-4 rounded-full bg-primary" aria-hidden="true" />
+                  </div>
+                  <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-primary/70 font-semibold">
+                    Mritunjay
+                  </span>
+                  <span className="material-symbols-outlined text-3xl text-primary/30" aria-hidden="true">
+                    clinical_notes
+                  </span>
                 </div>
-                <span className="font-mono text-[10px] tracking-widest text-right">YOUR LIFELONG MEMORY</span>
+                <span className="absolute bottom-4 left-4 font-mono text-[10px] tracking-widest uppercase text-primary/60">
+                  Physician-Patient
+                </span>
+                <span className="absolute bottom-4 right-4 font-mono text-[10px] tracking-widest uppercase text-primary/60">
+                  Your Lifelong Memory
+                </span>
               </div>
-              <div className="absolute inset-0 bg-primary/5 z-20" />
+              <div
+                className="absolute inset-3 border border-data-node/30 rounded-xl pointer-events-none"
+                aria-hidden="true"
+              />
+              <HumanBondPortrait />
+              <div className="absolute inset-0 bg-primary/5 z-20" aria-hidden="true" />
             </div>
             <div className="pt-2.5 px-2 flex justify-between items-center font-mono text-[10px] text-secondary">
               <span>PHYSICIAN-PATIENT ENCOUNTER</span>
