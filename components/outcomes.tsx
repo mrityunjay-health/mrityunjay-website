@@ -250,7 +250,7 @@ export function Outcome02(): ReactElement {
                   href="/waitlist"
                   className="group flex items-center justify-between w-full bg-primary text-clinical-white px-6 py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary/95 transition-all rounded-full shadow-sm active:scale-[0.98]"
                 >
-                  <span>START CONSULTATION WITH CONTEXT</span>
+                  <span>RESERVE YOUR 2026 PLACE</span>
                   <span className="w-6 h-6 rounded-full bg-clinical-white/15 group-hover:bg-clinical-white/25 flex items-center justify-center transition-colors">
                     <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                   </span>
@@ -339,7 +339,7 @@ export function Outcome03(): ReactElement {
                   <div className="flex justify-between items-center mb-6 pb-3 border-b border-clinical-white/15">
                     <div className="flex items-center gap-2.5 font-mono text-xs text-memory-glow">
                       <span className="w-2.5 h-2.5 rounded-full bg-memory-glow animate-pulse" />
-                      <span className="font-semibold uppercase tracking-wider">ACTIVE INTELLIGENCE // TODAY</span>
+                      <span className="font-semibold uppercase tracking-wider">TODAY&apos;S HEALTH PICTURE</span>
                     </div>
                     <span className="font-mono text-[10px] bg-clinical-white/10 px-2.5 py-0.5 rounded">
                       SYNCHRONIZED
@@ -354,7 +354,7 @@ export function Outcome03(): ReactElement {
                     <div className="bg-clinical-white/5 border border-clinical-white/10 p-4 rounded-xl">
                       <div className="flex items-center justify-between mb-1.5 font-mono text-xs">
                         <span className="text-memory-glow font-medium">PATHWAY CORRELATION</span>
-                        <span className="text-clinical-white/50 text-[10px]">CONFIDENCE: 98.4%</span>
+                        <span className="text-clinical-white/50 text-[10px]">MAPPED FROM 36 MONTHS</span>
                       </div>
                       <p className="text-sm sm:text-base text-clinical-white/90 leading-relaxed">
                         Recurring headaches mapped directly to the August Lisinopril dosage increase.
@@ -364,8 +364,8 @@ export function Outcome03(): ReactElement {
 
                     <div className="bg-clinical-white/5 border border-clinical-white/10 p-4 rounded-xl">
                       <div className="flex items-center justify-between mb-1.5 font-mono text-xs">
-                        <span className="text-memory-glow font-medium">RECOVERY DIRECTIVE</span>
-                        <span className="text-clinical-white/50 text-[10px]">PROACTIVE</span>
+                        <span className="text-memory-glow font-medium">RECOVERY CARE PLAN</span>
+                        <span className="text-clinical-white/50 text-[10px]">DRAFT FOR REVIEW</span>
                       </div>
                       <p className="text-sm sm:text-base text-clinical-white/90 leading-relaxed">
                         Pre-generating titration adjustment recommendation for the incoming specialist consultation.

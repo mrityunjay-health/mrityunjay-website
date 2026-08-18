@@ -33,7 +33,7 @@ export function Footer(): ReactElement {
           {/* Live Status Indicator */}
           <div className="flex items-center gap-2 font-mono text-[11px] text-green-700 bg-green-500/10 px-3.5 py-1.5 rounded-full border border-green-500/20">
             <span className="w-2 h-2 rounded-full bg-green-600 animate-pulse" />
-            <span>CLINICAL ENCLAVE ONLINE</span>
+            <span>CLINICAL LAYER ONLINE</span>
           </div>
         </div>
 

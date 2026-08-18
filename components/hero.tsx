@@ -70,7 +70,7 @@ export function Hero(): ReactElement {
             transition={{ duration: 1.0, ease: EASE_OUT }}
             className="pointer-events-auto font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/80 backdrop-blur-xs px-4 py-1 rounded-full border border-data-node/30 shadow-xs"
           >
-            LIVING HEALTH INTELLIGENCE
+            THE INTELLIGENT LAYER OF CARE
           </motion.span>
           <h1 className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none flex flex-wrap justify-center max-w-5xl">
             <span className="sr-only">Healthcare that finally remembers you.</span>
@@ -214,7 +214,7 @@ export function Hero(): ReactElement {
                     <div className="flex items-center justify-center gap-2 mb-1.5">
                       <span className="w-2 h-2 rounded-full bg-memory-glow animate-pulse-subtle" />
                       <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-memory-glow">
-                        ACTIVE CLINICAL MEMORY
+                        CONTINUOUS HEALTH MEMORY
                       </span>
                     </div>
                     <h3 className="font-headline-md text-lg sm:text-2xl mb-1">MRITUNJAY</h3>

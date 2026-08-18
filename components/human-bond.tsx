@@ -23,7 +23,7 @@ export function HumanBond(): ReactElement {
                 <div className="flex justify-center items-center">
                   <span className="material-symbols-outlined text-6xl opacity-30">clinical_notes</span>
                 </div>
-                <span className="font-mono text-[10px] tracking-widest text-right">MRITUNJAY ENCLAVE</span>
+                <span className="font-mono text-[10px] tracking-widest text-right">YOUR LIFELONG MEMORY</span>
               </div>
               <div className="absolute inset-0 bg-primary/5 z-20" />
             </div>

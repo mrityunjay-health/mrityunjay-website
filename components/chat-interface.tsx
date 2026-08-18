@@ -22,7 +22,7 @@ const ACT_MS: Record<Act, number> = {
   2: 2000, // understanding: user question + connection
   3: 3800, // synthesis: processing, ECG, brief materializes
   4: 2800, // review: doctor overlay, counter ticks, check draws
-  5: 2200, // reset: orchestrated exit, version increments, loop
+  5: 2200, // reset: orchestrated exit and loop
 };
 
 type ViewTab = "dialogue" | "timeline" | "reactions" | "recovery";
@@ -76,7 +76,6 @@ function AnimatedCounter({ active, persist }: { active: boolean; persist: boolea
 export function ChatInterface(): ReactElement {
   const reduced = useReducedMotion();
   const [act, setAct] = useState<Act>(1);
-  const [version, setVersion] = useState(82);
   const [activeTab, setActiveTab] = useState<ViewTab>("dialogue");
   const [isPaused, setIsPaused] = useState(false);
   const typing = useTyped(FULL_MESSAGE, act === 1, 26);
@@ -90,9 +89,6 @@ export function ChatInterface(): ReactElement {
   useEffect(() => {
     if (reduced || isPaused || activeTab !== "dialogue") return;
     const id = setTimeout(() => {
-      if (act === 5) {
-        setVersion((v) => v + 1);
-      }
       setAct((prev) => NEXT_ACT[prev]);
     }, ACT_MS[act]);
     return () => clearTimeout(id);
@@ -124,7 +120,7 @@ export function ChatInterface(): ReactElement {
                 MRITUNJAY CLINICAL WORKSTATION
               </span>
               <span className="hidden sm:inline-block text-[10px] px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
-                PATIENT ENCLAVE SECURE
+                FULL CONTEXT READY
               </span>
             </div>
 
@@ -191,7 +187,7 @@ export function ChatInterface(): ReactElement {
             <div className="hidden sm:flex items-center gap-2 text-secondary text-[11px] tabular-nums">
               <span className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse" />
               <span className="font-mono text-[10px] text-secondary">
-                CYCLE: V.{String(version).padStart(3, "0")}
+                LIVE
               </span>
             </div>
           </div>
