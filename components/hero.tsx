@@ -20,36 +20,41 @@ export function Hero(): ReactElement {
     offset: ["start start", "end end"],
   });
 
-  // Cellular microscope dive: scales the biological cell canvas into its glowing nucleus
-  const cellScale = useTransform(scrollYProgress, [0, 0.15, 0.52], [1, 1.25, 36]);
-  const cellOpacity = useTransform(scrollYProgress, [0.45, 0.62], [1, 0]);
+  // Cellular microscope dive: stretches the full duration of the scroll
+  const cellScale = useTransform(scrollYProgress, [0, 0.2, 1], [1, 1.25, 36]);
   
-  // Fade out Slide 1 text
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.16], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.16], [0, -45]);
+  // Fade out Slide 1 text quickly
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.2], [0, -45]);
 
-  // Optical mask overlay as the microscope enters the clinical matrix
-  const maskOverlayOpacity = useTransform(scrollYProgress, [0.45, 0.58], [0, 1]);
-
-  // Reveal Slide 2 (Persistent Health Memory Matrix)
-  const revealOpacity = useTransform(scrollYProgress, [0.55, 0.85], [0, 1]);
-  const revealY = useTransform(scrollYProgress, [0.55, 0.85], [50, 0]);
+  // Premium Logo Transition (Fades in, draws heartbeat, then fades OUT completely by 0.60)
+  const logoOpacity = useTransform(scrollYProgress, [0.10, 0.25, 0.50, 0.60], [0, 1, 1, 0]);
+  const logoScale = useTransform(scrollYProgress, [0.10, 0.60], [0.95, 1.1]);
+  
+  // Heartbeat ECG line drawing animation synced with scroll
+  const heartbeatPath = useTransform(scrollYProgress, [0.25, 0.50], [0, 1]);
+  
+  // Reveal Slide 2 ONLY AFTER the logo is completely gone
+  const revealOpacity = useTransform(scrollYProgress, [0.60, 0.75], [0, 1]);
   const revealPointerEvents = useTransform(
     scrollYProgress,
-    (v) => (v > 0.55 ? ("auto" as const) : ("none" as const))
+    (v) => (v >= 0.75 ? ("auto" as const) : ("none" as const))
   );
+
+  // Optical mask overlay smoothly crossfades the blue cells into the white background of Slide 2
+  const maskOverlayOpacity = useTransform(scrollYProgress, [0.75, 0.95], [0, 1]);
 
   const reduced = useReducedMotion();
 
   return (
-    <section ref={targetRef} className="relative h-[160vh] lg:h-[250vh] bg-background w-full">
+    <>
+      <section ref={targetRef} className="relative h-[300vh] bg-background w-full">
       <div className="sticky top-0 min-h-[100dvh] overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
         
         {/* Layer 0: Living Animated Biological Cell Background (Strict z-0) */}
         <motion.div 
           style={{ 
             scale: reduced ? 1 : cellScale, 
-            opacity: reduced ? 1 : cellOpacity,
             position: "absolute",
             zIndex: 0,
             transformOrigin: "50% 48%",
@@ -133,7 +138,58 @@ export function Hero(): ReactElement {
           </motion.div>
         </motion.div>
 
-        {/* Layer 20: Optical Mask Overlay (Strict z-20) */}
+        {/* Layer 15: Premium Logo Transition */}
+        <motion.div
+          style={{ 
+            opacity: reduced ? 0 : logoOpacity, 
+            scale: reduced ? 1 : logoScale
+          }}
+          className="absolute inset-0 flex items-center justify-center z-[15] pointer-events-none will-change-[transform,opacity]"
+        >
+          <div className="relative flex items-center justify-center w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
+            
+            {/* Ultra-Premium Realistic ECG Heartbeat Line (z-0, BEHIND THE LOGO) */}
+            <svg 
+              className="absolute inset-0 w-full h-full text-primary z-0"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <filter id="ecgGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              
+              {/* Perfectly proportioned heartbeat crossing the center */}
+              <motion.path 
+                style={{ pathLength: heartbeatPath }}
+                d="M 0 50 L 25 50 C 28 45, 32 45, 35 50 L 42 50 L 45 55 L 50 15 L 55 85 L 60 50 L 65 50 C 70 40, 78 40, 83 50 L 100 50"
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                filter="url(#ecgGlow)"
+                className="opacity-90"
+              />
+            </svg>
+
+            {/* The Logo Image (z-10, IN FRONT) */}
+            <motion.img 
+              src="/logo_transparent.png" 
+              alt="Mritunjay Logo" 
+              className="absolute inset-0 w-full h-full object-contain opacity-90 z-10" 
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            />
+          </div>
+        </motion.div>
+
+        {/* Layer 20: Optical Mask Overlay (Strict z-20) - Smooth transition to white */}
         <motion.div
           style={{ opacity: maskOverlayOpacity }}
           className="absolute inset-0 bg-clinical-white z-20 will-change-[opacity] pointer-events-none"
@@ -142,95 +198,94 @@ export function Hero(): ReactElement {
         {/* Layer 30: Slide 2 Intelligence Section (Strict z-30) */}
         <motion.div
           id="intelligence"
-          style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents }}
-          className="absolute inset-0 z-30 flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-gutter pt-16 sm:pt-24 pb-6 sm:pb-12 overflow-y-auto"
+          style={{ opacity: revealOpacity, pointerEvents: revealPointerEvents }}
+          className="absolute inset-0 z-30 overflow-y-auto"
         >
-          <div className="w-full max-w-container-max mx-auto py-2">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="min-h-full w-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-gutter pt-16 sm:pt-24 pb-16 sm:pb-24">
+            <div className="w-full max-w-container-max mx-auto py-2">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div className="flex flex-col">
                 <span className="font-mono text-[9px] sm:text-xs text-primary tracking-[0.25em] block mb-2 sm:mb-4 uppercase font-semibold">
                   PERSISTENT HEALTH MEMORY
                 </span>
-                <h2 className="font-headline-lg text-2xl sm:text-4xl lg:text-headline-lg text-primary leading-tight mb-3 sm:mb-6">
-                  Healthcare without Mritunjay is fragmented by design.
+                <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-5xl text-primary leading-tight mb-3 sm:mb-6 tracking-tight">
+                  Healthcare shouldn&apos;t reset every visit.
                 </h2>
-                <p className="font-body-lg text-sm sm:text-base lg:text-body-lg text-on-surface-variant mb-5 sm:mb-8 leading-relaxed">
-                  Hospitals treat symptoms. Specialists view slices. Mritunjay connects the narrative.
-                  We sit between you and the complexity of the medical system, ensuring your story is
-                  never lost and your doctors are never guessing.
+                <p className="font-body-lg text-sm sm:text-base lg:text-lg text-on-surface-variant mb-6 sm:mb-8 leading-relaxed">
+                  We sit between you and the complexity of the medical system, ensuring your story is never lost.
                 </p>
-                <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-6 sm:space-y-8">
                   {[
                     {
                       icon: "hub",
                       title: "The Understanding Layer",
-                      body: "Organizing clerical chaos into clinical insight before you step into the consultation room.",
+                      body: "Organizing clerical chaos into clinical insight.",
                     },
                     {
                       icon: "shield_person",
-                      title: "Sovereign Data Memory",
-                      body: "Your history follows you, not the provider. You own the bridge; doctors use it to treat you with precision.",
+                      title: "Sovereign Memory",
+                      body: "Your history follows you, not the provider.",
                     },
                   ].map((item) => (
-                    <div key={item.title} className="flex gap-3 sm:gap-4 items-start">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                        <span className="material-symbols-outlined text-clinical-white text-sm sm:text-lg">
+                    <div key={item.title} className="flex gap-4 sm:gap-5 items-start">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                        <span className="material-symbols-outlined text-clinical-white text-base sm:text-xl">
                           {item.icon}
                         </span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-headline-md text-base sm:text-lg lg:text-[20px] text-primary mb-1">
+                        <h4 className="font-headline-md text-lg sm:text-xl text-primary mb-1">
                           {item.title}
                         </h4>
-                        <p className="font-body-md text-xs sm:text-sm lg:text-base text-on-surface-variant leading-snug">{item.body}</p>
+                        <p className="font-body-md text-sm sm:text-base text-on-surface-variant leading-snug">{item.body}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="mt-4 sm:mt-0">
+              <div className="mt-8 sm:mt-0 lg:pl-10">
                 {/* Double-Bezel Nested Architecture Container */}
-                <div className="relative flex flex-col items-center justify-center p-4 sm:p-6 lg:p-10 border border-data-node/30 rounded-2xl lg:rounded-3xl bg-clinical-white shadow-double-bezel">
-                  <div className="text-center mb-3 sm:mb-6">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-inner">
-                      <span className="material-symbols-outlined text-primary text-xl sm:text-2xl">person</span>
+                <div className="relative flex flex-col items-center justify-center p-6 sm:p-8 lg:p-12 border border-data-node/30 rounded-3xl lg:rounded-[2.5rem] bg-clinical-white shadow-double-bezel">
+                  <div className="text-center mb-4 sm:mb-6">
+                    <div className="w-14 h-14 sm:w-20 sm:h-20 bg-secondary-container rounded-full mx-auto flex items-center justify-center mb-3 shadow-inner">
+                      <span className="material-symbols-outlined text-primary text-2xl sm:text-3xl">person</span>
                     </div>
-                    <span className="font-mono text-[9px] sm:text-xs tracking-wider text-secondary font-medium uppercase">
+                    <span className="font-mono text-[10px] sm:text-xs tracking-wider text-secondary font-medium uppercase">
                       Patient Narrative and History
                     </span>
                   </div>
 
-                  <div className="w-full h-8 sm:h-14 flex justify-center relative items-center">
+                  <div className="w-full h-12 sm:h-16 flex justify-center relative items-center">
                     <div className="w-0.5 h-full bg-gradient-to-b from-secondary-container via-primary to-primary opacity-60" />
-                    <span className="absolute right-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest uppercase">
+                    <span className="absolute right-6 sm:right-8 font-mono text-[9px] sm:text-[11px] text-secondary tracking-widest uppercase">
                       Continuous Understanding
                     </span>
                   </div>
 
                   {/* Core Intelligence Node with Peaceful Breathing */}
-                  <div className="w-full bg-primary p-4 sm:p-6 rounded-xl text-clinical-white text-center shadow-double-bezel-dark relative z-10 border border-memory-glow/25">
-                    <div className="flex items-center justify-center gap-2 mb-1.5">
-                      <span className="w-2 h-2 rounded-full bg-memory-glow animate-pulse-subtle" />
-                      <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-memory-glow">
+                  <div className="w-full bg-primary p-6 sm:p-8 rounded-2xl text-clinical-white text-center shadow-double-bezel-dark relative z-10 border border-memory-glow/25">
+                    <div className="flex items-center justify-center gap-2.5 mb-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-memory-glow animate-pulse-subtle shadow-[0_0_8px_rgba(165,216,255,0.5)]" />
+                      <span className="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-memory-glow font-medium">
                         CONTINUOUS HEALTH MEMORY
                       </span>
                     </div>
-                    <h3 className="font-headline-md text-lg sm:text-2xl mb-1">MRITUNJAY</h3>
-                    <p className="font-body-md text-xs sm:text-sm text-clinical-white/80 max-w-sm mx-auto">
+                    <h3 className="font-headline-md text-2xl sm:text-3xl mb-2 tracking-tight">MRITUNJAY</h3>
+                    <p className="font-body-md text-sm sm:text-base text-clinical-white/80 max-w-sm mx-auto leading-relaxed">
                       Continuous synthesis of EHR records, lab values, and symptom timelines.
                     </p>
                   </div>
 
-                  <div className="w-full h-8 sm:h-14 flex justify-center relative items-center">
+                  <div className="w-full h-12 sm:h-16 flex justify-center relative items-center">
                     <div className="w-0.5 h-full bg-gradient-to-b from-primary to-secondary-container opacity-60" />
-                    <span className="absolute left-4 font-mono text-[8px] sm:text-[10px] text-secondary tracking-widest uppercase">
+                    <span className="absolute left-6 sm:left-8 font-mono text-[9px] sm:text-[11px] text-secondary tracking-widest uppercase">
                       Physician Synthesis
                     </span>
                   </div>
 
                   {/* Providers Grid */}
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full">
                     {[
                       { icon: "local_hospital", label: "HOSPITALS" },
                       { icon: "medical_services", label: "SPECIALISTS" },
@@ -238,12 +293,12 @@ export function Hero(): ReactElement {
                     ].map((item) => (
                       <div
                         key={item.label}
-                        className="bg-surface-container-low p-2.5 sm:p-3 rounded-lg text-center border border-data-node/30 flex flex-col items-center justify-center shadow-sm"
+                        className="bg-surface-container-low p-3 sm:p-4 rounded-xl text-center border border-data-node/30 flex flex-col items-center justify-center shadow-sm"
                       >
-                        <span className="material-symbols-outlined text-primary text-base sm:text-lg mb-0.5">
+                        <span className="material-symbols-outlined text-primary text-xl sm:text-2xl mb-1.5">
                           {item.icon}
                         </span>
-                        <span className="block font-mono text-[8px] sm:text-[9px] text-primary font-medium tracking-wider">{item.label}</span>
+                        <span className="block font-mono text-[9px] sm:text-[10px] text-primary font-semibold tracking-wider">{item.label}</span>
                       </div>
                     ))}
                   </div>
@@ -251,8 +306,10 @@ export function Hero(): ReactElement {
               </div>
             </div>
           </div>
+          </div>
         </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }

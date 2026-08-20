@@ -63,7 +63,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="bg-clinical-white text-on-surface antialiased font-body-md text-body-md"
+        className="relative bg-clinical-white text-on-surface antialiased font-body-md text-body-md"
         suppressHydrationWarning
       >
         {children}

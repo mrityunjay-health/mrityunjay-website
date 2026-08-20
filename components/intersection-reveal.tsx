@@ -1,54 +1,50 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactElement, type ReactNode } from "react";
+import { useRef, type ReactElement, type ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
 
-// ponytail: Replaced with a no-op wrapper. IntersectionObserver-driven reveals
-// were unreliable in test environments (false negatives when the page is taller
-// than the viewport). CSS @keyframes animations in `globals.css` handle the
-// visual reveal instead, scoped via the section element. This wrapper exists only
-// to preserve the public API; it forwards children and className unchanged.
 export function Reveal({
   children,
   delay = 0,
-  className,
+  className = "",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
 }): ReactElement {
-  // Optional progressive enhancement: add a class when the element scrolls in.
-  // Content is always rendered, never hidden. Animation runs once via CSS.
   const ref = useRef<HTMLDivElement>(null);
-  const [armed, setArmed] = useState(false);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    if (typeof IntersectionObserver === "undefined") return;
-    // Only set up observer: do NOT hide content. If observer never fires, that's fine.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setArmed(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 30,
+      rotateX: 10,
+      scale: 0.98,
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.16, 1, 0.3, 1], // Custom bouncy/smooth easing
+        delay 
+      }
+    },
+  };
 
   return (
-    <div
+    <motion.div
       ref={ref}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={variants}
       className={className}
-      data-reveal={armed ? "in" : undefined}
-      data-delay={delay || undefined}
+      style={{ perspective: 1200 }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

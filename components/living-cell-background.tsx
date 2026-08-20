@@ -187,7 +187,7 @@ export function LivingCellBackground({
       ctx.clearRect(0, 0, width, height);
 
       const cx = width / 2;
-      const cy = height * (width < 640 ? 0.36 : 0.48);
+      const cy = height / 2;
       const baseRadius = Math.min(width, height) * (width < 640 ? 0.32 : 0.3);
 
       const mouseDist = Math.hypot(mouseX - cx, mouseY - cy);

@@ -32,24 +32,21 @@ export function Nav(): ReactElement {
             : "bg-clinical-white/70 backdrop-blur-sm border-b border-data-node/10"
         }`}
       >
-        <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter flex justify-between items-center h-20">
+        <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter flex justify-between items-center h-16 lg:h-[4.5rem]">
           <Link
             href="/"
             onClick={closeMobileMenu}
-            className="group flex items-center gap-2.5 font-headline-md text-2xl md:text-headline-md text-primary tracking-tighter"
+            className="group flex items-center shrink-0"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-primary group-hover:scale-125 transition-transform" />
-            <span>Mritunjay</span>
+            <img 
+              src="/logo_transparent.png" 
+              alt="Mritunjay Logo" 
+              className="h-14 lg:h-16 w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-110 group-active:scale-95" 
+            />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8 lg:gap-10 items-center">
-            <Link
-              className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
-              href="/#intelligence"
-            >
-              The Intelligence
-            </Link>
+          <nav className="hidden lg:flex gap-6 xl:gap-10 items-center">
             <Link
               className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
               href="/#how-it-works"
@@ -87,7 +84,7 @@ export function Nav(): ReactElement {
           <button
             type="button"
             onClick={toggleMobileMenu}
-            className="md:hidden text-primary p-2 focus:outline-none focus:ring-1 focus:ring-primary rounded-lg"
+            className="lg:hidden text-primary p-2 focus:outline-none focus:ring-1 focus:ring-primary rounded-lg"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
           >
@@ -104,7 +101,7 @@ export function Nav(): ReactElement {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation"
-          className="fixed inset-0 z-40 md:hidden bg-primary/20 backdrop-blur-sm pt-20 animate-fade-in-up"
+          className="fixed inset-0 z-40 lg:hidden bg-primary/20 backdrop-blur-sm pt-20 animate-fade-in-up"
           onClick={closeMobileMenu}
         >
           <div

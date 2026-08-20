@@ -15,7 +15,7 @@ export default function HomePage(): ReactElement {
   return (
     <>
       <Nav />
-      <main className="pt-20 bg-clinical-overlay">
+      <main className="relative pt-20 bg-clinical-overlay">
         <Hero />
         <Problem />
         <Differentiator />
