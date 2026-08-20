@@ -51,15 +51,15 @@ The application should always answer:
 
 # 3. Application Navigation Levels
 
-Level 1 — Global Navigation
+Level 1: Global Navigation
 
 Persistent application sections.
 
-Level 2 — Feature Navigation
+Level 2: Feature Navigation
 
 Navigation inside a feature.
 
-Level 3 — Context Navigation
+Level 3: Context Navigation
 
 Temporary navigation inside dialogs, sheets, or flows.
 

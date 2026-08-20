@@ -194,19 +194,19 @@ Overshooting animations
 
 Fast interactions:
 
-150–250 ms
+150-250 ms
 
 Standard:
 
-300–500 ms
+300-500 ms
 
 Storytelling:
 
-700–1500 ms
+700-1500 ms
 
 Hero sequence:
 
-6–10 seconds
+6-10 seconds
 
 Animations should feel patient.
 

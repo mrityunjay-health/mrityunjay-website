@@ -19,27 +19,27 @@ const MILESTONES: ReadonlyArray<Milestone> = [
     month: "Month 00",
     title: "Initial Cardiac Consultation",
     episodicEvent: "Patient fills 6 paper forms. History written on local EHR.",
-    continuousEvent: "Sovereign memory enclave initialized. 36-month record indexed.",
+    continuousEvent: "Sovereign memory enclave initialized. 12-month record indexed.",
     contextRetention: "100% Context Captured",
   },
   {
-    month: "Month 12",
+    month: "Month 04",
     title: "Medication Adjustment",
-    episodicEvent: "Physician has no record of adverse reaction from 6 months prior.",
+    episodicEvent: "Physician has no record of adverse reaction from previous hospital visit.",
     continuousEvent: "Allergy safeguard flagged; previous titration curve surfaced instantly.",
     contextRetention: "Persistent Memory Maintained",
   },
   {
-    month: "Month 24",
+    month: "Month 08",
     title: "Specialist Referral",
     episodicEvent: "New cardiologist starts from zero. Patient forced to repeat entire story.",
-    continuousEvent: "Specialist receives one-screen synthesized clinical ledger before arrival.",
+    continuousEvent: "Specialist receives one-screen synthesized clinical brief before arrival.",
     contextRetention: "Continuous Handoff Active",
   },
   {
-    month: "Month 36",
-    title: "Long-Term Recovery & Prevention",
-    episodicEvent: "No follow-up. Health narrative fragmented across 3 portals.",
+    month: "Month 12",
+    title: "Sustained Recovery & Prevention",
+    episodicEvent: "No follow-up. Health narrative fragmented across isolated portals.",
     continuousEvent: "Longitudinal health picture synthesized; proactive recovery trends clear.",
     contextRetention: "Lifelong Intelligence Compounded",
   },
@@ -77,14 +77,14 @@ export function Differentiator(): ReactElement {
         <div
           role="tablist"
           aria-label="Compare care paradigms"
-          className="flex justify-center gap-3 sm:gap-4 mb-8 sm:mb-12"
+          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12"
         >
           <button
             type="button"
             role="tab"
             aria-selected={mode === "episodic"}
             onClick={() => setMode("episodic")}
-            className={`px-5 sm:px-7 py-3 rounded-full font-label-caps text-xs sm:text-label-caps tracking-widest transition-all active:scale-[0.98] ${
+            className={`px-4 sm:px-7 py-2.5 sm:py-3 rounded-full font-label-caps text-[11px] sm:text-label-caps tracking-widest transition-all active:scale-[0.98] ${
               mode === "episodic"
                 ? "bg-primary text-clinical-white shadow-double-bezel-dark"
                 : "bg-clinical-white text-primary border border-data-node/40 hover:bg-surface-container"
@@ -97,7 +97,7 @@ export function Differentiator(): ReactElement {
             role="tab"
             aria-selected={mode === "continuous"}
             onClick={() => setMode("continuous")}
-            className={`px-5 sm:px-7 py-3 rounded-full font-label-caps text-xs sm:text-label-caps tracking-widest transition-all active:scale-[0.98] ${
+            className={`px-4 sm:px-7 py-2.5 sm:py-3 rounded-full font-label-caps text-[11px] sm:text-label-caps tracking-widest transition-all active:scale-[0.98] ${
               mode === "continuous"
                 ? "bg-primary text-clinical-white shadow-double-bezel-dark"
                 : "bg-clinical-white text-primary border border-data-node/40 hover:bg-surface-container"
@@ -114,7 +114,7 @@ export function Differentiator(): ReactElement {
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-data-node/20 mb-5">
                 <span className="font-mono text-xs font-semibold tracking-wider text-primary uppercase">
-                  36-MONTH CLINICAL TIMELINE
+                  12-MONTH CLINICAL TIMELINE
                 </span>
                 <span className="font-mono text-[10px] text-secondary">
                   SELECT CHECKPOINT
@@ -129,15 +129,15 @@ export function Differentiator(): ReactElement {
                       key={m.month}
                       type="button"
                       onClick={() => setSelectedMilestone(idx)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between active:scale-[0.99] ${
+                      className={`w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between active:scale-[0.99] gap-2 ${
                         isSelected
                           ? "bg-primary text-clinical-white border-primary shadow-sm"
                           : "bg-surface-container-low text-primary border-data-node/30 hover:border-primary/40 hover:bg-clinical-white"
                       }`}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2.5 min-w-0">
                         <span
-                          className={`font-mono text-xs font-semibold px-2 py-0.5 rounded ${
+                          className={`font-mono text-xs font-semibold px-2 py-0.5 rounded shrink-0 ${
                             isSelected
                               ? "bg-memory-glow/20 text-memory-glow"
                               : "bg-data-node/40 text-secondary"
@@ -145,12 +145,12 @@ export function Differentiator(): ReactElement {
                         >
                           {m.month}
                         </span>
-                        <span className="font-headline-md text-sm sm:text-base truncate">
+                        <span className="font-headline-md text-xs sm:text-sm md:text-base leading-snug">
                           {m.title}
                         </span>
                       </div>
                       <span
-                        className={`material-symbols-outlined text-sm ${
+                        className={`material-symbols-outlined text-sm shrink-0 ${
                           isSelected ? "text-memory-glow" : "text-data-node"
                         }`}
                       >

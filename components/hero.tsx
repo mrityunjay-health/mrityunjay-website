@@ -143,7 +143,7 @@ export function Hero(): ReactElement {
         <motion.div
           id="intelligence"
           style={{ opacity: revealOpacity, y: revealY, pointerEvents: revealPointerEvents }}
-          className="absolute inset-0 z-30 flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-gutter pt-20 sm:pt-24 pb-8 sm:pb-12"
+          className="absolute inset-0 z-30 flex flex-col items-center justify-center w-full px-4 sm:px-6 md:px-gutter pt-16 sm:pt-24 pb-6 sm:pb-12 overflow-y-auto"
         >
           <div className="w-full max-w-container-max mx-auto py-2">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">

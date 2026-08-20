@@ -20,7 +20,7 @@ Public Next.js marketing website and clinical intelligence workstation for Mritu
 5. **One Screen, One Purpose**: Home = "I understand my current health"; Consultation = "The system understands me"; Prescription = "I know exactly what to do"; Recovery = "I know whether I am improving".
 6. **Silence Is a Feature**: Healthcare apps constantly shout. We don't. Silence builds trust. Only speak when meaningful.
 7. **Motion Must Explain, Never Decorate**: Animation explains progress, relationship, continuity, transition, attention. Never for entertainment.
-8. **Every Wait Has Meaning**: Never show generic "Loading...". Show meaningful progress ("Analyzing 36 months of cardiac data...", "Cross-referencing medication safety...").
+8. **Every Wait Has Meaning**: Never show generic "Loading...". Show meaningful progress ("Analyzing 12 months of cardiac data...", "Cross-referencing medication safety...").
 9. **The System Should Feel Attentive**: Attention builds trust ("I remember your allergy", "Your doctor already reviewed your context").
 10. **Technology Must Become Invisible**: Users should think "My healthcare became easier", not "What an amazing AI". The technology disappears; the care remains.
 11. **The Next Step Is Always Obvious**: Patient always knows where they are, what is happening, and what happens next.
@@ -84,8 +84,8 @@ Next.js 16.3.1 (App Router, Turbopack). React 19. Tailwind CSS 3.4. Framer Motio
 
 ## Design System Tokens & Guidelines [v3]
 - **Three Dials**: `DESIGN_VARIANCE: 7`, `MOTION_INTENSITY: 4`, `VISUAL_DENSITY: 5` (clinical trust, calm telemetry, high-agency interactive inspection).
-- **Asymmetric Diagnostic Architecture**: Replaces generic 3-box feature cards with split diagnostic ledgers and contextual error markers (`[ERR_NARRATIVE_LOST]`, `[ERR_ZERO_CONTEXT]`).
-- **Interactive Narrative Comparator**: Scrubbable 36-month timeline comparing conventional episodic amnesia with Mritunjay's continuous memory loop.
+- **Asymmetric Diagnostic Architecture**: Replaces generic 3-box feature cards with split diagnostic ledgers and human clinical reality markers (Context Lost, Reconstruction Burden, System Fragmentation).
+- **Interactive Narrative Comparator**: Scrubbable 12-month timeline comparing conventional episodic amnesia with Mritunjay's continuous memory loop.
 - **Two-Pane Clinical Journey Simulator**: Synchronized step stepper with live clinical telemetry artifacts (Allergy Safeguard, Physician One-Screen Brief, Titration Ledger).
 - **Act Scrubber Workstation**: Interactive act controller allowing direct jump between Intake Brief, Patient Query, Synthesis, and Doctor Verification.
 - **Double-Bezel Architecture**: Hairline borders (`border border-data-node/30`), inner highlights (`shadow-double-bezel`), concentric radii (`rounded-2xl`).

@@ -20,7 +20,7 @@ const TRUST_TIERS: ReadonlyArray<TrustTier> = [
     label: "AI-GENERATED INFORMATION",
     tag: "TIER 01 // SYNTHESIS",
     actor: "Mritunjay Intelligence Layer",
-    body: "What the system organized for you: your 36-month timeline, lab trends, and adverse reaction signatures, correlated for clinician review.",
+    body: "What the system organized for you: your 12-month timeline, lab trends, and adverse reaction signatures, correlated for clinician review.",
     explainability: "Explainability: Shows the exact EHR source document and date timestamp for every correlated point.",
     emphasis: "low",
   },

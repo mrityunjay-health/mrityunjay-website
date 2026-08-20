@@ -386,5 +386,5 @@ Prioritize clarity over complexity.
 
 Deliver a website that feels handcrafted rather than AI-generated.
 
-The final result should introduce a new category of healthcare—not just another healthcare startup.
+The final result should introduce a new category of healthcare - not just another healthcare startup.
 

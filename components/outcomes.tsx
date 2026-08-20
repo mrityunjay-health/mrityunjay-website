@@ -353,7 +353,7 @@ export function Outcome03(): ReactElement {
                     <div className="bg-clinical-white/5 border border-clinical-white/10 p-4 rounded-xl">
                       <div className="flex items-center justify-between mb-1.5 font-mono text-xs">
                         <span className="text-memory-glow font-medium">PATHWAY CORRELATION</span>
-                        <span className="text-clinical-white/50 text-[10px]">MAPPED FROM 36 MONTHS</span>
+                        <span className="text-clinical-white/50 text-[10px]">MAPPED FROM 12 MONTHS</span>
                       </div>
                       <p className="text-sm sm:text-base text-clinical-white/90 leading-relaxed">
                         Recurring headaches mapped directly to the August Lisinopril dosage increase.

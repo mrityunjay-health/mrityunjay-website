@@ -16,7 +16,7 @@ Healthcare systems forget what happened yesterday.
 
 Mritunjay exists to solve this problem.
 
-Our vision is to build the world's first continuous Health Intelligence Layer—a platform that understands every individual more deeply with every interaction while ensuring physicians remain responsible for clinical decisions.
+Our vision is to build the world's first continuous Health Intelligence Layer - a platform that understands every individual more deeply with every interaction while ensuring physicians remain responsible for clinical decisions.
 
 Healthcare should not restart every appointment.
 
@@ -67,7 +67,7 @@ Knowledge should persist.
 
 Care should become increasingly personalized.
 
-Technology should assist clinicians—not replace them.
+Technology should assist clinicians - not replace them.
 
 Patients should feel understood, not processed.
 
@@ -207,7 +207,7 @@ Every interaction should strengthen future understanding.
 
 ## Human-Centered AI
 
-Technology exists to augment clinicians and empower patients—not replace either.
+Technology exists to augment clinicians and empower patients - not replace either.
 
 ---
 

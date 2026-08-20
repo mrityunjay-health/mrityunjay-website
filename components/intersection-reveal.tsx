@@ -25,7 +25,7 @@ export function Reveal({
     const node = ref.current;
     if (!node) return;
     if (typeof IntersectionObserver === "undefined") return;
-    // Only set up observer — do NOT hide content. If observer never fires, that's fine.
+    // Only set up observer: do NOT hide content. If observer never fires, that's fine.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

@@ -113,11 +113,11 @@ spacing:
 ---
 
 ## Brand & Style
-The design system is anchored in **Scientific Minimalism** with an **Editorial** soul. It avoids the frantic tropes of Silicon Valley SaaS—no neon gradients, no floating glass cards, and no generic AI illustrations. Instead, it positions itself as a premium healthcare intelligence layer that feels like a cross between a prestigious scientific journal (e.g., *Nature* or *The Lancet*) and a luxury product launch.
+The design system is anchored in **Scientific Minimalism** with an **Editorial** soul. It avoids the frantic tropes of Silicon Valley SaaS - no neon gradients, no floating glass cards, and no generic AI illustrations. Instead, it positions itself as a premium healthcare intelligence layer that feels like a cross between a prestigious scientific journal (e.g., *Nature* or *The Lancet*) and a luxury product launch.
 
 The brand personality is **Calm, Intelligent, and Continuous**. It seeks to evoke an emotional response of profound trust and curiosity. The UI is defined by:
 - **Expansive Whitespace:** Using space as a functional element to lower cognitive load and convey "breathing room" in healthcare.
-- **Organic Movement:** Every transition mimics biological growth or memory formation—smooth, intentional, and never bouncy.
+- **Organic Movement:** Every transition mimics biological growth or memory formation - smooth, intentional, and never bouncy.
 - **Human-Centered Rigor:** Balancing technical precision (fine lines, structured grids) with human warmth (authentic photography, soft neutrals).
 
 ## Colors
@@ -158,7 +158,7 @@ The shape language is **Soft (0.25rem)**. We intentionally avoid hyper-rounded "
 
 ## Components
 - **Buttons:** Primary buttons use `primary_color_hex` with white text. They are large (min-height 56px) and lack shadows. Hover states involve a subtle shift to `tertiary_color_hex` or a very fine inset border.
-- **Cards:** Editorial-style cards with no background color—only a thin, low-opacity top border to separate them from the main flow. They should feel like "entries" in a ledger.
+- **Cards:** Editorial-style cards with no background color - only a thin, low-opacity top border to separate them from the main flow. They should feel like "entries" in a ledger.
 - **Health Memory Engine:** A custom interactive canvas component. Nodes should pulse gently when hovered, and connecting lines should "draw" themselves as the user scrolls.
 - **Input Fields:** Minimalist design with only a bottom-border in the default state, transitioning to a full-border focus state in `primary_color_hex`.
 - **Trust Indicators:** Subtle, monochrome logos and "Physician Reviewed" badges using the `label-caps` typography style to ensure they feel like certifications rather than ads.

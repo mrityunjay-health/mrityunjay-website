@@ -116,7 +116,7 @@ spacing:
 
 The brand personality is anchored in **Scientific Elegance**, a design style that merges the rigor of a modern scientific journal with the quiet confidence of a luxury product. The target audience includes individuals seeking longitudinal health understanding and organizations looking for a credible intelligence layer in healthcare.
 
-The UI avoids the "software" aesthetic entirely, instead favoring an **Editorial Minimalism** approach. This is characterized by expansive whitespace, a restrained color palette, and a focus on high-fidelity typography that communicates intelligence and calm. The visual language is intentional, avoiding the "artificial" tropes of AI—such as glowing brains or circuit boards—in favor of organic, living systems that represent "Health Memory."
+The UI avoids the "software" aesthetic entirely, instead favoring an **Editorial Minimalism** approach. This is characterized by expansive whitespace, a restrained color palette, and a focus on high-fidelity typography that communicates intelligence and calm. The visual language is intentional, avoiding the "artificial" tropes of AI - such as glowing brains or circuit boards - in favor of organic, living systems that represent "Health Memory."
 
 ### Design Movements
 - **Minimalism:** Use whitespace as a functional element to guide focus and reduce cognitive load.
@@ -158,7 +158,7 @@ The layout follows an **Editorial Fluid Grid** philosophy. It uses a 12-column s
 To maintain a scientific and clean aesthetic, depth is achieved through **Tonal Layers** and **Subtle Elevation** rather than dramatic shadows.
 
 - **Surface Tiers:** Use very slight variations in background color (e.g., Clinical White on Soft Neutral) to separate content sections.
-- **Shadows:** Only use shadows on interactive components like cards or buttons. Shadows must be "Ambient"—low-opacity, highly diffused, and tinted with a hint of Trust Blue to avoid looking "dirty."
+- **Shadows:** Only use shadows on interactive components like cards or buttons. Shadows must be "Ambient" - low-opacity, highly diffused, and tinted with a hint of Trust Blue to avoid looking "dirty."
 - **Outlines:** Use hairline borders (0.5px to 1px) in low-contrast grays to define boundaries without adding visual weight.
 - **Prohibited:** No glassmorphism, no heavy neon blurs, and no neomorphism. The UI should feel solid and dependable, not ephemeral.
 

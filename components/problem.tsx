@@ -3,7 +3,7 @@ import { Reveal } from "./intersection-reveal";
 
 interface DiagnosticPillar {
   readonly id: string;
-  readonly code: string;
+  readonly tag: string;
   readonly icon: string;
   readonly label: string;
   readonly heading: string;
@@ -13,7 +13,7 @@ interface DiagnosticPillar {
 const DIAGNOSTIC_PILLARS: ReadonlyArray<DiagnosticPillar> = [
   {
     id: "patients",
-    code: "ERR_NARRATIVE_LOST",
+    tag: "THE RETELLING BURDEN",
     icon: "person",
     label: "PATIENTS",
     heading: "Their story resets with every visit.",
@@ -25,7 +25,7 @@ const DIAGNOSTIC_PILLARS: ReadonlyArray<DiagnosticPillar> = [
   },
   {
     id: "doctors",
-    code: "ERR_ZERO_CONTEXT",
+    tag: "THE DOCUMENTATION BURDEN",
     icon: "stethoscope",
     label: "DOCTORS",
     heading: "They must reconstruct what was already known.",
@@ -37,7 +37,7 @@ const DIAGNOSTIC_PILLARS: ReadonlyArray<DiagnosticPillar> = [
   },
   {
     id: "hospitals",
-    code: "ERR_ISOLATED_EHR",
+    tag: "THE DISCONNECTED EHR",
     icon: "apartment",
     label: "HEALTH SYSTEMS",
     heading: "Systems that do not share a memory.",
@@ -97,27 +97,27 @@ export function Problem(): ReactElement {
                 {/* Disconnect Sequence Nodes */}
                 <div className="space-y-4">
                   {[
-                    { code: "ERR_NARRATIVE_LOST", title: "Patient Story Disconnect", desc: "History fails to bridge to the next provider" },
-                    { code: "ERR_ZERO_CONTEXT", title: "Clinician Blank Slate", desc: "11 minutes spent reconstructing past records" },
-                    { code: "ERR_ISOLATED_EHR", title: "Interoperability Breakdown", desc: "Specialist visits isolated from primary care" },
+                    { tag: "CONTEXT LOST", title: "Patient Story Disconnect", desc: "History fails to bridge to the next provider" },
+                    { tag: "RECONSTRUCTION OVERHEAD", title: "Clinician Blank Slate", desc: "11 minutes spent reconstructing past records" },
+                    { tag: "SYSTEM FRAGMENTATION", title: "Interoperability Breakdown", desc: "Specialist visits isolated from primary care" },
                   ].map((node, idx) => (
                     <div
-                      key={node.code}
+                      key={node.tag}
                       className="p-3.5 sm:p-4 rounded-xl bg-clinical-white/5 border border-clinical-white/10 flex items-start gap-3"
                     >
                       <span className="font-mono text-[11px] text-memory-glow shrink-0 mt-0.5 font-semibold">
                         0{idx + 1}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <h4 className="font-mono text-xs text-clinical-white font-semibold truncate">
+                        <div className="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+                          <h4 className="font-mono text-xs text-clinical-white font-semibold">
                             {node.title}
                           </h4>
-                          <span className="font-mono text-[9px] text-urgent-red bg-urgent-red/10 px-1.5 py-0.5 rounded border border-urgent-red/20 shrink-0">
-                            [{node.code}]
+                          <span className="font-mono text-[9px] text-amber-300 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-300/20 shrink-0 uppercase tracking-wider font-medium">
+                            {node.tag}
                           </span>
                         </div>
-                        <p className="font-body-md text-xs text-clinical-white/70 leading-snug">
+                        <p className="font-body-md text-xs text-clinical-white/70 leading-relaxed">
                           {node.desc}
                         </p>
                       </div>
@@ -126,9 +126,9 @@ export function Problem(): ReactElement {
                 </div>
               </div>
 
-              <div className="pt-8 mt-8 border-t border-clinical-white/15 font-mono text-[10px] text-memory-glow flex items-center justify-between">
+              <div className="pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-clinical-white/15 font-mono text-[10px] text-memory-glow flex flex-wrap items-center justify-between gap-2">
                 <span>ROOT CAUSE: CLERICAL AMNESIA</span>
-                <span>STATUS: ACTIVE DEFECT</span>
+                <span className="text-clinical-white/75">STATUS QUO: FRAGMENTED CARE</span>
               </div>
             </div>
           </Reveal>
@@ -150,8 +150,8 @@ export function Problem(): ReactElement {
                           </span>
                         </div>
                       </div>
-                      <span className="font-mono text-[10px] text-secondary tracking-wider">
-                        [{pillar.code}]
+                      <span className="font-mono text-[10px] text-secondary tracking-wider uppercase font-medium bg-clinical-white/60 px-2 py-0.5 rounded border border-data-node/30">
+                        {pillar.tag}
                       </span>
                     </div>
 
