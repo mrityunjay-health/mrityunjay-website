@@ -79,15 +79,19 @@ Condensed from The Experience Principles. Full text in `stitch_stitch_design_sys
 - **Calm is part of the treatment** - spacing, typography, color, motion, language, and timing all reduce stress.
 - **Leave people better than you found them** - informed, confident, prepared, hopeful, supported.
 
-## Stack [v2]
-Next.js 15.1 (App Router). React 19. Tailwind CSS 3.4. Framer Motion 11.18. TypeScript strict. Supabase (PostgreSQL + RLS) for `/api/waitlist` persistence.
+## Stack [v3]
+Next.js 16.3.1 (App Router, Turbopack). React 19. Tailwind CSS 3.4. Framer Motion 11.18. TypeScript strict. Supabase (PostgreSQL + RLS) for `/api/waitlist` persistence.
 
-## Design System Tokens & Guidelines [v2]
-- **Three Dials**: `DESIGN_VARIANCE: 4`, `MOTION_INTENSITY: 3`, `VISUAL_DENSITY: 6` (clinical trust, calm telemetry).
+## Design System Tokens & Guidelines [v3]
+- **Three Dials**: `DESIGN_VARIANCE: 7`, `MOTION_INTENSITY: 4`, `VISUAL_DENSITY: 5` (clinical trust, calm telemetry, high-agency interactive inspection).
+- **Asymmetric Diagnostic Architecture**: Replaces generic 3-box feature cards with split diagnostic ledgers and contextual error markers (`[ERR_NARRATIVE_LOST]`, `[ERR_ZERO_CONTEXT]`).
+- **Interactive Narrative Comparator**: Scrubbable 36-month timeline comparing conventional episodic amnesia with Mritunjay's continuous memory loop.
+- **Two-Pane Clinical Journey Simulator**: Synchronized step stepper with live clinical telemetry artifacts (Allergy Safeguard, Physician One-Screen Brief, Titration Ledger).
+- **Act Scrubber Workstation**: Interactive act controller allowing direct jump between Intake Brief, Patient Query, Synthesis, and Doctor Verification.
 - **Double-Bezel Architecture**: Hairline borders (`border border-data-node/30`), inner highlights (`shadow-double-bezel`), concentric radii (`rounded-2xl`).
-- **Zero Em-Dash Rule**: Absolute ban on em-dashes (`—`) in copy. Use hyphens, colons, or periods.
+- **Zero Em-Dash Rule**: Absolute ban on em-dashes (Unicode 8212 / 8211) in copy. Use hyphens, colons, or periods only.
 - **Button-in-Button CTA**: Primary action pills with nested circular arrow capsules (`active:scale-[0.98]`).
-- **Living Cell Canvas**: Procedural biological cell with 60–65 BPM cardiac pulse, undulating lipid bilayer, and microscopic zoom dive.
+- **Living Cell Canvas**: Procedural biological cell with 60-65 BPM cardiac pulse, undulating lipid bilayer, and microscopic zoom dive.
 
 ## TypeScript Rules [v0]
 - No `any`, `as`, `@ts-ignore`, `!`
@@ -98,7 +102,7 @@ Next.js 15.1 (App Router). React 19. Tailwind CSS 3.4. Framer Motion 11.18. Type
 - Framer Motion for meaningful motion only. No decorative animation.
 - Animate strictly via `transform` and `opacity`. Respect `prefers-reduced-motion`.
 
-## File Structure [v2]
+## File Structure [v3]
 ```
 app/                 Next.js App Router (pages, layouts, API routes)
   api/waitlist/      POST /api/waitlist endpoint (validation + persistence)
@@ -111,4 +115,4 @@ stitch_reference_driven_generator/  Creative briefs & editorial references
 stitch_stitch_design_system/        Design system specifications
 ```
 
-<!-- sessions: 5, last: 2026-08-17 -->
+<!-- sessions: 7, last: 2026-08-20 -->

@@ -407,3 +407,28 @@ Can this realistically be implemented?
 
 Would both patients and clinicians trust this experience?
 Only when all answers are yes is the design considered complete.
+
+---
+
+# Anti-Generic Section Architecture (Website Blueprint)
+
+## 1. Problem Section (Asymmetric Diagnostic Ledger)
+- Avoid 3 equal card rows.
+- Left column (5/12 width): Systemic Audit diagnostic ledger with sequential failure markers (`[ERR_NARRATIVE_LOST]`, `[ERR_ZERO_CONTEXT]`, `[ERR_ISOLATED_EHR]`).
+- Right column (7/12 width): Structured stakeholder impact cards with high-contrast typography and subtle hairline dividers.
+
+## 2. Differentiator (Interactive Narrative Comparator)
+- Interactive tabbed / scrubbable comparison between Conventional Episodic Care and Mritunjay Continuous Layer.
+- 4 chronological milestones (Month 00 to Month 36) mapping context retention vs clerical amnesia.
+
+## 3. How It Works (Two-Pane Clinical Journey Simulator)
+- Left pane: Interactive step selector for Patient Journey (8 steps) and Doctor Journey (7 steps).
+- Right pane: Live synchronized clinical preview artifact (e.g. Allergy Safeguard Token, One-Screen Brief, Longitudinal Recovery Monitor).
+
+## 4. Clinical Intelligence Workstation (Act Scrubber & Multi-Telemetry)
+- Interactive act controller for manual step inspection (Intake Brief, Patient Query, EHR Synthesis, Doctor Verified).
+- 4 telemetry tabs: Live Synthesis, 3-Year Timeline, Adverse Audit, Recovery Outlook.
+
+## 5. Trust Hierarchy (Three-Tier Clinical Governance)
+- Interactive inspection of Tier 01 (AI Synthesis), Tier 02 (Doctor Validation), and Tier 03 (Final Clinical Authority).
+- Plain-language explainability callouts for every tier.

@@ -197,6 +197,51 @@ export function ChatInterface(): ReactElement {
             {/* VIEW 1: Live Dialogue Synthesis Stream */}
             {activeTab === "dialogue" && (
               <>
+                {/* Act Scrubber Controller (High-Agency Inspection) */}
+                <div className="mb-4 pb-3 border-b border-data-node/20 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px]">
+                  <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                    {[
+                      { actNum: 1 as Act, label: "01: Intake Brief" },
+                      { actNum: 2 as Act, label: "02: Patient Inquiry" },
+                      { actNum: 3 as Act, label: "03: EHR Synthesis" },
+                      { actNum: 4 as Act, label: "04: Doctor Verified" },
+                    ].map((step) => {
+                      const isActive = effectiveAct === step.actNum;
+                      return (
+                        <button
+                          key={step.actNum}
+                          type="button"
+                          onClick={() => {
+                            setAct(step.actNum);
+                            setIsPaused(true);
+                          }}
+                          className={`px-2.5 py-1 rounded-full border transition-all ${
+                            isActive
+                              ? "bg-primary text-clinical-white border-primary font-semibold shadow-xs"
+                              : "bg-surface-container-low text-secondary border-data-node/30 hover:text-primary hover:bg-clinical-white"
+                          }`}
+                        >
+                          {step.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="flex items-center gap-2 text-secondary shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setIsPaused((prev) => !prev)}
+                      className="px-2 py-0.5 rounded border border-data-node/40 hover:bg-surface-container-low text-primary flex items-center gap-1 font-mono text-[10px]"
+                      aria-label={isPaused ? "Resume automatic sequence" : "Pause sequence"}
+                    >
+                      <span className="material-symbols-outlined text-[13px]">
+                        {isPaused ? "play_arrow" : "pause"}
+                      </span>
+                      <span>{isPaused ? "AUTO-PLAY" : "PAUSED"}</span>
+                    </button>
+                  </div>
+                </div>
+
                 <div className="space-y-4 sm:space-y-6 max-w-2xl mx-auto w-full">
                   {/* Clinical AI message */}
                   <AnimatePresence>
@@ -372,15 +417,14 @@ export function ChatInterface(): ReactElement {
                   {showDoctor && (
                     <motion.div
                       key="doctor"
-                      initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                      animate={{ opacity: 1, backdropFilter: "blur(6px)" }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       exit={{
                         opacity: 0,
-                        backdropFilter: "blur(0px)",
-                        transition: { duration: 0.7, ease: EASE_OUT },
+                        transition: { duration: 0.5, ease: EASE_OUT },
                       }}
-                      transition={{ duration: 0.8, ease: EASE_OUT }}
-                      className="absolute inset-0 flex items-center justify-center bg-clinical-white/50 pointer-events-none will-change-[opacity] p-4"
+                      transition={{ duration: 0.6, ease: EASE_OUT }}
+                      className="absolute inset-0 flex items-center justify-center bg-clinical-white/80 pointer-events-none will-change-[opacity] p-4"
                     >
                       <motion.div
                         initial={{ scale: 0.9, opacity: 0, y: 8 }}

@@ -68,7 +68,7 @@ export function Hero(): ReactElement {
             initial={reduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.0, ease: EASE_OUT }}
-            className="pointer-events-auto font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold bg-clinical-white/80 backdrop-blur-xs px-4 py-1 rounded-full border border-data-node/30 shadow-xs"
+            className="pointer-events-auto font-mono text-[10px] sm:text-xs text-primary tracking-[0.25em] mb-3 sm:mb-4 block uppercase font-semibold"
           >
             THE INTELLIGENT LAYER OF CARE
           </motion.span>
@@ -80,14 +80,13 @@ export function Hero(): ReactElement {
                 className="mr-[0.26em] inline-block overflow-hidden pb-[0.1em] -mb-[0.1em] align-bottom last:mr-0"
               >
                 <motion.span
-                  initial={reduced ? false : { y: "115%", filter: "blur(8px)", opacity: 0 }}
-                  animate={{ y: 0, filter: "blur(0px)", opacity: 1 }}
+                  initial={reduced ? false : { y: "115%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
                   transition={
                     reduced
                       ? undefined
                       : {
                           y: { duration: 1.1, ease: EASE_OUT, delay: i * 0.07 },
-                          filter: { duration: 0.9, ease: "easeOut", delay: i * 0.07 },
                           opacity: { duration: 0.7, ease: "easeOut", delay: i * 0.07 },
                         }
                   }
@@ -102,7 +101,7 @@ export function Hero(): ReactElement {
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed bg-clinical-white/90 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none px-4 py-2.5 sm:px-0 sm:py-0 rounded-2xl border border-data-node/30 sm:border-none shadow-xs sm:shadow-none"
+            className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed"
           >
             Treatment happens at the hospital. Understanding begins with Mritunjay.
             We are the intelligent bridge between your history and your future care.
@@ -126,7 +125,7 @@ export function Hero(): ReactElement {
             </Link>
             <a
               href="#intelligence"
-              className="w-full sm:w-auto border border-primary/30 text-primary bg-clinical-white/80 backdrop-blur-xs px-6 sm:px-8 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest hover:bg-primary hover:text-clinical-white transition-all rounded-full flex items-center justify-center gap-2 text-center"
+              className="w-full sm:w-auto border border-primary/40 text-primary hover:bg-primary hover:text-clinical-white transition-all px-6 sm:px-8 py-3.5 sm:py-4 font-label-caps text-xs sm:text-label-caps tracking-widest rounded-full flex items-center justify-center gap-2 text-center active:scale-[0.98]"
             >
               <span className="material-symbols-outlined text-[18px] sm:text-[20px]">layers</span>
               <span>EXPLORE THE LAYER</span>

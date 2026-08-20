@@ -209,7 +209,6 @@ export function Outcome02(): ReactElement {
 
         <Reveal delay={0.3}>
           <div className="relative">
-            <div className="absolute -inset-4 bg-surface-container-low rounded-3xl -z-10 blur-2xl opacity-60" />
             <div className="bg-clinical-white border border-data-node/40 rounded-2xl shadow-double-bezel overflow-hidden">
               <div className="bg-surface-container-low p-4 sm:p-5 flex justify-between items-center border-b border-data-node/20 font-mono text-xs">
                 <div className="flex items-center gap-2">
