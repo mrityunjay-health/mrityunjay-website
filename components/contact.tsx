@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactElement, useState } from "react";
+import { type ReactElement, useState, useEffect } from "react";
 import { Reveal } from "./intersection-reveal";
 import { GoogleOAuthProvider, GoogleLogin, type CredentialResponse } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -18,6 +18,12 @@ export function Contact(): ReactElement {
     patient: {name: string, email: string} | null,
     industrial: {name: string, email: string} | null
   }>({ patient: null, industrial: null });
+  
+  const [redirectUrl, setRedirectUrl] = useState("");
+  
+  useEffect(() => {
+    setRedirectUrl(window.location.origin + "/thank-you");
+  }, []);
 
   const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
@@ -67,7 +73,7 @@ export function Contact(): ReactElement {
                </div>
                <div>
                   <h4 className="font-headline-md text-lg text-primary mb-0.5">Direct Email</h4>
-                  <p className="font-body-md text-sm text-secondary">gravityanti47@gmail.com</p>
+                  <p className="font-body-md text-sm text-secondary">antigravity87@gmail.com</p>
                </div>
             </div>
             
@@ -117,23 +123,26 @@ export function Contact(): ReactElement {
                 Send us an Inquiry
               </h3>
               <p className="font-body-md text-sm text-secondary leading-relaxed">
-                Your message will be routed directly to <strong>gravityanti47@gmail.com</strong>.
+                Your message will be routed directly to <strong>antigravity87@gmail.com</strong>.
               </p>
             </div>
             
             {/* 
               USER INSTRUCTION: 
-              We are using Formspree (or Web3Forms) here so the form stays on your website!
-              1. Go to https://formspree.io/
-              2. Sign in with gravityanti47@gmail.com and create a "New Form"
-              3. Copy your Form ID (it looks like a short code, e.g., 'xabcdefg')
-              4. Replace 'YOUR_FORM_ID_HERE' below with your actual code.
+              We are using Web3Forms here so the form stays on your website!
+              Your Access Key is correctly set below.
             */}
             <form 
-              action="https://formspree.io/f/YOUR_FORM_ID_HERE" 
+              action="https://api.web3forms.com/submit" 
               method="POST"
               className="space-y-4 text-left flex-1"
             >
+              {/* Web3Forms Access Key */}
+              <input type="hidden" name="access_key" value="d7bf2cae-4247-479a-94d9-730d8e6c3336" />
+              
+              {/* Redirect to Custom Thank You Page */}
+              <input type="hidden" name="redirect" value={redirectUrl} />
+              
               {/* Hidden field to pass inquiry type */}
               <input type="hidden" name="Inquiry Type" value={inquiryType} />
               
@@ -175,11 +184,10 @@ export function Contact(): ReactElement {
                     </button>
                   </div>
 
-                  {/* Hidden inputs to capture the verified user's details for formspree submission */}
+                  {/* Hidden inputs to capture the verified user's details for Web3Forms submission */}
                   <input type="hidden" name="name" value={currentUserProfile?.name || "Verified User"} />
                   <input type="hidden" name="email" value={currentUserProfile?.email || "user@example.com"} />
-                  <input type="hidden" name="_replyto" value={currentUserProfile?.email || "user@example.com"} />
-                  <input type="hidden" name="_subject" value={`[Mritunjay] New ${inquiryType === 'patient' ? 'Patient' : 'Enterprise'} Inquiry from ${currentUserProfile?.name || "Verified User"}`} />
+                  <input type="hidden" name="subject" value={`[Mritunjay] New ${inquiryType === 'patient' ? 'Patient' : 'Enterprise'} Inquiry from ${currentUserProfile?.name || "Verified User"}`} />
 
                   {inquiryType === "industrial" && (
                     <div>
