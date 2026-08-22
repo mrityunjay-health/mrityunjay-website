@@ -13,24 +13,33 @@ interface GoogleJwtPayload {
 
 export function Contact(): ReactElement {
   const [inquiryType, setInquiryType] = useState<"patient" | "industrial">("patient");
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [userProfile, setUserProfile] = useState<{name: string, email: string} | null>(null);
+  const [signedInStates, setSignedInStates] = useState({ patient: false, industrial: false });
+  const [userProfiles, setUserProfiles] = useState<{
+    patient: {name: string, email: string} | null,
+    industrial: {name: string, email: string} | null
+  }>({ patient: null, industrial: null });
 
   const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
       const decoded = jwtDecode<GoogleJwtPayload>(credentialResponse.credential);
-      setIsSignedIn(true);
-      setUserProfile({
-        name: decoded.name || decoded.given_name || "Verified User",
-        email: decoded.email || "user@example.com",
-      });
+      setSignedInStates(prev => ({ ...prev, [inquiryType]: true }));
+      setUserProfiles(prev => ({
+        ...prev,
+        [inquiryType]: {
+          name: decoded.name || decoded.given_name || "Verified User",
+          email: decoded.email || "user@example.com",
+        }
+      }));
     }
   };
 
   const handleSignOut = () => {
-    setIsSignedIn(false);
-    setUserProfile(null);
+    setSignedInStates(prev => ({ ...prev, [inquiryType]: false }));
+    setUserProfiles(prev => ({ ...prev, [inquiryType]: null }));
   };
+
+  const currentIsSignedIn = signedInStates[inquiryType];
+  const currentUserProfile = userProfiles[inquiryType];
 
   return (
     <GoogleOAuthProvider clientId="866654168622-rjhur8jgrqvd92nu8q2kicdmtvp1md1k.apps.googleusercontent.com">
@@ -128,7 +137,7 @@ export function Contact(): ReactElement {
               {/* Hidden field to pass inquiry type */}
               <input type="hidden" name="Inquiry Type" value={inquiryType} />
               
-              {!isSignedIn ? (
+              {!currentIsSignedIn ? (
                 <div className="flex flex-col items-center justify-center py-10 space-y-5 bg-surface-container-low border border-data-node/30 rounded-xl">
                   <p className="font-body-md text-sm text-secondary text-center px-4">
                     Please sign in to verify your identity before sending a direct message.
@@ -150,11 +159,11 @@ export function Contact(): ReactElement {
                   <div className="flex items-center justify-between bg-green-500/5 border border-green-500/20 rounded-xl px-4 py-3">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full bg-primary text-clinical-white flex items-center justify-center text-sm font-bold shadow-sm uppercase">
-                        {userProfile?.name.charAt(0) || "U"}
+                        {currentUserProfile?.name.charAt(0) || "U"}
                       </div>
                       <div>
-                        <p className="font-headline-md text-sm text-primary leading-tight">{userProfile?.name || "Verified User"}</p>
-                        <p className="font-mono text-[9px] text-green-700 tracking-wider">{userProfile?.email || "user@example.com"} (SECURED)</p>
+                        <p className="font-headline-md text-sm text-primary leading-tight">{currentUserProfile?.name || "Verified User"}</p>
+                        <p className="font-mono text-[9px] text-green-700 tracking-wider">{currentUserProfile?.email || "user@example.com"} (SECURED)</p>
                       </div>
                     </div>
                     <button 
@@ -167,8 +176,10 @@ export function Contact(): ReactElement {
                   </div>
 
                   {/* Hidden inputs to capture the verified user's details for formspree submission */}
-                  <input type="hidden" name="name" value={userProfile?.name || "Verified User"} />
-                  <input type="hidden" name="email" value={userProfile?.email || "user@example.com"} />
+                  <input type="hidden" name="name" value={currentUserProfile?.name || "Verified User"} />
+                  <input type="hidden" name="email" value={currentUserProfile?.email || "user@example.com"} />
+                  <input type="hidden" name="_replyto" value={currentUserProfile?.email || "user@example.com"} />
+                  <input type="hidden" name="_subject" value={`[Mritunjay] New ${inquiryType === 'patient' ? 'Patient' : 'Enterprise'} Inquiry from ${currentUserProfile?.name || "Verified User"}`} />
 
                   {inquiryType === "industrial" && (
                     <div>
