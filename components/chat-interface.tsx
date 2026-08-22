@@ -105,7 +105,7 @@ export function ChatInterface(): ReactElement {
           </div>
 
           {/* Interactive Content Container */}
-          <div className="p-4 sm:p-6 md:p-8 relative font-body-md bg-clinical-white min-h-[480px]">
+          <div className="p-4 sm:p-6 md:p-8 relative font-body-md bg-clinical-white h-[850px] sm:h-[750px] lg:h-[650px] overflow-hidden">
             <AnimatePresence mode="wait">
               {/* VIEW 1: Live Dialogue & Pre-Consultation Synthesis */}
               {activeTab === "synthesis" && (

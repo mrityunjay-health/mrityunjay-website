@@ -92,13 +92,13 @@ export function Contact(): ReactElement {
         {/* RIGHT CONTENT (FORM) */}
         <div className="bg-clinical-white border border-data-node/40 rounded-2xl sm:rounded-3xl shadow-double-bezel p-6 sm:p-8 md:p-10 relative overflow-hidden flex flex-col w-full h-auto">
           
-          <div role="tablist" aria-label="Select inquiry type" className="flex justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 shrink-0">
+          <div role="tablist" className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 shrink-0">
             <button
               type="button"
               role="tab"
               aria-selected={inquiryType === "patient"}
               onClick={() => setInquiryType("patient")}
-              className={`px-4 sm:px-6 py-2.5 rounded-full font-label-caps text-[10px] sm:text-xs tracking-widest transition-all active:scale-[0.98] flex-1 sm:flex-none ${
+              className={`px-4 sm:px-6 py-3 sm:py-2.5 rounded-full font-label-caps text-[10px] sm:text-xs tracking-widest transition-all active:scale-[0.98] w-full sm:w-auto ${
                 inquiryType === "patient" ? "bg-primary text-clinical-white shadow-double-bezel-dark" : "bg-surface-container-low text-primary border border-data-node/40 hover:bg-surface-container"
               }`}
             >
@@ -109,7 +109,7 @@ export function Contact(): ReactElement {
               role="tab"
               aria-selected={inquiryType === "industrial"}
               onClick={() => setInquiryType("industrial")}
-              className={`px-4 sm:px-6 py-2.5 rounded-full font-label-caps text-[10px] sm:text-xs tracking-widest transition-all active:scale-[0.98] flex-1 sm:flex-none ${
+              className={`px-4 sm:px-6 py-3 sm:py-2.5 rounded-full font-label-caps text-[10px] sm:text-xs tracking-widest transition-all active:scale-[0.98] w-full sm:w-auto ${
                 inquiryType === "industrial" ? "bg-primary text-clinical-white shadow-double-bezel-dark" : "bg-surface-container-low text-primary border border-data-node/40 hover:bg-surface-container"
               }`}
             >

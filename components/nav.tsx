@@ -49,6 +49,12 @@ export function Nav(): ReactElement {
           <nav className="hidden lg:flex gap-6 xl:gap-10 items-center">
             <Link
               className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
+              href="/about"
+            >
+              About Us
+            </Link>
+            <Link
+              className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
               href="/#how-it-works"
             >
               How It Works
@@ -109,6 +115,14 @@ export function Nav(): ReactElement {
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="flex flex-col space-y-4">
+              <Link
+                href="/about"
+                onClick={closeMobileMenu}
+                className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
+              >
+                <span>About Us</span>
+                <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
+              </Link>
               <Link
                 href="/#how-it-works"
                 onClick={closeMobileMenu}
