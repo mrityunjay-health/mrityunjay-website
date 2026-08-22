@@ -115,7 +115,7 @@ export function ChatInterface(): ReactElement {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="space-y-6 max-w-3xl mx-auto h-[1050px] sm:h-[850px] lg:h-[650px]"
+                  className="space-y-6 max-w-3xl mx-auto"
                 >
                   {/* Dialogue Stream */}
                   <div className="space-y-4">

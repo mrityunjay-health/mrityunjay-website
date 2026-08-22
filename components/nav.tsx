@@ -28,8 +28,8 @@ export function Nav(): ReactElement {
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-clinical-white/90 backdrop-blur-md shadow-double-bezel border-b border-data-node/30"
-            : "bg-clinical-white/70 backdrop-blur-sm border-b border-data-node/10"
+            ? "bg-clinical-white/95 backdrop-blur-md shadow-[0_4px_20px_-2px_rgba(67,113,24,0.2)] border-b border-[#437118]/30"
+            : "bg-clinical-white/70 backdrop-blur-sm border-b border-[#437118]/10"
         }`}
       >
         <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-gutter flex justify-between items-center h-16 lg:h-[4.5rem]">
@@ -41,7 +41,7 @@ export function Nav(): ReactElement {
             <img 
               src="/logo_transparent.png" 
               alt="Mritunjay Logo" 
-              className="h-14 lg:h-16 w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-110 group-active:scale-95" 
+              className="h-14 lg:h-16 w-auto object-contain transition-transform duration-500 ease-out group-hover:scale-110 group-active:scale-95 theme-logo-filter" 
             />
           </Link>
 

@@ -8,33 +8,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "outline-variant": "#c4c6d0",
-        "secondary-container": "#d9e1e3",
-        "data-node": "#D1D5DB",
-        "inverse-primary": "#a9c7ff",
-        "on-surface-variant": "#43474f",
-        "surface-variant": "#e2e2e2",
-        "on-background": "#1a1c1c",
-        "ink-black": "#1A1A1A",
-        "outline": "#747780",
-        "on-surface": "#1a1c1c",
+        "outline-variant": "#E2E8F0", 
+        "secondary-container": "#F1F5F9", 
+        "data-node": "#87AECE", // Sky Blue
+        "inverse-primary": "#F8FAFC", 
+        "on-surface-variant": "#475569", // Slate 600 for subtitles
+        "surface-variant": "#F1F5F9",
+        "on-background": "#0F172A", // Slate 900 for premium dark text
+        "ink-black": "#0F172A", 
+        "outline": "#87AECE", // Sky Blue
+        "on-surface": "#0F172A", 
         "error": "#ba1a1a",
-        "surface-bright": "#f9f9f9",
-        "memory-glow": "#A5D8FF",
+        "surface-bright": "#FFFFFF", 
+        "memory-glow": "#AFD06E", // Lime Green
         "primary": {
-          DEFAULT: "#001736",
-          fixed: "#d6e3ff",
-          container: "#002b5b",
+          DEFAULT: "#437118", // Forest Green for buttons
+          fixed: "#AFD06E", // Lime Green
+          container: "#87AECE", // Sky Blue
         },
-        "secondary": "#586062",
-        "background": "#f9f9f9",
+        "secondary": "#334155", // Slate 700
+        "background": "#EDEDED", // The original requested Light Gray
         "surface": {
-          DEFAULT: "#f9f9f9",
-          container: "#eeeeee",
-          "container-low": "#f3f3f3",
-          dim: "#dadada",
+          DEFAULT: "#EDEDED",
+          container: "#FFFFFF", 
+          "container-low": "#E5E5E5", 
+          dim: "#D4D4D4",
         },
-        "clinical-white": "#FFFFFF",
+        "clinical-white": "#FFFFFF", 
       },
       borderRadius: {
         none: "0px",
@@ -48,9 +48,9 @@ const config: Config = {
         full: "9999px",
       },
       boxShadow: {
-        "double-bezel": "0 0 0 1px rgba(0, 23, 54, 0.06), 0 2px 8px -2px rgba(0, 0, 0, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.9)",
-        "double-bezel-dark": "0 0 0 1px rgba(255, 255, 255, 0.12), 0 12px 36px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.2)",
-        "artifact": "0 4px 20px -2px rgba(0, 23, 54, 0.06), 0 0 0 1px rgba(209, 213, 219, 0.4)",
+        "double-bezel": "0 0 0 1px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 1)",
+        "double-bezel-dark": "0 0 0 1px rgba(67, 113, 24, 0.1), 0 12px 32px -8px rgba(67, 113, 24, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.8)",
+        "artifact": "0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(135, 174, 206, 0.3)",
       },
       spacing: {
         "margin-mobile": "20px",
@@ -73,14 +73,14 @@ const config: Config = {
         serif: ["Times New Roman", "Times", "serif"],
       },
       fontSize: {
-        "headline-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.01em", fontWeight: "400" }],
-        "body-lg": ["20px", { lineHeight: "32px", fontWeight: "400" }],
-        "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.1em", fontWeight: "600" }],
-        "headline-lg-mobile": ["36px", { lineHeight: "44px", fontWeight: "400" }],
-        "display-hero": ["84px", { lineHeight: "92px", letterSpacing: "-0.02em", fontWeight: "400" }],
-        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-        quote: ["28px", { lineHeight: "42px", fontWeight: "300" }],
-        "headline-md": ["32px", { lineHeight: "40px", fontWeight: "400" }],
+        "headline-lg": ["52px", { lineHeight: "60px", letterSpacing: "-0.01em", fontWeight: "400" }],
+        "body-lg": ["22px", { lineHeight: "34px", fontWeight: "400" }],
+        "label-caps": ["13px", { lineHeight: "18px", letterSpacing: "0.12em", fontWeight: "600" }],
+        "headline-lg-mobile": ["40px", { lineHeight: "48px", fontWeight: "400" }],
+        "display-hero": ["92px", { lineHeight: "100px", letterSpacing: "-0.02em", fontWeight: "400" }],
+        "body-md": ["17px", { lineHeight: "26px", fontWeight: "400" }],
+        quote: ["32px", { lineHeight: "46px", fontWeight: "300" }],
+        "headline-md": ["36px", { lineHeight: "44px", fontWeight: "400" }],
       },
       maxWidth: {
         "container-max": "1280px",

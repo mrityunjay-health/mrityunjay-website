@@ -60,7 +60,7 @@ export function Footer(): ReactElement {
                 <img 
                   src="/logo_transparent.png" 
                   alt="Mritunjay Logo" 
-                  className="h-14 w-auto object-contain" 
+                  className="h-14 w-auto object-contain theme-logo-filter" 
                 />
               </Link>
               <p className="font-body-md text-secondary leading-relaxed">

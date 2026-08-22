@@ -134,7 +134,7 @@ function ArtifactCard({
   readonly totalSteps: number;
 }): ReactElement {
   return (
-    <div className="bg-clinical-white border border-data-node/40 rounded-2xl sm:rounded-3xl shadow-double-bezel overflow-hidden p-5 sm:p-7 h-full flex flex-col justify-between">
+    <div className="bg-clinical-white border border-data-node/40 rounded-2xl sm:rounded-3xl shadow-double-bezel overflow-hidden p-5 sm:p-7 flex flex-col justify-between h-auto lg:h-full min-h-[320px]">
       <div>
         <div className="flex items-center justify-between pb-4 border-b border-data-node/20 mb-5">
           <div className="flex items-center gap-2">

@@ -226,8 +226,8 @@ export function LivingCellBackground({
           if (b.y > height) b.y = 0;
 
           const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius);
-          grad.addColorStop(0, `rgba(165, 216, 255, ${b.alpha * 1.2})`);
-          grad.addColorStop(1, "rgba(249, 249, 249, 0)");
+          grad.addColorStop(0, `rgba(175, 208, 110, ${b.alpha * 1.2})`);
+          grad.addColorStop(1, "rgba(248, 250, 252, 0)");
           ctx.fillStyle = grad;
           ctx.beginPath();
           ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
@@ -237,10 +237,10 @@ export function LivingCellBackground({
 
       // --- 1. Ambient Volumetric Halo ---
       const ambientGlow = ctx.createRadialGradient(cx, cy, baseRadius * 0.1, cx, cy, baseRadius * 1.7);
-      ambientGlow.addColorStop(0, "rgba(165, 216, 255, 0.18)");
-      ambientGlow.addColorStop(0.35, "rgba(0, 43, 91, 0.05)");
-      ambientGlow.addColorStop(0.75, "rgba(0, 23, 54, 0.012)");
-      ambientGlow.addColorStop(1, "rgba(249, 249, 249, 0)");
+      ambientGlow.addColorStop(0, "rgba(175, 208, 110, 0.18)");
+      ambientGlow.addColorStop(0.35, "rgba(67, 113, 24, 0.05)");
+      ambientGlow.addColorStop(0.75, "rgba(15, 23, 42, 0.012)");
+      ambientGlow.addColorStop(1, "rgba(248, 250, 252, 0)");
 
       ctx.fillStyle = ambientGlow;
       ctx.beginPath();
@@ -317,10 +317,10 @@ export function LivingCellBackground({
 
       const cytoplasmGrad = ctx.createRadialGradient(cx, cy, baseRadius * 0.08, cx, cy, baseRadius * 1.02);
       cytoplasmGrad.addColorStop(0, "rgba(255, 255, 255, 0.88)");
-      cytoplasmGrad.addColorStop(0.3, "rgba(242, 248, 255, 0.65)");
-      cytoplasmGrad.addColorStop(0.65, "rgba(214, 227, 255, 0.25)");
-      cytoplasmGrad.addColorStop(0.92, "rgba(165, 216, 255, 0.14)");
-      cytoplasmGrad.addColorStop(1, "rgba(0, 23, 54, 0.04)");
+      cytoplasmGrad.addColorStop(0.3, "rgba(248, 250, 252, 0.65)");
+      cytoplasmGrad.addColorStop(0.65, "rgba(226, 232, 240, 0.25)");
+      cytoplasmGrad.addColorStop(0.92, "rgba(175, 208, 110, 0.14)");
+      cytoplasmGrad.addColorStop(1, "rgba(15, 23, 42, 0.04)");
 
       ctx.fillStyle = cytoplasmGrad;
       ctx.fill();
@@ -330,7 +330,7 @@ export function LivingCellBackground({
 
       // --- 5. Endoplasmic Reticulum (ER) Labyrinth Ribbons ---
       ctx.save();
-      ctx.strokeStyle = "rgba(0, 23, 54, 0.035)";
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.035)";
       ctx.lineWidth = 2.2;
       for (let ring = 0; ring < 3; ring++) {
         const erRadius = baseRadius * (0.34 + ring * 0.06);
@@ -365,7 +365,7 @@ export function LivingCellBackground({
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.quadraticCurveTo(cxPoint, cyPoint, x2, y2);
-        ctx.strokeStyle = "rgba(0, 23, 54, 0.05)";
+        ctx.strokeStyle = "rgba(15, 23, 42, 0.05)";
         ctx.lineWidth = 1.1;
         ctx.stroke();
 
@@ -382,9 +382,9 @@ export function LivingCellBackground({
           const packetY = (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * cyPoint + t * t * y2;
 
           const packetGlow = ctx.createRadialGradient(packetX, packetY, 0, packetX, packetY, 5 * excitation);
-          packetGlow.addColorStop(0, `rgba(165, 216, 255, ${0.75 * excitation})`);
-          packetGlow.addColorStop(0.5, "rgba(0, 43, 91, 0.2)");
-          packetGlow.addColorStop(1, "rgba(0, 23, 54, 0)");
+          packetGlow.addColorStop(0, `rgba(175, 208, 110, ${0.75 * excitation})`);
+          packetGlow.addColorStop(0.5, "rgba(67, 113, 24, 0.2)");
+          packetGlow.addColorStop(1, "rgba(15, 23, 42, 0)");
 
           ctx.fillStyle = packetGlow;
           ctx.beginPath();
@@ -407,9 +407,9 @@ export function LivingCellBackground({
         // Outer mitochondrial capsule
         ctx.beginPath();
         ctx.ellipse(0, 0, mito.width, mito.length, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(0, 23, 54, 0.04)";
+        ctx.fillStyle = "rgba(15, 23, 42, 0.04)";
         ctx.fill();
-        ctx.strokeStyle = "rgba(0, 23, 54, 0.14)";
+        ctx.strokeStyle = "rgba(15, 23, 42, 0.14)";
         ctx.lineWidth = 0.9;
         ctx.stroke();
 
@@ -420,7 +420,7 @@ export function LivingCellBackground({
           ctx.moveTo(-mito.width * 0.6, c);
           ctx.lineTo(mito.width * 0.6, c);
         }
-        ctx.strokeStyle = "rgba(165, 216, 255, 0.4)";
+        ctx.strokeStyle = "rgba(175, 208, 110, 0.4)";
         ctx.lineWidth = 0.7;
         ctx.stroke();
 
@@ -445,7 +445,7 @@ export function LivingCellBackground({
 
           ctx.beginPath();
           ctx.arc(nx, ny, 1.1, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0, 23, 54, ${cluster.alpha * 0.35})`;
+          ctx.fillStyle = `rgba(15, 23, 42, ${cluster.alpha * 0.35})`;
           ctx.fill();
         }
         ctx.restore();
@@ -460,7 +460,7 @@ export function LivingCellBackground({
         const waveRadius = baseRadius * wave.radiusRatio;
         ctx.beginPath();
         ctx.arc(cx, cy, waveRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(165, 216, 255, ${wave.alpha})`;
+        ctx.strokeStyle = `rgba(175, 208, 110, ${wave.alpha})`;
         ctx.lineWidth = 2.0;
         ctx.stroke();
 
@@ -474,10 +474,10 @@ export function LivingCellBackground({
 
       const nucleusGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, nucleusRadius * 1.5);
       nucleusGrad.addColorStop(0, "rgba(255, 255, 255, 0.95)");
-      nucleusGrad.addColorStop(0.2, "rgba(165, 216, 255, 0.75)");
-      nucleusGrad.addColorStop(0.55, "rgba(0, 43, 91, 0.18)");
-      nucleusGrad.addColorStop(0.85, "rgba(0, 23, 54, 0.05)");
-      nucleusGrad.addColorStop(1, "rgba(0, 23, 54, 0)");
+      nucleusGrad.addColorStop(0.2, "rgba(175, 208, 110, 0.75)");
+      nucleusGrad.addColorStop(0.55, "rgba(67, 113, 24, 0.18)");
+      nucleusGrad.addColorStop(0.85, "rgba(15, 23, 42, 0.05)");
+      nucleusGrad.addColorStop(1, "rgba(15, 23, 42, 0)");
 
       ctx.fillStyle = nucleusGrad;
       ctx.beginPath();
@@ -487,14 +487,14 @@ export function LivingCellBackground({
       // Nucleus Inner Envelope Ring
       ctx.beginPath();
       ctx.arc(cx, cy, nucleusRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(0, 23, 54, 0.18)";
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.18)";
       ctx.lineWidth = 1.2;
       ctx.stroke();
 
       // Nucleolus Central Core
       ctx.beginPath();
       ctx.arc(cx, cy, nucleusRadius * 0.35, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0, 23, 54, 0.12)";
+      ctx.fillStyle = "rgba(15, 23, 42, 0.12)";
       ctx.fill();
 
       ctx.restore(); // End membrane clipping mask
@@ -509,7 +509,7 @@ export function LivingCellBackground({
         ctx.quadraticCurveTo(membranePoints[i].x, membranePoints[i].y, xc, yc);
       }
       ctx.closePath();
-      ctx.strokeStyle = "rgba(0, 23, 54, 0.16)";
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.16)";
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
@@ -524,7 +524,7 @@ export function LivingCellBackground({
         else ctx.lineTo(px, py);
       }
       ctx.closePath();
-      ctx.strokeStyle = "rgba(165, 216, 255, 0.38)";
+      ctx.strokeStyle = "rgba(175, 208, 110, 0.38)";
       ctx.lineWidth = 1.0;
       ctx.stroke();
 
@@ -539,8 +539,8 @@ export function LivingCellBackground({
           if (b.y > height) b.y = 0;
 
           const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.radius);
-          grad.addColorStop(0, `rgba(165, 216, 255, ${b.alpha * 0.8})`);
-          grad.addColorStop(1, "rgba(249, 249, 249, 0)");
+          grad.addColorStop(0, `rgba(175, 208, 110, ${b.alpha * 0.8})`);
+          grad.addColorStop(1, "rgba(248, 250, 252, 0)");
           ctx.fillStyle = grad;
           ctx.beginPath();
           ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);

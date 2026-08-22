@@ -147,8 +147,8 @@ export function Contact(): ReactElement {
               <input type="hidden" name="Inquiry Type" value={inquiryType} />
               
               {!currentIsSignedIn ? (
-                <div className="flex flex-col items-center justify-center py-10 space-y-5 bg-surface-container-low border border-data-node/30 rounded-xl">
-                  <p className="font-body-md text-sm text-secondary text-center px-4">
+                <div className="flex flex-col items-center justify-center py-10 space-y-5 bg-surface-bright border border-dashed border-outline-variant rounded-xl">
+                  <p className="font-body-md text-sm text-on-surface-variant text-center px-4">
                     Please sign in to verify your identity before sending a direct message.
                   </p>
                   <div className="flex justify-center">
@@ -158,7 +158,7 @@ export function Contact(): ReactElement {
                         console.error("Login Failed");
                       }}
                       shape="pill"
-                      theme="filled_blue"
+                      theme="outline"
                       text="signin_with"
                     />
                   </div>

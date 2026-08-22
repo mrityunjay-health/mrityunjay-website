@@ -18,9 +18,9 @@
 }
 
 :root {
-  --background: #f9f9f9;
-  --foreground: #1a1c1c;
-  --primary: #001736;
+  --background: #EDEDED;
+  --foreground: #0F172A;
+  --primary: #437118;
 }
 
 html {
@@ -35,25 +35,28 @@ body {
 }
 
 ::selection {
-  background: #d6e3ff;
-  color: #001b3d;
+  background: #AFD06E;
+  color: #0F172A;
 }
 
 /* Background subtle clinical gradient */
 .bg-clinical-overlay {
-  background-color: #f9f9f9;
-  background-image: radial-gradient(rgba(0, 23, 54, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-color: #EDEDED;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(135, 174, 206, 0.35) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(175, 208, 110, 0.25) 0px, transparent 50%),
+    radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
 }
 
 /* Layer bridge gradient */
 .layer-bridge {
-  background: linear-gradient(to bottom, transparent, rgba(0, 23, 54, 0.02) 50%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.03) 50%, transparent);
 }
 
 /* Artifact shadow */
 .artifact-shadow {
-  box-shadow: 0 4px 24px -12px rgba(0, 23, 54, 0.12), 0 0 0 1px rgba(209, 213, 219, 0.3);
+  box-shadow: 0 4px 24px -12px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(135, 174, 206, 0.2);
 }
 
 /* Scroll-reveal animation */
@@ -81,9 +84,14 @@ body {
   display: inline-block;
   width: 0.125rem;
   height: 1.25rem;
-  background: #001736;
+  background: #437118;
   margin-left: 0.25rem;
   vertical-align: middle;
+}
+
+/* Recolor black logo to Forest Green (#437118) */
+.theme-logo-filter {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(87%) saturate(464%) hue-rotate(50deg) brightness(98%) contrast(92%);
 }
 @keyframes blink {
   50% { opacity: 0; }

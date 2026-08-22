@@ -15,7 +15,7 @@ export default function ThankYou() {
             <img 
               src="/logo_transparent.png" 
               alt="Mritunjay Logo" 
-              className="h-24 sm:h-28 w-auto object-contain drop-shadow-sm" 
+              className="h-20 sm:h-24 w-auto object-contain theme-logo-filter drop-shadow-sm" 
             />
           </div>
 
