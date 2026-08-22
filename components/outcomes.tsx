@@ -5,7 +5,7 @@ import { Premium3DCard } from "./premium-3d-card";
 
 export function Outcome01(): ReactElement {
   return (
-    <section id="outcomes" className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter bg-surface-container-low">
+    <section id="outcomes" className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter bg-surface-container-low">
       <div className="max-w-container-max mx-auto">
         <Reveal className="mb-12 sm:mb-20 text-center">
           <span className="font-mono text-xs sm:text-label-caps text-primary tracking-[0.25em] block mb-3 sm:mb-4 uppercase font-semibold">
@@ -157,7 +157,7 @@ export function Outcome01(): ReactElement {
 
 export function Outcome02(): ReactElement {
   return (
-    <section className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter bg-clinical-white overflow-hidden">
+    <section className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter bg-clinical-white overflow-hidden">
       <div className="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-20 items-center">
         <Reveal>
           <span className="font-mono text-xs sm:text-label-caps text-secondary tracking-[0.25em] block mb-3 sm:mb-4 uppercase font-semibold">
@@ -232,7 +232,7 @@ export function Outcome02(): ReactElement {
 
 export function Outcome03(): ReactElement {
   return (
-    <section className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter bg-surface-bright" id="science">
+    <section className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter bg-surface-bright" id="science">
       <div className="max-w-container-max mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-4 sm:gap-6">
           <Reveal className="max-w-xl">

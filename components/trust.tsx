@@ -55,7 +55,7 @@ export function Trust(): ReactElement {
   return (
     <section
       id="trust"
-      className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter bg-surface-bright"
+      className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter bg-surface-bright"
     >
       <div className="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-14 lg:gap-16 items-center">
         <Reveal className="lg:col-span-6">

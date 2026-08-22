@@ -6,7 +6,7 @@ export function Cta(): ReactElement {
   return (
     <section
       id="waitlist"
-      className="py-16 sm:py-24 lg:py-section-gap-lg bg-primary text-clinical-white px-4 sm:px-6 md:px-gutter text-center relative overflow-hidden"
+      className="py-[25px] sm:py-10 bg-primary text-clinical-white px-4 sm:px-6 md:px-gutter text-center relative overflow-hidden"
     >
       {/* Background Subtle Gradient Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(165,216,255,0.08)_0,transparent_70%)] pointer-events-none" />

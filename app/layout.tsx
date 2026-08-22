@@ -1,28 +1,5 @@
 import type { Metadata } from "next";
-import { Newsreader, Manrope, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  variable: "--font-newsreader",
-  display: "swap",
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-});
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
-
-const hankenGrotesk = Hanken_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-hanken-grotesk",
-  display: "swap",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   title: "Mritunjay | The Intelligent Layer of Healthcare",
@@ -50,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${manrope.variable} ${hankenGrotesk.variable} scroll-smooth`}
+      className="scroll-smooth"
       suppressHydrationWarning
     >
       <head>
@@ -60,6 +37,10 @@ export default function RootLayout({
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
       <body

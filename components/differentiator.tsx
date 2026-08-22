@@ -57,7 +57,7 @@ export function Differentiator(): ReactElement {
   return (
     <section
       id="differentiator"
-      className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter bg-surface-container-low"
+      className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter bg-surface-container-low"
     >
       <div className="max-w-container-max mx-auto">
         <Reveal className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">

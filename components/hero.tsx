@@ -31,9 +31,7 @@ export function Hero(): ReactElement {
   const logoOpacity = useTransform(scrollYProgress, [0.10, 0.25, 0.50, 0.60], [0, 1, 1, 0]);
   const logoScale = useTransform(scrollYProgress, [0.10, 0.60], [0.95, 1.1]);
   
-  // Heartbeat ECG line drawing animation synced with scroll
-  const heartbeatPath = useTransform(scrollYProgress, [0.25, 0.50], [0, 1]);
-  
+
   // Reveal Slide 2 ONLY AFTER the logo is completely gone
   const revealOpacity = useTransform(scrollYProgress, [0.60, 0.75], [0, 1]);
   const revealPointerEvents = useTransform(
@@ -49,7 +47,7 @@ export function Hero(): ReactElement {
   return (
     <>
       <section ref={targetRef} className="relative h-[300vh] bg-background w-full">
-      <div className="sticky top-0 min-h-[100dvh] overflow-hidden flex flex-col items-center justify-center pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
+      <div className="sticky top-0 min-h-[100dvh] overflow-hidden flex flex-col items-center justify-center pt-12 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-gutter">
         
         {/* Layer 0: Living Animated Biological Cell Background (Strict z-0) */}
         <motion.div 
@@ -77,7 +75,7 @@ export function Hero(): ReactElement {
           >
             THE INTELLIGENT LAYER OF CARE
           </motion.span>
-          <h1 className="font-display-hero text-3xl sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 leading-tight sm:leading-none flex flex-wrap justify-center max-w-5xl">
+          <h1 className="font-display-hero text-[40px] leading-[44px] sm:text-5xl md:text-7xl lg:text-display-hero text-primary tracking-tighter mb-4 sm:mb-6 sm:leading-none flex flex-wrap justify-center max-w-5xl px-2">
             <span className="sr-only">Healthcare that finally remembers you.</span>
             {["Healthcare", "that", "finally", "remembers", "you."].map((word, i) => (
               <span
@@ -148,35 +146,7 @@ export function Hero(): ReactElement {
         >
           <div className="relative flex items-center justify-center w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
             
-            {/* Ultra-Premium Realistic ECG Heartbeat Line (z-0, BEHIND THE LOGO) */}
-            <svg 
-              className="absolute inset-0 w-full h-full text-primary z-0"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <filter id="ecgGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="1.5" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              
-              {/* Perfectly proportioned heartbeat crossing the center */}
-              <motion.path 
-                style={{ pathLength: heartbeatPath }}
-                d="M 0 50 L 25 50 C 28 45, 32 45, 35 50 L 42 50 L 45 55 L 50 15 L 55 85 L 60 50 L 65 50 C 70 40, 78 40, 83 50 L 100 50"
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                filter="url(#ecgGlow)"
-                className="opacity-90"
-              />
-            </svg>
+
 
             {/* The Logo Image (z-10, IN FRONT) */}
             <motion.img 
@@ -201,7 +171,7 @@ export function Hero(): ReactElement {
           style={{ opacity: revealOpacity, pointerEvents: revealPointerEvents }}
           className="absolute inset-0 z-30 overflow-y-auto"
         >
-          <div className="min-h-full w-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-gutter pt-16 sm:pt-24 pb-16 sm:pb-24">
+          <div className="min-h-full w-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-gutter pt-4 sm:pt-24 pb-16 sm:pb-24">
             <div className="w-full max-w-container-max mx-auto py-2">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div className="flex flex-col">

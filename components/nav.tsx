@@ -55,15 +55,15 @@ export function Nav(): ReactElement {
             </Link>
             <Link
               className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
-              href="/#outcomes"
+              href="/#chat-interface"
             >
               Outcomes
             </Link>
             <Link
               className="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors relative py-1"
-              href="/#science"
+              href="/#contact"
             >
-              Clinical Ledger
+              Contact
             </Link>
 
             {/* Button-in-Button CTA Architecture */}
@@ -110,14 +110,6 @@ export function Nav(): ReactElement {
           >
             <nav className="flex flex-col space-y-4">
               <Link
-                href="/#intelligence"
-                onClick={closeMobileMenu}
-                className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
-              >
-                <span>The Intelligence</span>
-                <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
-              </Link>
-              <Link
                 href="/#how-it-works"
                 onClick={closeMobileMenu}
                 className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
@@ -126,7 +118,7 @@ export function Nav(): ReactElement {
                 <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
               </Link>
               <Link
-                href="/#outcomes"
+                href="/#chat-interface"
                 onClick={closeMobileMenu}
                 className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
               >
@@ -134,11 +126,11 @@ export function Nav(): ReactElement {
                 <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
               </Link>
               <Link
-                href="/#science"
+                href="/#contact"
                 onClick={closeMobileMenu}
                 className="font-label-caps text-sm text-primary py-2.5 border-b border-data-node/10 flex justify-between items-center"
               >
-                <span>Clinical Ledger</span>
+                <span>Contact</span>
                 <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
               </Link>
 

@@ -206,14 +206,11 @@ export function HowItWorks(): ReactElement {
   };
 
   return (
-    <section id="how-it-works" className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter bg-surface-bright" ref={containerRef}>
+    <section id="how-it-works" className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter bg-surface-bright" ref={containerRef}>
       <div className="max-w-container-max mx-auto">
         <Reveal className="max-w-3xl mx-auto text-center mb-10 sm:mb-16">
-          <span className="font-mono text-xs sm:text-label-caps text-secondary tracking-[0.25em] block mb-3 sm:mb-4 uppercase font-semibold">
+          <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg text-primary leading-tight uppercase tracking-wide">
             HOW IT WORKS
-          </span>
-          <h2 className="font-headline-lg text-3xl sm:text-4xl lg:text-headline-lg text-primary leading-tight">
-            One continuous journey.
           </h2>
           <p className="font-body-lg text-base sm:text-body-lg text-secondary max-w-2xl mx-auto mt-4 sm:mt-6 leading-relaxed">
             The patient experiences relief. The doctor experiences focus.
@@ -250,18 +247,20 @@ export function HowItWorks(): ReactElement {
             <ol role="tabpanel" className="relative space-y-2.5 sm:space-y-3">
               {activeJourney.map((step, i) => {
                 const isSelected = activeStepIndex === i;
+                const isNextTarget = activeStepIndex + 1 === i;
+                
                 return (
-                  <li key={step.title}>
+                  <li key={step.title} className="relative">
                     <button
                       type="button"
                       onClick={() => setActiveStepIndex(i)}
-                      className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all flex flex-col gap-3 active:scale-[0.99] ${
+                      className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all flex flex-col gap-3 active:scale-[0.99] relative overflow-hidden ${
                         isSelected
                           ? "bg-primary text-clinical-white border-primary shadow-double-bezel-dark"
                           : "bg-surface-container-low text-primary border-data-node/30 hover:border-primary/40 hover:bg-clinical-white"
                       }`}
                     >
-                      <div className="flex gap-3.5 sm:gap-4 items-start w-full">
+                      <div className="flex gap-3.5 sm:gap-4 items-start w-full pr-8">
                         <div className="flex flex-col items-center shrink-0 mt-0.5">
                           <span
                             className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-mono text-xs font-semibold shadow-xs ${
@@ -280,6 +279,20 @@ export function HowItWorks(): ReactElement {
                           </p>
                         </div>
                       </div>
+
+                      {/* The Waving Pointer */}
+                      {isNextTarget && (
+                        <motion.div
+                          layoutId="wagging-pointer"
+                          className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-2xl sm:text-3xl text-primary drop-shadow-md z-10"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                          <i className="fa-solid fa-arrow-pointer fa-wag text-primary" style={{ filter: "drop-shadow(0px 2px 4px rgba(0,23,54,0.2))" }}></i>
+                        </motion.div>
+                      )}
 
                       {isSelected && (
                         <div className="lg:hidden mt-2 pt-3 border-t border-clinical-white/20">

@@ -4,7 +4,7 @@ import { HumanBondPortrait } from "./human-bond-portrait";
 
 export function HumanBond(): ReactElement {
   return (
-    <section className="py-16 sm:py-24 lg:py-section-gap-lg px-4 sm:px-6 md:px-gutter relative bg-clinical-white">
+    <section className="py-[25px] sm:py-10 px-4 sm:px-6 md:px-gutter relative bg-clinical-white">
       <div className="max-w-container-max mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
         {/* Double-Bezel Enclosed Editorial Photography with Graceful Fallback */}
         <Reveal className="w-full lg:w-1/2">
